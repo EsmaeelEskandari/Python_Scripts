@@ -4,97 +4,99 @@ import math
 #--------------Atlas Style---------------------------------------------------
 class AtlasStyle( ROOT.TStyle ):
 
-    ##
-    # @short Object constructor
-    #
-    # The constructor just initializes the underlying TStyle object, and
-    # calls the configure() function to set up the ATLAS style.
-    #
-    # The parameters of the constructor should just be ignored in 99.9%
-    # of the cases.
-    #
-    # @param name The name given to the style
-    # @param title The title given to the style
-    def __init__( self, name = "AtlasStyle", title = "ATLAS style object" ):
+	##
+	# @short Object constructor
+	#
+	# The constructor just initializes the underlying TStyle object, and
+	# calls the configure() function to set up the ATLAS style.
+	#
+	# The parameters of the constructor should just be ignored in 99.9%
+	# of the cases.
+	#
+	# @param name The name given to the style
+	# @param title The title given to the style
+	def __init__( self, name = "AtlasStyle", title = "ATLAS style object" ):
 
-        # Initialise the base class:
-        ROOT.TStyle.__init__( self, name, title )
-        self.SetName( name )
-        self.SetTitle( title )
+		# Initialise the base class:
+		ROOT.TStyle.__init__( self, name, title )
+		self.SetName( name )
+		self.SetTitle( title )
 
-        # Call the configure function for setting up the style:
-        self.configure()
+		# Call the configure function for setting up the style:
+		self.configure()
 
-        return
+		return
 
-    ##
-    # @short Configure the object for the ATLAS style
-    #
-    # This function actually takes care of setting up the ATLAS style.
-    # I implemented it based on a C++ TStyle object, which in turn was
-    # implemented based on a central piece of CINT macro.
-    def configure( self ):
+	##
+	# @short Configure the object for the ATLAS style
+	#
+	# This function actually takes care of setting up the ATLAS style.
+	# I implemented it based on a C++ TStyle object, which in turn was
+	# implemented based on a central piece of CINT macro.
+	def configure( self ):
 
-        # Tell the user what we're doing:
-        self.Info( "configure", "Configuring default ATLAS style" )
+		# Tell the user what we're doing:
+		self.Info( "configure", "Configuring default ATLAS style" )
 
-        # Use plain black on white colors:
-        icol = 0
-        self.SetFrameBorderMode( 0 )
-        self.SetFrameFillColor( icol )
-        self.SetFrameFillStyle( 0 )
-        self.SetCanvasBorderMode( 0 )
-        self.SetPadBorderMode( 0 )
-        self.SetPadColor( icol )
-        self.SetCanvasColor( icol )
-        self.SetStatColor( icol )
+		# Use plain black on white colors:
+		icol = 0
+		self.SetFrameBorderMode( 0 )
+		self.SetFrameFillColor( icol )
+		self.SetFrameFillStyle( 0 )
+		self.SetCanvasBorderMode( 0 )
+		self.SetPadBorderMode( 0 )
+		self.SetPadColor( icol )
+		self.SetCanvasColor( icol )
+		self.SetStatColor( icol )
 
-        # Set the paper and margin sizes:
-        self.SetPaperSize( 20, 26 )
-        self.SetPadTopMargin( 0.10 )		#0.05
-        self.SetPadRightMargin( 0.025 )		#0.05
-        self.SetPadBottomMargin( 0.10 )		#0.16
-        self.SetPadLeftMargin( 0.12 )		#0.16
+		# Set the paper and margin sizes:
+		#self.SetPaperSize(20, 26)
+		self.SetPadTopMargin(0.10)			#0.05
+		self.SetPadRightMargin(0.025)		#0.05
+		self.SetPadBottomMargin(0.10)		#0.16
+		self.SetPadLeftMargin(0.12)			#0.16
 
-        # set title offsets (for axis label)
-        self.SetTitleXOffset(1.3);			#1.4
-        self.SetTitleYOffset(1.3);			#1.4
-		#self.SetTitleOffset(0.5);
+		# set title offsets (for axis label)
+		self.SetTitleXOffset(1.1)			#1.4
+		self.SetTitleYOffset(1.3)			#1.4
+		self.SetTitleStyle(0)
+		self.SetTitleBorderSize(0)
+		self.SetTitleX(0.2)
 
-        # Use large fonts:
-        font_type = 42
-        font_size = 0.04
-        self.SetTextFont( font_type )
-        self.SetTextSize( font_size )
-        self.SetLabelFont( font_type, "x" )
-        self.SetLabelSize( font_size, "x" )
-        self.SetTitleFont( font_type, "x" )
-        self.SetTitleSize( font_size, "x" )
-        self.SetLabelFont( font_type, "y" )
-        self.SetLabelSize( font_size, "y" )
-        self.SetTitleFont( font_type, "y" )
-        self.SetTitleSize( font_size, "y" )
-        self.SetLabelFont( font_type, "z" )
-        self.SetLabelSize( font_size, "z" )
-        self.SetTitleFont( font_type, "z" )
-        self.SetTitleSize( font_size, "z" )
+		# Use large fonts:
+		font_type = 42
+		font_size = 0.04
+		self.SetTextFont( font_type )
+		self.SetTextSize( font_size )
+		self.SetLabelFont( font_type, "x" )
+		self.SetLabelSize( font_size, "x" )
+		self.SetTitleFont( font_type, "x" )
+		self.SetTitleSize( font_size, "x" )
+		self.SetLabelFont( font_type, "y" )
+		self.SetLabelSize( font_size, "y" )
+		self.SetTitleFont( font_type, "y" )
+		self.SetTitleSize( font_size, "y" )
+		self.SetLabelFont( font_type, "z" )
+		self.SetLabelSize( font_size, "z" )
+		self.SetTitleFont( font_type, "z" )
+		self.SetTitleSize( font_size, "z" )
 
-        # Use bold lines and markers:
-        #self.SetMarkerStyle( 20 )
-        #self.SetMarkerSize( 1.2 )
-        #self.SetHistLineWidth( 2 )
-        #self.SetLineStyleString( 2, "[12 12]" )
+		# Use bold lines and markers:
+		#self.SetMarkerStyle( 20 )
+		#self.SetMarkerSize( 1.2 )
+		#self.SetHistLineWidth( 2 )
+		#self.SetLineStyleString( 2, "[12 12]" )
 
-        # Do not display any of the standard histogram decorations:
-        self.SetOptTitle( 0 )
-        self.SetOptStat( 0 )
-        self.SetOptFit( 0 )
+		# Do not display any of the standard histogram decorations:
+		#self.SetOptTitle(0)
+		self.SetOptStat(0)
+		#self.SetOptFit(0)
 
-        # Put tick marks on top and rhs of the plots:
-        self.SetPadTickX( 1 )
-        self.SetPadTickY( 1 )
+		# Put tick marks on top and rhs of the plots:
+		self.SetPadTickX(1)
+		self.SetPadTickY(1)
 
-        return
+		return
 
 #--------------Create_Hists.py-----------------------------------------------
 def MakeLegend(h1,h2):
@@ -110,15 +112,13 @@ def MakeLegend(h1,h2):
 	
 def SetHistStyle(h1,h2,max_1,max_2,min_1,min_2):
 	#h1.SetFillColor(ROOT.TAttFill.kYellow)
-	#h1.SetLineColor(ROOT.TAttLine.kBlack)
 	h1.SetLineColor(ROOT.TAttLine.kBlue)
 	h1.SetLineWidth(3)
-	h1.GetYaxis().SetTitleOffset(1.5)
+	#h1.GetYaxis().SetTitleOffset(1.5)
 	#h2.SetFillColor(ROOT.TAttFill.kGreen-8)
-	#h2.SetLineColor(ROOT.TAttLine.kBlack)
 	h2.SetLineColor(ROOT.TAttLine.kRed)
 	h2.SetLineWidth(3)
-	h2.GetYaxis().SetTitleOffset(1.5)
+	#h2.GetYaxis().SetTitleOffset(1.5)
 	if max_1 > max_2 and max_1 != 0:
 		h1.SetMaximum(10*max_1)
 		if min_1 < min_2:
@@ -145,7 +145,7 @@ def MakeErrorBandLegend(h1,h2):
 	
 def FindErrorBands(datasets,root_file,hist):
 	rebin = 4					# Set this to how many bins should be merged (1 -> no change)
-	nom_hist = root_file.Get(datasets[0]+"/Normalized/"+hist+'_norm')
+	nom_hist = root_file.Get(datasets[0]+"/Normalized_XS/"+hist+'_norm')
 	nom_hist = nom_hist.Clone()
 	nom_hist.Rebin(rebin)
 	nom_graph = ROOT.TGraphAsymmErrors(nom_hist)
@@ -162,7 +162,7 @@ def FindErrorBands(datasets,root_file,hist):
 		nom_bin_err = nom_hist.GetBinError(bin)
 
 		for dataset in sequence:
-			hist_to_clone = root_file.Get(dataset+"/Normalized/"+hist+'_norm')
+			hist_to_clone = root_file.Get(dataset+"/Normalized_XS/"+hist+'_norm')
 			hist_to_comp = hist_to_clone.Clone(dataset)
 			hist_to_comp.Rebin(rebin)
 
