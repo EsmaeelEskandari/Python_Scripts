@@ -1,18 +1,8 @@
 import glob
 import os
+from Aux_Functions import *
 
-dataset_names = ["129916.Nominal_Sherpa", "147294.min_n_tchannels_CKKW30", "147295.min_n_tchannels_CKKW30_MjjFilt",
-				"147296.min_n_tchannels_MuFdown", "147297.min_n_tchannels_MuFdown_MjjFilt",
-				"147298.min_n_tchannels_MuFup", "147299.min_n_tchannels_MuFup_MjjFilt",
-				"147300.min_n_tchannels_mpi1", "147301.min_n_tchannels_mpi1_MjjFilt",
-				"147302.min_n_tchannels_mpi2", "147303.min_n_tchannels_mpi2_MjjFilt",
-				"147304.min_n_tchannels_Shower1", "147305.min_n_tchannels_Shower1_MjjFilt",
-				"147306.min_n_tchannels_MuRdown", "147307.min_n_tchannels_MuRdown_MjjFilt",
-				"147308.min_n_tchannels_MuRup", "147309.min_n_tchannels_MuRup_MjjFilt",
-				"147310.CKKW30", "147311.CKKW30_MjjFilt", "147312.MuFdown", "147313.MuFdown_MjjFilt",
-				"147314.MuFup", "147315.MuFup_MjjFilt", "147316.mpi1", "147317.mpi1_MjjFilt",
-				"147318.mpi2", "147319.mpi2_MjjFilt", "147320.Shower1", "147321.Shower1_MjjFilt",
-				"147322.MuRdown", "147323.MuRdown_MjjFilt", "147324.MuRup", "147325.MuRup_MjjFilt"]
+dataset_names = GetListDataset('dataset_names')
 
 # Make a list of Aida files available in the current directory
 for folder in dataset_names:
