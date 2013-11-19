@@ -105,3 +105,4 @@ for idx,dataset_list in enumerate(dataset_lists_to_check):
 	c1.SaveAs(hist+'_'+dataset_lists_names[idx]+".pdf")
 	c1.Clear()
 	del nom_hist, nom_graph, line, ratio_plot, tot_stat_errors, stat_plot
+
