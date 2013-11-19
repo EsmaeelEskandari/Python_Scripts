@@ -56,51 +56,50 @@ if not os.path.exists(dir):
 
 #root_file.mkdir(dir)
 for index in range(16):
-	x = root_file.GetDirectory(dataset_names_1[index])
-	y = root_file.GetDirectory(dataset_names_2[index])
-	print x
-	print y
-	if x and y:
-		#root_file.cd(dir)
-		#ROOT.gDirectory.mkdir(dataset_names_2[index])
-		#ROOT.gDirectory.cd()
-		for k, hist in enumerate(hist_list):
-			histogram1 = root_file.Get(dataset_names_1[index]+'/Normalized_XS/'+hist+'_norm')
-			histo1 = histogram1.Clone(hist+'_1')
-			histogram2 = root_file.Get(dataset_names_2[index]+'/Normalized_XS/'+hist+'_norm')
-			histo2 = histogram2.Clone(hist+'_2')
-			max_1 = histo1.GetMaximum()
-			max_2 = histo2.GetMaximum()
-			min_1 = histo1.GetMinimum(0)
-			min_2 = histo2.GetMinimum(0)
-			histo1, histo2 = SetHistStyle(histo1,histo2,max_1,max_2,min_1,min_2)
-			if max_1 > max_2:
-				histo1.Draw("HIST E")
-				histo2.Draw("HIST E SAME")
-			else:
-				histo2.Draw("HIST E")
-				histo1.Draw("HIST E SAME")
-			ROOT.gPad.RedrawAxis()
-			l.DrawLatex(lx,ly,"ATLAS")
-			p.DrawLatex(px,py,"Internal")
-			if (k%2 == 0):	#If k is even (Jet pT > 30*GeV)
-				q.DrawLatex(qx,qy,"Jet p_{T,thresh} > 30 [GeV]")
-			else:			#If k is odd (Jet pT > 25*GeV)
-				q.DrawLatex(qx,qy,"Jet p_{T,thresh} > 25 [GeV]")
-			leg = MakeLegend(histo1,histo2)
-			leg.Draw()
-			c1.Modified()
-			c1.Update()
-			if not os.path.exists(dir+'/'+dataset_names_2[index]):
-				os.makedirs(dir+'/'+dataset_names_2[index])
-			c1.SaveAs(dir+'/'+dataset_names_2[index]+'/'+hist+'.pdf')
-			#root_file.cd(dir)
-			#ROOT.gDirectory.cd(dataset_names_2[index])
-			#c1.Write(hist,ROOT.TObject.kOverwrite)
-			c1.Clear
-			#ROOT.gDirectory.cd()
-			#ROOT.gDirectory.cd()
-	else:
-		continue
-		
-		
+    x = root_file.GetDirectory(dataset_names_1[index])
+    y = root_file.GetDirectory(dataset_names_2[index])
+    print x
+    print y
+    if x and y:
+	#root_file.cd(dir)
+	#ROOT.gDirectory.mkdir(dataset_names_2[index])
+	#ROOT.gDirectory.cd()
+	for k, hist in enumerate(hist_list):
+	    histogram1 = root_file.Get(dataset_names_1[index]+'/Normalized_XS/'+hist+'_norm')
+	    histo1 = histogram1.Clone(hist+'_1')
+	    histogram2 = root_file.Get(dataset_names_2[index]+'/Normalized_XS/'+hist+'_norm')
+	    histo2 = histogram2.Clone(hist+'_2')
+	    max_1 = histo1.GetMaximum()
+	    max_2 = histo2.GetMaximum()
+	    min_1 = histo1.GetMinimum(0)
+	    min_2 = histo2.GetMinimum(0)
+	    histo1, histo2 = SetHistStyle(histo1,histo2,max_1,max_2,min_1,min_2)
+	    if max_1 > max_2:
+		histo1.Draw("HIST E")
+		histo2.Draw("HIST E SAME")
+	    else:
+		histo2.Draw("HIST E")
+		histo1.Draw("HIST E SAME")
+	    ROOT.gPad.RedrawAxis()
+	    l.DrawLatex(lx,ly,"ATLAS")
+	    p.DrawLatex(px,py,"Internal")
+	    if (k%2 == 0):	#If k is even (Jet pT > 30*GeV)
+		q.DrawLatex(qx,qy,"Jet p_{T,thresh} > 30 [GeV]")
+	    else:		#If k is odd (Jet pT > 25*GeV) ----- No longer true!
+		q.DrawLatex(qx,qy,"Jet p_{T,thresh} > 25 [GeV]")
+	    leg = MakeLegend(histo1,histo2)
+	    leg.Draw()
+	    c1.Modified()
+	    c1.Update()
+	    if not os.path.exists(dir+'/'+dataset_names_2[index]):
+		os.makedirs(dir+'/'+dataset_names_2[index])
+	    c1.SaveAs(dir+'/'+dataset_names_2[index]+'/'+hist+'.pdf')
+	    #root_file.cd(dir)
+	    #ROOT.gDirectory.cd(dataset_names_2[index])
+	    #c1.Write(hist,ROOT.TObject.kOverwrite)
+	    c1.Clear
+	    #ROOT.gDirectory.cd()
+	    #ROOT.gDirectory.cd()
+    else:
+	    continue
+	      

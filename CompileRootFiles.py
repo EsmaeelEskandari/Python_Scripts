@@ -60,8 +60,8 @@ for folder, data in zip(dataset_names, datasets):
 	if os.path.exists(folder+"/") == True:
 		#First get the crossSection_mean and GenFiltEff_mean for this dataset from AMI for normalizations
 		xsec, effic = get_dataset_xsec_effic(client, data)
+		print folder, xsec, effic
 		xsec = 1000*xsec*effic #Converts nb to pb and applies GenFiltEff
-		print xsec, effic
 		
 		#histogram manipulation and such
 		os.chdir(folder+"/")
