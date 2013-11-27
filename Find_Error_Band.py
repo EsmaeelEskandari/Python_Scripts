@@ -1,6 +1,5 @@
 import ROOT
 import os
-import numpy as np
 import math
 from Aux_Functions import *
 

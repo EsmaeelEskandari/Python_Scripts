@@ -144,7 +144,6 @@ def MakeErrorBandLegend(h1,h2):
     return leg
       
 def FindErrorBands(datasets,root_file,hist):
-<<<<<<< HEAD
     rebin_to = 20	# Set this to how many bins you would like (0 -> no change)
     nom_hist = root_file.Get(datasets[0]+"/Normalized_XS/"+hist+'_norm')
     nom_hist = nom_hist.Clone()
