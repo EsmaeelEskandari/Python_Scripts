@@ -6,7 +6,7 @@
 # Script first copies necessary scripts to that directory
 # then changes to that directory
 include_scripts="Prepare_Syst_File.sh Aux_Functions.py Rename_Folder.py \
-		 MergeAidaFiles.py CompileRootFiles.py Find_Error_Band.py"
+		 MergeAidaFiles.py CompileRootFiles.py Find_Error_Band.py aidamerge.py"
 work_dir=$1
 if test -z "$work_dir" ; then
   work_dir=$PWD
@@ -32,6 +32,8 @@ echo "6.  Find Error Band"
 
 read -p "Input number? " -n 1 -r
 echo
+echo
+
 if [ $REPLY = "0" ] ; then
   # Check if output_dataset.txt file exists.
   out_data_file="./output_dataset.txt"
@@ -42,6 +44,7 @@ if [ $REPLY = "0" ] ; then
     exit 1
   fi
   echo "Running rucio-get and all scripts..."
+  echo
   voms-proxy-init -voms atlas
   rucio-get -F output_dataset.txt
   wait
@@ -50,38 +53,47 @@ fi
 if [ $REPLY = "1" ] ; then
   echo "Running all scripts...minus rucio-get"
   echo "Adjusting directory names to satisfy script requirements"
+  echo
   python Rename_Folder.py
   wait
   echo "Merging Aida files to produce a single .root file for each dataset."
   echo "Aida files are averaged and their errors are added in quadrature."
+  echo
   python MergeAidaFiles.py
   wait
   echo "Compiling the individual dataset .root files into one single .root file."
   echo "The VBF_Systematics.root file stores each input .root file into a new directory."
+  echo
   python CompileRootFiles.py
   wait
   echo "Making the error band plots. Currently you have to adjust the histograms"
   echo "to be created in the Find_Error_Band.py script."
+  echo
   python Find_Error_Band.py
   wait
 elif [ $REPLY = "2" ] ; then
   echo "Using rucio-get to get datasets given in output_dataset.txt."
+  echo
   voms-proxy-init -voms atlas
   rucio-get -F output_dataset.txt
 elif [ $REPLY = "3" ] ; then
   echo "Adjusting directory names to satisfy script requirements."
+  echo
   python Rename_Folder.py
 elif [ $REPLY = "4" ] ; then
   echo "Merging Aida files to produce a single .root file for each dataset."
   echo "Aida files are averaged and their errors are added in quadrature."
+  echo
   python MergeAidaFiles.py
 elif [ $REPLY = "5" ] ; then
   echo "Compiling the individual dataset .root files into one single .root file."
   echo "The VBF_Systematics.root file stores each input .root file into a new directory."
+  echo
   python CompileRootFiles.py
 elif [ $REPLY = "6" ] ; then
   echo "Making the error band plots. Currently you have to adjust the histograms"
   echo "to be created in the Find_Error_Band.py script."
+  echo
   python Find_Error_Band.py
 else
   echo "Wrong user input..."
