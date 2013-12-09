@@ -41,7 +41,7 @@ def CompileDijetMass(ExclMjj,th2_hist):
     # Get bin content and error for given Excl_jet_Mjj
     for bin in range(202):
         bin_cont.append(ExclMjj.GetBinContent(bin))
-        bin_err.apped(ExclMjj.GetBinError(bin))
+        bin_err.append(ExclMjj.GetBinError(bin))
     
     # Set bin content and error in th2_hist for given excl_jet_#
     for bin in range(202):
@@ -113,7 +113,12 @@ for folder, data in zip(dataset_names, datasets):
             #      ROOT.gDirectory.cd("Shape_Comparisons")
             #      histogram_area.Write()
             #      ROOT.gDirectory.cd()
-			del histogram_norm, histogram_area
+            if "Mjj_" in hist:
+                th2_hist = CompileDijetMass(histogram_norm,th2_hist)
+			del histogram_norm #, histogram_area
+        hf.cd(folder)
+        th2_hist.Write()
+        del th2_hist
 		root_file.Close()
 		hf.cd()
 		os.chdir("..")

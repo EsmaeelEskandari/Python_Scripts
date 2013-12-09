@@ -178,13 +178,25 @@ def FindErrorBands(datasets,root_file,hist):
 	    comp_bin_err = hist_to_comp.GetBinError(bin)
 
 	    diff = comp_bin_val - nom_bin_val
-	    shift_unc = math.sqrt(comp_bin_err*comp_bin_err + nom_bin_err*nom_bin_err)
+	    shift_unc = math.sqrt(comp_bin_err*comp_bin_err + nom_bin_err*nom_bin_err) # These errors are mostly non-sense
 	    shifts.append(diff)
 	    shift_times_unc.append(2.0*diff*shift_unc)
-	    if diff > 0.0:
-		positive_shifts2.append(diff*diff)
+        
+	    if (diff > 0.0):
+            if "MuFdown" in dataset: MuFdown = diff*diff
+            elif "MuRdown" in dataset: MuRdown = diff*diff
+            else: positive_shifts2.append(diff*diff)
 	    else:
-		negative_shifts2.append(diff*diff)
+            if "MuFup" in dataset: MuFup = diff*diff
+            elif "MuRup" in dataset: MuRup = diff*diff
+		    else: negative_shifts2.append(diff*diff)
+    
+    if MuFdown > MuRdown: positive_shifts2.append(MuFdown)
+    elif MuFdown < MuRdown: positive_shifts2.append(MuRdown)
+    if MuFup > MuRup: negative_shifts2.append(MuFup)
+    elif MuFup < MuRup: negative_shifts2.append(MuRup)
+    print MuFdown, MuRdown, MuFup, MuRup
+    print positive_shifts2, negative_shifts2
 
 	upper_error.append(math.sqrt(math.fsum(positive_shifts2)))
 	lower_error.append(math.sqrt(math.fsum(negative_shifts2)))
@@ -393,7 +405,7 @@ def GetListDataset(list_name):
 			"d#sigma/dm_{jj} [events/GeV]", "d#sigma/dm_{jj} [events/GeV]", "d#sigma/dm_{jj} [events/GeV]",
 			"d#sigma/d#eta_{3} [events]", "d#sigma/d#eta_{3} [events]", "d#sigma/d#eta_{4} [events]",
 			"d#sigma/d#eta_{j_1j_2} [events]", "d#sigma/d#eta_{j_1j_2} [events]", "d#sigma/d#eta_{j_1j_2} [events]",
-			"d#sigma/dcos|#phi_{j_1}-#phi_{j_2}| [events]", "d#sigma/dcos|#phi_{j_1}-#phi_{j_2}| [events]", "d#sigma/dcos|#phi_{j_1}-#phi_{j_2}| [events]"
+			"d#sigma/dcos|#phi_{j_1}-#phi_{j_2}| [events]", "d#sigma/dcos|#phi_{j_1}-#phi_{j_2}| [events]", "d#sigma/dcos|#phi_{j_1}-#phi_{j_2}| [events]",
 			"[events/cut]", "[events]", "[events]", "[events]","d#sigma/d#it{m} [events/GeV]","d#sigma/d#it{m} [events/GeV]", "d#sigma/d#it{m} [events/GeV]",
             "d#sigma/d#it{m} [events/GeV]","d#sigma/d#it{m} [events/GeV]", "d#sigma/d#it{m} [events/GeV]", "d#sigma/d#it{m} [events/GeV]",
             "d#sigma/d#it{m} [events/GeV]", "d#sigma/d#it{m} [events/GeV]","d#sigma/d#it{m} [events/GeV]","d#sigma/d#it{m} [events/GeV]"]

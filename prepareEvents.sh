@@ -8,11 +8,11 @@
 echo "Input the file name prefix: (e.g. user.cjohnson.powheg.w2jet.81514.txt._)"
 read file_prefix
 os_type=`uname`
-if [[ "$os_type" == 'Darwin' ]]; then
-	rename 's/lhe/events/' *.lhe
-else
+#if [[ "$os_type" == 'Darwin' ]]; then
+#	rename 's/lhe/events/' *.lhe
+#else
 	rename lhe events *.lhe
-fi
+#fi
 
 # Add "</LesHouchesEvents>" to end of each file
 # To Do: check if </LesHouchesEvents> is already the last line
@@ -22,11 +22,11 @@ do
 done
 
 # Rename the file to use the prefix given earlier
-if [[ "$os_type" == 'Darwin' ]]; then
-	rename "s/pwgevents-/${file_prefix}/" pwgevents*	# For Mac OS X
-else
+#if [[ "$os_type" == 'Darwin' ]]; then
+#	rename "s/pwgevents-/${file_prefix}/" pwgevents*	# For Mac OS X
+#else
 	rename pwgevents- ${file_prefix} pwgevents*		# For Linux
-fi
+#fi
 
 # Tarball individual .event file and name the tarball w/o the .events ext.
 for file in *.events
@@ -37,7 +37,7 @@ do
 done
 
 # Clean up and tarball into one neat package
-rm *.events
-echo "Tarballing the whole package"
-tar zcf events.tar.gz user.cjohnson*
-rm user.cjohnson*
+#rm *.events
+#echo "Tarballing the whole package"
+#tar zcf events.tar.gz user.cjohnson*
+#rm user.cjohnson*
