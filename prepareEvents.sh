@@ -9,27 +9,27 @@ echo "Input the file name prefix: (e.g. user.cjohnson.powheg.w2jet.81514.txt._)"
 read file_prefix
 os_type=`uname`
 #if [[ "$os_type" == 'Darwin' ]]; then
-#	rename 's/lhe/events/' *.lhe
+	rename 's/lhe/events/' *.lhe
 #else
-	rename lhe events *.lhe
+#	rename lhe events *.lhe
 #fi
 
 # Add "</LesHouchesEvents>" to end of each file
 # To Do: check if </LesHouchesEvents> is already the last line
-for file in *.events
+for file in $( ls *.events )
 do
 	echo "</LesHouchesEvents>" >> $file
 done
 
 # Rename the file to use the prefix given earlier
 #if [[ "$os_type" == 'Darwin' ]]; then
-#	rename "s/pwgevents-/${file_prefix}/" pwgevents*	# For Mac OS X
+	rename "s/pwgevents-/${file_prefix}/" pwgevents*	# For Mac OS X
 #else
-	rename pwgevents- ${file_prefix} pwgevents*		# For Linux
+#	rename pwgevents- ${file_prefix} pwgevents*		# For Linux
 #fi
 
 # Tarball individual .event file and name the tarball w/o the .events ext.
-for file in *.events
+for file in $( ls *.events )
 do
 	echo "Tarballing: " $file
 	name=${file%.events}
