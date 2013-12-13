@@ -25,7 +25,7 @@ hist = 'DijetMass_2jet_1'
 rebin = 4
 
 #Draw for the Signal-----------------------------------------------------
-leg = ROOT.TLegend(0.5,0.67,0.9,0.87)
+leg = ROOT.TLegend(0.33,0.25,0.73,0.45)
 leg.SetFillColor(0)
 leg.SetBorderSize(0)
 leg.SetTextSize(0.02)
@@ -114,7 +114,7 @@ del nom_hist, CKKW30_hist, MuFdown_hist, mpi1_hist, mpi2_hist, Shower1_hist, MuR
 Max_Vals = []
 
 #Drow for the Background-----------------------------------------------------
-leg = ROOT.TLegend(0.5,0.67,0.9,0.87)
+leg = ROOT.TLegend(0.33,0.25,0.73,0.45)
 leg.SetFillColor(0)
 leg.SetBorderSize(0)
 leg.SetTextSize(0.02)

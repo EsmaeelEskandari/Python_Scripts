@@ -3,6 +3,15 @@
 # To remove any incomplete events from the end of the file
 #echo "Removing incomplete events from the end of the file"
 #python removeIncEvents.py
+#echo "Counting Events in each file..."
+#python Count_Events_LHEF.py
+
+#echo "Splitting Files..."
+#for lhe in $( ls *.lhe );
+#do
+#	python splitLHE.py -i $lhe -n 50000
+#	rm $lhe
+#done
 
 # Ask for the file name prefix and also change extenstion from .lhe to .events
 echo "Input the file name prefix: (e.g. user.cjohnson.powheg.w2jet.81514.txt._)"

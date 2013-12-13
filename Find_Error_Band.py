@@ -89,7 +89,8 @@ for idx,dataset_list in enumerate(dataset_lists_to_check):
 	line.SetLineWidth(1)
 	line.SetLineStyle(1)
 	upper_ratio_lim = nom_hist.GetXaxis().GetXmax()
-	line.SetRange(0.0,0.0,upper_ratio_lim,2.0)	# fix this so it gets the min_x and max_x from input nom_hist
+	lower_ratio_lim = nom_hist.GetXaxis().GetXmin()
+	line.SetRange(lower_ratio_lim,0.0,upper_ratio_lim,2.0)	# fix this so it gets the min_x and max_x from input nom_hist
 	line.SetMaximum(1.75)
 	line.SetMinimum(0.5)
 	line.GetYaxis().SetTitle("Nominal/Systematic")
