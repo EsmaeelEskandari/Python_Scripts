@@ -248,6 +248,7 @@ def GetListDataset(list_name):
     # Names of new lists must be put in the list_of_lists list.
 
     datasets = 	['mc12_8TeV.129916.Sherpa_CT10_Wmunu2JetsEW1JetQCD15GeV_min_n_tchannels.evgen.EVNT.e1557/',
+          'mc12_8TeV.129930.Sherpa_CT10_Wmunu_MjjFiltered.evgen.EVNT.e1538/',
 		  'mc12_8TeV.147294.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_CKKW30.evgen.EVNT.e1805/',
 		  'mc12_8TeV.147295.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_CKKW30_MjjFilt.evgen.EVNT.e1805/',
 		  'mc12_8TeV.147296.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_MuFdown.evgen.EVNT.e2355/',
@@ -282,14 +283,15 @@ def GetListDataset(list_name):
 		  'mc12_8TeV.147325.Sherpa_CT10_Wmunu_MuRup_MjjFilt.evgen.EVNT.e2355/',
 		  'mc12_8TeV.147775.Sherpa_CT10_Wmunu.evgen.EVNT.e1434/']
 	      
-    dataset_number = ['129916','147294','147295','147296','147297','147298',
-		      '147299','147300','147301','147302','147303','147304',
-		      '147305','147306','147307','147308','147309','147310',
-		      '147311','147312','147313','147314','147315','147316',
-		      '147317','147318','147319','147320','147321','147322',
-		      '147323','147324','147325','147774']
+    dataset_number = ['129916','129930','147294','147295','147296',
+              '147297','147298','147299','147300','147301','147302',
+              '147303','147304','147305','147306','147307','147308',
+              '147309','147310','147311','147312','147313','147314',
+              '147315','147316','147317','147318','147319','147320',
+              '147321','147322','147323','147324','147325','147774']
 
-    dataset_names = ["129916.Nominal_Sherpa_Signal", "147294.min_n_tchannels_CKKW30", "147295.min_n_tchannels_CKKW30_MjjFilt",
+    dataset_names = ["129916.Nominal_Sherpa_Signal", "129930.Nominal_Sherpa_Background_MjjFilt",
+              "147294.min_n_tchannels_CKKW30", "147295.min_n_tchannels_CKKW30_MjjFilt",
 		      "147296.min_n_tchannels_MuFdown", "147297.min_n_tchannels_MuFdown_MjjFilt",
 		      "147298.min_n_tchannels_MuFup", "147299.min_n_tchannels_MuFup_MjjFilt",
 		      "147300.min_n_tchannels_mpi1", "147301.min_n_tchannels_mpi1_MjjFilt",
@@ -324,7 +326,7 @@ def GetListDataset(list_name):
 			    "147301.min_n_tchannels_mpi1_MjjFilt","147303.min_n_tchannels_mpi2_MjjFilt","147305.min_n_tchannels_Shower1_MjjFilt",
 			    "147307.min_n_tchannels_MuRdown_MjjFilt","147309.min_n_tchannels_MuRup_MjjFilt"]
 
-    datasets_back_MjjFilt = ["147775.Nominal_Sherpa_Background", "147311.CKKW30_MjjFilt","147313.MuFdown_MjjFilt","147315.MuFup_MjjFilt","147317.mpi1_MjjFilt",
+    datasets_back_MjjFilt = ["129930.Nominal_Sherpa_Background_MjjFilt", "147311.CKKW30_MjjFilt","147313.MuFdown_MjjFilt","147315.MuFup_MjjFilt","147317.mpi1_MjjFilt",
 			      "147319.mpi2_MjjFilt","147321.Shower1_MjjFilt","147323.MuRdown_MjjFilt","147325.MuRup_MjjFilt"]
 
     datasets_back = ["147775.Nominal_Sherpa_Background", "147310.CKKW30", "147312.MuFdown", "147314.MuFup", 

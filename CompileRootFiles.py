@@ -117,6 +117,7 @@ for folder, data in zip(dataset_names, datasets):
                 th2_hist = CompileDijetMass(histogram_norm,th2_hist)
 			del histogram_norm #, histogram_area
         hf.cd(folder)
+        th2_hist.SetName("hmj1j2_wvbf"+"_"+str(file_name))
         th2_hist.Write()
         del th2_hist
 		root_file.Close()
