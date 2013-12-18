@@ -13,6 +13,7 @@ datasets = GetListDataset('datasets')
 dataset_names = GetListDataset('dataset_names')
 exp_hist_list = GetListDataset('exp_hist_list')
 hist_list = GetListDataset('hist_list')
+hist_list_147311 = GetListDataset('hist_list_147311')
 title_list = GetListDataset('title_list')
 x_axis_list = GetListDataset('x_axis_list')
 y_axis_list = GetListDataset('y_axis_list')
@@ -23,6 +24,13 @@ def StyleHistogram(index, h1):
 	h1.GetXaxis().SetTitle(x_axis_list[index])
 	h1.GetYaxis().SetTitle(y_axis_list[index])
 	h1.SetOption("HIST E")
+    
+def StyleTH2(th2):
+    th2.SetTitle("Differential Dijet Mass and N_{jets} Distribution")
+    th2.GetXaxis().SetTitle("N_{jets} in event")
+    th2.GetYaxis().SetTitle("Dijet Mass [GeV]")
+    th2.GetZaxis().SetTitle("(1/#sigma) d#sigma/d#m_{jj}dN_{jets}")
+    th2.SetOption("LEGO2 0")
 	
 def StyleData(index, h1):
 	h1.SetTitle(title_list[index])
@@ -76,34 +84,35 @@ if os.path.exists("Exp_Data_arXiv12011276.root") == True:
 #for folder in dataset_names:
 for folder, data in zip(dataset_names, datasets):
     th2_hist = ROOT.TH2F( "hmj1j2_wvbf", "hmj1j2_wvbf", 10, -0.5, 9.5, 200, 0, 5000 )
-	if os.path.exists(folder+"/") == True:
-		#First get the crossSection_mean and GenFiltEff_mean for this dataset from AMI for normalizations
-		xsec, effic = get_dataset_xsec_effic(client, data)
-		print folder, xsec, effic
-		xsec = 1000*xsec*effic #Converts nb to pb and applies GenFiltEff
-		
-		#histogram manipulation and such
-		os.chdir(folder+"/")
-		hf.mkdir(folder)
-		hf.cd(folder)
-		ROOT.gDirectory.mkdir("Normalized_XS")
+    if os.path.exists(folder+"/") == True:
+        #First get the crossSection_mean and GenFiltEff_mean for this dataset from AMI for normalizations
+        xsec, effic = get_dataset_xsec_effic(client, data)
+        print folder, xsec, effic
+        xsec = 1000*xsec*effic #Converts nb to pb and applies GenFiltEff
+
+        #histogram manipulation and such
+        os.chdir(folder+"/")
+        hf.mkdir(folder)
+        hf.cd(folder)
+        ROOT.gDirectory.mkdir("Normalized_XS")
         # ROOT.gDirectory.mkdir("Shape_Comparisons")
-		file_name = folder.split('.')
-		file_name = file_name[0]
-		root_file = ROOT.TFile.Open(file_name+".root")
-		for index, hist in enumerate(hist_list):
+        file_name = folder.split('.')
+        file_name = file_name[0]
+        root_file = ROOT.TFile.Open(file_name+".root")
+        for index, hist in enumerate(hist_list):
             # No normalization
-			histogram = root_file.Get(hist)
-			hf.cd(folder)
-			StyleHistogram(index, histogram)
-			histogram.Write()
-			# Clone root histograms, normalize to XS, and move to Normalized_XS directory
-			histogram_norm = histogram.Clone(hist+"_norm")
-			histogram_norm.GetYaxis().SetTitle("(1/#sigma) "+y_axis_list_norm[index])
-			histogram_norm.Scale(1.0/xsec)
-			ROOT.gDirectory.cd("Normalized_XS")
-			histogram_norm.Write()
-			ROOT.gDirectory.cd()
+            if file_name == "147311": hist = hist_list_147311[index]
+            histogram = root_file.Get(hist)
+            hf.cd(folder)
+            StyleHistogram(index, histogram)
+            histogram.Write()
+            # Clone root histograms, normalize to XS, and move to Normalized_XS directory
+            histogram_norm = histogram.Clone(hist+"_norm")
+            histogram_norm.GetYaxis().SetTitle("(1/#sigma) "+y_axis_list_norm[index])
+            histogram_norm.Scale(1.0/xsec)
+            ROOT.gDirectory.cd("Normalized_XS")
+            histogram_norm.Write()
+            ROOT.gDirectory.cd()
             # # Clone root histograms, normalize to area, and move to Shape_Comparisons directory
             # histogram_area = histogram.Clone(hist+"_shape")
             # histogram_area.GetYaxis().SetTitle("(1/N) "+y_axis_list_norm[index])
@@ -115,16 +124,18 @@ for folder, data in zip(dataset_names, datasets):
             #      ROOT.gDirectory.cd()
             if "Mjj_" in hist:
                 th2_hist = CompileDijetMass(histogram_norm,th2_hist)
-			del histogram_norm #, histogram_area
+            del histogram_norm #, histogram_area
         hf.cd(folder)
-        th2_hist.SetName("hmj1j2_wvbf"+"_"+str(file_name))
+        #th2_hist.SetName("hmj1j2_wvbf"+"_"+str(file_name))
+        StyleTH2(th2_hist)
         th2_hist.Write()
+        #th2_hist.SaveAs()
         del th2_hist
-		root_file.Close()
-		hf.cd()
-		os.chdir("..")
-	else:
-		continue
+        root_file.Close()
+        hf.cd()
+        os.chdir("..")
+    else:
+    	continue
 
 hf.Write()
 hf.Close()

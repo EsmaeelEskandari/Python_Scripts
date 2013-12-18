@@ -4,6 +4,8 @@ from Aux_Functions import *
 
 dataset_names = GetListDataset('dataset_names')
 
+#TODO: Convert this to use yoda files!
+
 # Make a list of Aida files available in the current directory
 for folder in dataset_names:
 	current_dir = folder+"/"
