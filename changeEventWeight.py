@@ -94,7 +94,7 @@ for name_index,fname in enumerate(filenames):
                 newline = line
                 if index == eventLine+1:
                     newline = line.replace(allCurrWeights[numEvents-1],allNewWeights[numEvents-1][2])
-                out_MuRdown.write(line)
+                out_MuRdown.write(newline)
     infile.close()
         
     infile = open(fname)    
@@ -108,7 +108,7 @@ for name_index,fname in enumerate(filenames):
                 newline = line
                 if index == eventLine+1:
                     newline = line.replace(allCurrWeights[numEvents-1],allNewWeights[numEvents-1][3])
-                out_MuFup.write(line)
+                out_MuFup.write(newline)
     infile.close()
      
     infile = open(fname)       
@@ -122,7 +122,7 @@ for name_index,fname in enumerate(filenames):
                 newline = line
                 if index == eventLine+1:
                     newline = line.replace(allCurrWeights[numEvents-1],allNewWeights[numEvents-1][4])
-                out_MuRup.write(line)
+                out_MuRup.write(newline)
     infile.close()
     
     infile = open(fname)        
@@ -136,5 +136,5 @@ for name_index,fname in enumerate(filenames):
                 newline = line
                 if index == eventLine+1:
                     newline = line.replace(allCurrWeights[numEvents-1],allNewWeights[numEvents-1][5])
-                out_MuRMuFup.write(line)
+                out_MuRMuFup.write(newline)
     infile.close()
