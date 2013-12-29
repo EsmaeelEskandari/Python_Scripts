@@ -1,8 +1,10 @@
+#TODO: Add a scale factor check.
+
 import glob, os
 
 #filenames = ["powheg.events"]
 filenames = glob.glob("*.events")
-file_root_names = [name.split(".")[0] for name in filenames]
+file_root_names = [os.path.splitext(name)[0] for name in filenames]
 
 def getTheWeights(eventBlock):
     numParticles = int(eventBlock[1][0])
@@ -85,30 +87,54 @@ for name_index,fname in enumerate(filenames):
     with open("./MuRdown/"+file_root_names[name_index]+"_MuRdown.events", "w") as out_MuRdown:
         numEvents = 0
         for index,line in enumerate(infile):
-            if "<event>" in line: numEvents += 1
-            if "#new" not in line: out_MuRdown.write(line)
+            if "<event>" in line:
+                numEvents += 1
+                eventLine = index
+            if "#new" not in line:
+                newline = line
+                if index == eventLine+1:
+                    newline = line.replace(allCurrWeights[numEvents-1],allNewWeights[numEvents-1][2])
+                out_MuRdown.write(line)
     infile.close()
         
     infile = open(fname)    
     with open("./MuFup/"+file_root_names[name_index]+"_MuFup.events", "w") as out_MuFup:
         numEvents = 0
         for index,line in enumerate(infile):
-            if "<event>" in line: numEvents += 1
-            if "#new" not in line: out_MuFup.write(line)
+            if "<event>" in line:
+                numEvents += 1
+                eventLine = index
+            if "#new" not in line:
+                newline = line
+                if index == eventLine+1:
+                    newline = line.replace(allCurrWeights[numEvents-1],allNewWeights[numEvents-1][3])
+                out_MuFup.write(line)
     infile.close()
      
     infile = open(fname)       
     with open("./MuRup/"+file_root_names[name_index]+"_MuRup.events", "w") as out_MuRup:
         numEvents = 0
         for index,line in enumerate(infile):
-            if "<event>" in line: numEvents += 1
-            if "#new" not in line: out_MuRup.write(line)
+            if "<event>" in line:
+                numEvents += 1
+                eventLine = index
+            if "#new" not in line:
+                newline = line
+                if index == eventLine+1:
+                    newline = line.replace(allCurrWeights[numEvents-1],allNewWeights[numEvents-1][4])
+                out_MuRup.write(line)
     infile.close()
     
     infile = open(fname)        
     with open("./MuRupMuFup/"+file_root_names[name_index]+"_MuRupMuFup.events", "w") as out_MuRMuFup:
         numEvents = 0
         for index,line in enumerate(infile):
-            if "<event>" in line: numEvents += 1
-            if "#new" not in line: out_MuRMuFup.write(line)
+            if "<event>" in line:
+                numEvents += 1
+                eventLine = index
+            if "#new" not in line:
+                newline = line
+                if index == eventLine+1:
+                    newline = line.replace(allCurrWeights[numEvents-1],allNewWeights[numEvents-1][5])
+                out_MuRMuFup.write(line)
     infile.close()
