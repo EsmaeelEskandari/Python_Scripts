@@ -1,6 +1,18 @@
 #TODO: Add a scale factor check.
 
 import glob, os
+from optparse import OptionParser
+
+parser = OptionParser()
+parser.add_option("-x", "--xsecup", dest="xSection", default="-1.00", help="Manually set the cross-section (pb) in LHE files (default is -1.0). This adjusts the original file and is only needed if the LHE file has -1.0 where the cross-section should be.")
+parser.add_option("-e", "--xerrup", dest="xsErr", default="-1.00", help="Manually set the cross-section error (pb) in LHE files (default is -1.0). This adjusts the original file and is only needed if the LHE file has -1.0 where the cross-section error should be.")
+(options, args) = parser.parse_args()
+
+xSec = '%.5E' % float(options.xSection) # Convert it to string and in scientific notation
+xErr = '%.5E' % float(options.xsErr)
+if float(options.xSection) != -1.00: setXS = True
+else: setXS = False
+print setXS, options.xSection
 
 #filenames = ["powheg.events"]
 filenames = glob.glob("*.events")
@@ -35,25 +47,57 @@ for name_index,fname in enumerate(filenames):
         allRenFacts = []
         allFacFacts = []
         getWeights = False
-        for index,line in enumerate(infile):
-            changeWeights = False
-            if "<event>" in line: 
-                numEvents += 1
-                getWeights = True
+        if setXS:
+            with open("./"+fname+".1", "w") as new_infile:
+                initLine = 0
+                for index,line in enumerate(infile):
+                    changeWeights = False
+                    if setXS:
+                        newline = line
+                        if "<init>" in line: 
+                            initLine = index
+                        if index == initLine+2:
+                            newline = line.replace("-1.00000E+00",xSec,1)
+                            newline = newline.replace("-1.00000E+00",xErr,1)
+                        new_infile.write(newline)
+                    if "<event>" in line: 
+                        numEvents += 1
+                        getWeights = True
+                        changeWeights = False
+                        eventLine = index
+                        eventBlock = []
+                    if "</event>" in line: 
+                        getWeights = False
+                        changeWeights = True
+                    if getWeights:
+                        eventBlock.append(line.split())
+                    if changeWeights: 
+                        renfact, facfact, weight, currWeight = getTheWeights(eventBlock)
+                        allNewWeights.append(weight)
+                        allCurrWeights.append(currWeight)
+                        allRenFacts.append(renfact)
+                        allFacFacts.append(facfact)
+        else:
+            for index,line in enumerate(infile):
                 changeWeights = False
-                eventLine = index
-                eventBlock = []
-            if "</event>" in line: 
-                getWeights = False
-                changeWeights = True
-            if getWeights:
-                eventBlock.append(line.split())
-            if changeWeights: 
-                renfact, facfact, weight, currWeight = getTheWeights(eventBlock)
-                allNewWeights.append(weight)
-                allCurrWeights.append(currWeight)
-                allRenFacts.append(renfact)
-                allFacFacts.append(facfact)
+                if "<event>" in line: 
+                    numEvents += 1
+                    getWeights = True
+                    changeWeights = False
+                    eventLine = index
+                    eventBlock = []
+                if "</event>" in line: 
+                    getWeights = False
+                    changeWeights = True
+                if getWeights:
+                    eventBlock.append(line.split())
+                if changeWeights: 
+                    renfact, facfact, weight, currWeight = getTheWeights(eventBlock)
+                    allNewWeights.append(weight)
+                    allCurrWeights.append(currWeight)
+                    allRenFacts.append(renfact)
+                    allFacFacts.append(facfact)
+    if setXS: os.rename(fname+".1",fname)
     
     infile = open(fname)    
     with open("./MuRdownMuFdown/"+file_root_names[name_index]+"_MuRdownMuFdown.events", "w") as out_MuRMuFdown:
