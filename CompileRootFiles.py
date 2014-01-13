@@ -25,6 +25,18 @@ def StyleHistogram(index, h1):
 	h1.GetYaxis().SetTitle(y_axis_list[index])
 	h1.SetOption("HIST E")
     
+def StyleCutFlow(h1):
+    h1.SetBinLabel(1,"No Cuts")
+    h1.SetBinLabel(2, "1#it{l} & 1#nu")
+    h1.SetBinLabel(3, "#slash{E}_{T} > 25GeV")
+    h1.SetBinLabel(4, "m_T(W) > 40GeV")
+    h1.SetBinLabel(5, "#ge 2jets")
+    h1.SetBinLabel(6, "p_{T,1} > 80GeV")
+    h1.SetBinLabel(7, "p_{T,2} > 60GeV")
+    h1.SetBinLabel(8, "M_{jj} > 500GeV")
+    h1.SetBinLabel(9, "CJV")
+    h1.SetBinLabel(10, "OJV")
+    
 def StyleTH2(th2):
     th2.SetTitle("Differential Dijet Mass and N_{jets} Distribution")
     th2.GetXaxis().SetTitle("N_{jets} in event")
@@ -105,6 +117,7 @@ for folder, data in zip(dataset_names, datasets):
             histogram = root_file.Get(hist)
             hf.cd(folder)
             StyleHistogram(index, histogram)
+            if "CutFlow" in hist: StyleCutFlow(histogram) # Labels the Cut Flow histograms
             histogram.Write()
             # Clone root histograms, normalize to XS, and move to Normalized_XS directory
             histogram_norm = histogram.Clone(hist+"_norm")
@@ -126,10 +139,8 @@ for folder, data in zip(dataset_names, datasets):
                 th2_hist = CompileDijetMass(histogram_norm,th2_hist)
             del histogram_norm #, histogram_area
         hf.cd(folder)
-        #th2_hist.SetName("hmj1j2_wvbf"+"_"+str(file_name))
         StyleTH2(th2_hist)
         th2_hist.Write()
-        #th2_hist.SaveAs()
         del th2_hist
         root_file.Close()
         hf.cd()
