@@ -26,16 +26,16 @@ def StyleHistogram(index, h1):
 	h1.SetOption("HIST E")
     
 def StyleCutFlow(h1):
-    h1.SetBinLabel(1,"No Cuts")
-    h1.SetBinLabel(2, "1#it{l} & 1#nu")
-    h1.SetBinLabel(3, "#slash{E}_{T} > 25GeV")
-    h1.SetBinLabel(4, "m_T(W) > 40GeV")
-    h1.SetBinLabel(5, "#ge 2jets")
-    h1.SetBinLabel(6, "p_{T,1} > 80GeV")
-    h1.SetBinLabel(7, "p_{T,2} > 60GeV")
-    h1.SetBinLabel(8, "M_{jj} > 500GeV")
-    h1.SetBinLabel(9, "CJV")
-    h1.SetBinLabel(10, "OJV")
+    h1.SetBinLabel(2,"No Cuts")
+    h1.SetBinLabel(3, "1#it{l} & 1#nu")
+    h1.SetBinLabel(4, "#slash{E}_{T} > 25GeV")
+    h1.SetBinLabel(5, "m_T(W) > 40GeV")
+    h1.SetBinLabel(6, "#geq 2jets")
+    h1.SetBinLabel(7, "p_{T,1} > 80GeV")
+    h1.SetBinLabel(8, "p_{T,2} > 60GeV")
+    h1.SetBinLabel(9, "M_{jj} > 500GeV")
+    h1.SetBinLabel(10, "CJV")
+    h1.SetBinLabel(11, "OJV")
     
 def StyleTH2(th2):
     th2.SetTitle("Differential Dijet Mass and N_{jets} Distribution")

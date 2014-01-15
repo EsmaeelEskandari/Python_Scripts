@@ -31,8 +31,7 @@ c2.SetLogy()
 c3.SetLogy()
 c4.SetLogy()
 
-hist = 'CutFlow'
-rebin = 1
+hist = 'CutFlow_1'
 
 #Draw for the Signal-----------------------------------------------------
 leg = ROOT.TLegend(0.33,0.25,0.73,0.45)
@@ -42,11 +41,14 @@ leg.SetTextSize(0.02)
 
 # Signal, no Mjj_Filt
 c1.cd()
+events_passed_sig = []
 for index,folder in enumerate(datasets_sig):
     new_histo = root_file.Get(folder+"/"+hist)
     new_histo.SetLineColor(eval(Colors[index]))
     leg.AddEntry(new_histo,folder,"l")
     new_histo.Draw("hist same")
+    events_passed_sig.append(new_histo.GetBinContent(11))
+    del new_histo
 leg.Draw()
 
 c1.Update()
@@ -56,11 +58,13 @@ leg.Clear()
 
 # Signal, with Mjj_Filt
 c2.cd()
+events_passed_sig_mjj = []
 for index,folder in enumerate(datasets_sig_mjjfilt):
     new_histo = root_file.Get(folder+"/"+hist)
     new_histo.SetLineColor(eval(Colors[index]))
     leg.AddEntry(new_histo,folder,"l")
     new_histo.Draw("hist same")
+    events_passed_sig_mjj.append(new_histo.GetBinContent(11))
     del new_histo
 leg.Draw()
 
@@ -71,11 +75,13 @@ leg.Clear()
 
 # Background, no Mjj_Filt
 c3.cd()
+events_passed_back = []
 for index,folder in enumerate(datasets_back):
     new_histo = root_file.Get(folder+"/"+hist)
     leg.AddEntry(new_histo,folder,"l")
     new_histo.SetLineColor(eval(Colors[index]))
     new_histo.Draw("hist same")
+    events_passed_back.append(new_histo.GetBinContent(11))
     del new_histo
 leg.Draw()
 
@@ -86,11 +92,13 @@ leg.Clear()
 
 # Background, with Mjj_Filt
 c4.cd()
+events_passed_back_mjj = []
 for index,folder in enumerate(datasets_back_mjjfilt):
     new_histo = root_file.Get(folder+"/"+hist)
     leg.AddEntry(new_histo,folder,"l")
     new_histo.SetLineColor(eval(Colors[index]))
     new_histo.Draw("hist same")
+    events_passed_back_mjj.append(new_histo.GetBinContent(11))
     del new_histo
 leg.Draw()
 
@@ -98,3 +106,17 @@ c4.Update()
 c4.SaveAs("Cut_Flow_Sig_Back_Mjj.pdf")
 c4.Clear()
 leg.Clear()
+
+# Create the histograms that show the signal acceptance per uncertainty
+accept_sig = ROOT.TH1F("Event Acceptance - Signal",10,0,10)
+accept_sig_mjj = ROOT.TH1F("Event Acceptance - Signal (Dijet Mass Filter)",10,0,10)
+accept_back = ROOT.TH1F("Event Acceptance - Background",10,0,10)
+accept_back_mjj = ROOT.TH1F("Event Acceptance - Background (Dijet Mass Filter)",10,0,10)
+
+for index in range(1,11):
+    accept_sig.fill(index,events_passed_sig[index-1])
+    accept_sig_mjj.fill(index,events_passed_sig_mjj[index-1])
+    accept_back.fill(index,events_passed_back[index-1])
+    accept_back_mjj.fill(index,events_passed_back_mjj[index-1])
+
+    
