@@ -352,9 +352,19 @@ def GetListDataset(list_name):
           "SumYElecJet_1", "DeltaR_2jet_1", "DeltaY_2jet_1", "DeltaPhi_2jet_1", "DijetMass_2jet_1", "DijetMass_3jet_1",
 		  "DijetMass_4jet_1", "AntiDijetMass_2jet_1", "AntiDijetMass_3jet_1", "AntiDijetMass_4jet_1", "ThirdZep_3jet_1", "ThirdZep_4jet_1",
           "FourthZep_4jet_1", "AntiDijetEtaDiff_2jet_1", "AntiDijetEtaDiff_3jet_1", "AntiDijetEtaDiff_4jet_1", "AntiDijetPhiDiff_2jet_1",
-		  "AntiDijetPhiDiff_3jet_1", "AntiDijetPhiDiff_4jet_1", "CutFlow", "DeltaR13_3jet_1", "DeltaR23_3jet_1", "NJetsNoCuts",
-          "Mjj_Excl_00_Jet1", "Mjj_Excl_01_Jet1", "Mjj_Excl_02_Jet1", "Mjj_Excl_03_Jet1", "Mjj_Excl_04_Jet1", "Mjj_Excl_05_Jet1",
-          "Mjj_Excl_06_Jet1", "Mjj_Excl_07_Jet1", "Mjj_Excl_08_Jet1", "Mjj_Excl_09_Jet1", "Mjj_Excl_10_Jet1"]
+		  "AntiDijetPhiDiff_3jet_1", "AntiDijetPhiDiff_4jet_1", "CutFlow_1", "DeltaR13_3jet_1", "DeltaR23_3jet_1", "NJetsNoCuts",
+          "Mjj_Excl_00_Jet_1", "Mjj_Excl_01_Jet_1", "Mjj_Excl_02_Jet_1", "Mjj_Excl_03_Jet_1", "Mjj_Excl_04_Jet_1", "Mjj_Excl_05_Jet_1",
+          "Mjj_Excl_06_Jet_1", "Mjj_Excl_07_Jet_1", "Mjj_Excl_08_Jet_1", "Mjj_Excl_09_Jet_1", "Mjj_Excl_10_Jet_1"]
+          
+    stuff = ["NJetExcl_2", "RatioNJetExcl_2", "FirstJetPt_2jet_2", "FirstJetPt_3jet_2", "FirstJetPt_4jet_2", "SecondJetPt_2jet_2",
+          "SecondJetPt_3jet_2", "SecondJetPt_4jet_2", "ThirdJetPt_3jet_2","ThirdJetPt_4jet_2", "FourthJetPt_4jet_2",
+          "Ht_2jet_2", "Ht_3jet_2", "Ht_4jet_2", "Minv_2jet_2", "Minv_3jet_2", "Minv_4jet_2", "JetRapidity_2", "DeltaYElecJet_2",
+          "SumYElecJet_2", "DeltaR_2jet_2", "DeltaY_2jet_2", "DeltaPhi_2jet_2", "DijetMass_2jet_2", "DijetMass_3jet_2",
+          "DijetMass_4jet_2", "AntiDijetMass_2jet_2", "AntiDijetMass_3jet_2", "AntiDijetMass_4jet_2", "ThirdZep_3jet_2", "ThirdZep_4jet_2",
+          "FourthZep_4jet_2", "AntiDijetEtaDiff_2jet_2", "AntiDijetEtaDiff_3jet_2", "AntiDijetEtaDiff_4jet_2", "AntiDijetPhiDiff_2jet_2",
+          "AntiDijetPhiDiff_3jet_2", "AntiDijetPhiDiff_4jet_2", "CutFlow_2", "DeltaR13_3jet_2", "DeltaR23_3jet_2", "NJetsNoCuts",
+          "Mjj_Excl_00_Jet_2", "Mjj_Excl_01_Jet_2", "Mjj_Excl_02_Jet_2", "Mjj_Excl_03_Jet_2", "Mjj_Excl_04_Jet_2", "Mjj_Excl_05_Jet_2",
+          "Mjj_Excl_06_Jet_2", "Mjj_Excl_07_Jet_2", "Mjj_Excl_08_Jet_2", "Mjj_Excl_09_Jet_2", "Mjj_Excl_10_Jet_2"]
           
     hist_list_147311 = ["NJetExcl_1", "RatioNJetExcl_1", "FirstJetPt_2jet_1", "FirstJetPt_3jet_1", "FirstJetPt_4jet_1", "SecondJetPt_2jet_1",
 		  "SecondJetPt_3jet_1", "SecondJetPt_4jet_1", "ThirdJetPt_3jet_1","ThirdJetPt_4jet_1", "FourthJetPt_4jet_1",
@@ -378,7 +388,7 @@ def GetListDataset(list_name):
 		  "cos|#phi_{j_1}-#phi_{j_2}| b/w Most Forward-Rearward Jets (W+#geq 2 jets)", "cos|#phi_{j_1}-#phi_{j_2}| b/w Most Forward-Rearward Jets (W+#geq 3 jets)",
 		  "cos|#phi_{j_1}-#phi_{j_2}| b/w Most Forward-Rearward Jets (W+#geq 4 jets)", "Cut Flow", "Rapidity Diff b/w Jets 1 and 3", "Rapidity Diff b/w Jets 2 and 3",
           "Number of Jets in Event (No Cuts)", "Dijet Mass (#jets = 0)", "Dijet Mass (#jets = 1)", "Dijet Mass (#jets = 2)", "Dijet Mass (#jets = 3)", "Dijet Mass (#jets = 4)",
-          "Dijet Mass (#jets = 5)", "Dijet Mass (#jets = 6)", "Dijet Mass (#jets = 7)", "Dijet Mass (#jets = 8)", "Dijet Mass (#jets = 9)", "Dijet Mass (#jets = 10)",]
+          "Dijet Mass (#jets = 5)", "Dijet Mass (#jets = 6)", "Dijet Mass (#jets = 7)", "Dijet Mass (#jets = 8)", "Dijet Mass (#jets = 9)", "Dijet Mass (#jets = 10)"]
 
     x_axis_list = 	["N_{jet}", "N_{jet}", "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]",
 		      "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]", "H_{T} [GeV]", "H_{T} [GeV]", "H_{T} [GeV]",

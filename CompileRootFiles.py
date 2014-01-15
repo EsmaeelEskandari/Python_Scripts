@@ -13,7 +13,7 @@ datasets = GetListDataset('datasets')
 dataset_names = GetListDataset('dataset_names')
 exp_hist_list = GetListDataset('exp_hist_list')
 hist_list = GetListDataset('hist_list')
-hist_list_147311 = GetListDataset('hist_list_147311')
+#hist_list_147311 = GetListDataset('hist_list_147311')
 title_list = GetListDataset('title_list')
 x_axis_list = GetListDataset('x_axis_list')
 y_axis_list = GetListDataset('y_axis_list')
@@ -113,7 +113,7 @@ for folder, data in zip(dataset_names, datasets):
         root_file = ROOT.TFile.Open(file_name+".root")
         for index, hist in enumerate(hist_list):
             # No normalization
-            if file_name == "147311": hist = hist_list_147311[index]
+            #if file_name == "147311": hist = hist_list_147311[index]
             histogram = root_file.Get(hist)
             hf.cd(folder)
             StyleHistogram(index, histogram)
