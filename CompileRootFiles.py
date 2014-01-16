@@ -26,16 +26,16 @@ def StyleHistogram(index, h1):
 	h1.SetOption("HIST E")
     
 def StyleCutFlow(h1):
-    h1.SetBinLabel(2,"No Cuts")
-    h1.SetBinLabel(3, "1#it{l} & 1#nu")
-    h1.SetBinLabel(4, "#slash{E}_{T} > 25GeV")
-    h1.SetBinLabel(5, "m_T(W) > 40GeV")
-    h1.SetBinLabel(6, "#geq 2jets")
-    h1.SetBinLabel(7, "p_{T,1} > 80GeV")
-    h1.SetBinLabel(8, "p_{T,2} > 60GeV")
-    h1.SetBinLabel(9, "M_{jj} > 500GeV")
-    h1.SetBinLabel(10, "CJV")
-    h1.SetBinLabel(11, "OJV")
+    h1.GetXaxis().SetBinLabel(2,"No Cuts")
+    h1.GetXaxis().SetBinLabel(3, "1#it{l} & 1#nu")
+    h1.GetXaxis().SetBinLabel(4, "#slash{E}_{T} > 25GeV")
+    h1.GetXaxis().SetBinLabel(5, "m_T(W) > 40GeV")
+    h1.GetXaxis().SetBinLabel(6, "#geq 2jets")
+    h1.GetXaxis().SetBinLabel(7, "p_{T,1} > 80GeV")
+    h1.GetXaxis().SetBinLabel(8, "p_{T,2} > 60GeV")
+    h1.GetXaxis().SetBinLabel(9, "M_{jj} > 500GeV")
+    h1.GetXaxis().SetBinLabel(10, "CJV")
+    h1.GetXaxis().SetBinLabel(11, "OJV")
     
 def StyleTH2(th2):
     th2.SetTitle("Differential Dijet Mass and N_{jets} Distribution")
@@ -111,14 +111,18 @@ for folder, data in zip(dataset_names, datasets):
         file_name = folder.split('.')
         file_name = file_name[0]
         root_file = ROOT.TFile.Open(file_name+".root")
+        root_file_add = ROOT.TFile.Open(file_name+"_add.root")
         for index, hist in enumerate(hist_list):
             # No normalization
-            #if file_name == "147311": hist = hist_list_147311[index]
             histogram = root_file.Get(hist)
+            histogram_add = root_file_add.Get(hist)
             hf.cd(folder)
             StyleHistogram(index, histogram)
-            if "CutFlow" in hist: StyleCutFlow(histogram) # Labels the Cut Flow histograms
-            histogram.Write()
+            if "CutFlow" in hist:
+                StyleCutFlow(histogram_add) # Labels the Cut Flow histograms
+                histogram_add.Write()
+            else:
+                histogram.Write()
             # Clone root histograms, normalize to XS, and move to Normalized_XS directory
             histogram_norm = histogram.Clone(hist+"_norm")
             histogram_norm.GetYaxis().SetTitle("(1/#sigma) "+y_axis_list_norm[index])

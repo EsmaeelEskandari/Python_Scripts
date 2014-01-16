@@ -44,6 +44,7 @@ c1.cd()
 events_passed_sig = []
 for index,folder in enumerate(datasets_sig):
     new_histo = root_file.Get(folder+"/"+hist)
+    #if "129916" in folder: new_histo.Scale(4.0)
     new_histo.SetLineColor(eval(Colors[index]))
     leg.AddEntry(new_histo,folder,"l")
     new_histo.Draw("hist same")
@@ -103,20 +104,51 @@ for index,folder in enumerate(datasets_back_mjjfilt):
 leg.Draw()
 
 c4.Update()
-c4.SaveAs("Cut_Flow_Sig_Back_Mjj.pdf")
+c4.SaveAs("Cut_Flow_Back_Mjj.pdf")
 c4.Clear()
 leg.Clear()
 
 # Create the histograms that show the signal acceptance per uncertainty
-accept_sig = ROOT.TH1F("Event Acceptance - Signal",10,0,10)
-accept_sig_mjj = ROOT.TH1F("Event Acceptance - Signal (Dijet Mass Filter)",10,0,10)
-accept_back = ROOT.TH1F("Event Acceptance - Background",10,0,10)
-accept_back_mjj = ROOT.TH1F("Event Acceptance - Background (Dijet Mass Filter)",10,0,10)
+c5 = ROOT.TCanvas('c5','Signal_Acceptance',0,0,640,640)
+c6 = ROOT.TCanvas('c6','Signal_Acceptance_MjjFilt',0,0,640,640)
+c7 = ROOT.TCanvas('c7','Background_Acceptance',0,0,640,640)
+c8 = ROOT.TCanvas('c8','Background_Acceptance_MjjFilt',0,0,640,640)
+accept_sig = ROOT.TH1F("accept_sig","Event Acceptance - Signal",10,0,10)
+accept_sig_mjj = ROOT.TH1F("accept_sig_mjj","Event Acceptance - Signal (Dijet Mass Filter)",10,0,10)
+accept_back = ROOT.TH1F("accept_back","Event Acceptance - Background",10,0,10)
+accept_back_mjj = ROOT.TH1F("accept_back_mjj","Event Acceptance - Background (Dijet Mass Filter)",10,0,10)
 
-for index in range(1,11):
-    accept_sig.fill(index,events_passed_sig[index-1])
-    accept_sig_mjj.fill(index,events_passed_sig_mjj[index-1])
-    accept_back.fill(index,events_passed_back[index-1])
-    accept_back_mjj.fill(index,events_passed_back_mjj[index-1])
-
+for index in range(1,10):
+    accept_sig.Fill(index,events_passed_sig[index-1])
+    accept_sig_mjj.Fill(index,events_passed_sig_mjj[index-1])
+    accept_back.Fill(index,events_passed_back[index-1])
+    accept_back_mjj.Fill(index,events_passed_back_mjj[index-1])
     
+print events_passed_sig
+print events_passed_sig_mjj
+print events_passed_back
+print events_passed_back_mjj
+    
+c5.cd()
+accept_sig.Draw()
+c5.Update()
+c5.SaveAs("accept_sig.pdf")
+c5.Clear()
+
+c6.cd()
+accept_sig_mjj.Draw()
+c6.Update()
+c6.SaveAs("accept_sig_mjj.pdf")
+c6.Clear()
+
+c7.cd()
+accept_back.Draw()
+c7.Update()
+c7.SaveAs("accept_back.pdf")
+c7.Clear()
+
+c8.cd()
+accept_back_mjj.Draw()
+c8.Update()
+c8.SaveAs("accept_back_mjj.pdf")
+c8.Clear()
