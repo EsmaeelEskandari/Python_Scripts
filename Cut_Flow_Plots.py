@@ -6,6 +6,17 @@ from Aux_Functions import *
 # in datasets[]. Useful to confirm that errors are being calculated
 # properly in Find_error_band.py script.
 
+def StyleAcceptHist(h1):
+    h1.GetXaxis().SetBinLabel(2, "Nominal")
+    h1.GetXaxis().SetBinLabel(3, "CKKW30")
+    h1.GetXaxis().SetBinLabel(4, "MuFdown")
+    h1.GetXaxis().SetBinLabel(5, "MuFup")
+    h1.GetXaxis().SetBinLabel(6, "mpi1")
+    h1.GetXaxis().SetBinLabel(7, "mpi2")
+    h1.GetXaxis().SetBinLabel(8, "Shower1")
+    h1.GetXaxis().SetBinLabel(9, "MuRdown")
+    h1.GetXaxis().SetBinLabel(10, "MuRup")
+
 #-----------------------------------------------------------------
 # Global style settings go here!
 # Most of these are ATLAS defaults
@@ -34,7 +45,7 @@ c4.SetLogy()
 hist = 'CutFlow_1'
 
 #Draw for the Signal-----------------------------------------------------
-leg = ROOT.TLegend(0.33,0.25,0.73,0.45)
+leg = ROOT.TLegend(0.2,0.2,0.5,0.4)
 leg.SetFillColor(0)
 leg.SetBorderSize(0)
 leg.SetTextSize(0.02)
@@ -44,11 +55,11 @@ c1.cd()
 events_passed_sig = []
 for index,folder in enumerate(datasets_sig):
     new_histo = root_file.Get(folder+"/"+hist)
-    #if "129916" in folder: new_histo.Scale(4.0)
+    if "129916" in folder: new_histo.Scale(0.25)
     new_histo.SetLineColor(eval(Colors[index]))
     leg.AddEntry(new_histo,folder,"l")
     new_histo.Draw("hist same")
-    events_passed_sig.append(new_histo.GetBinContent(11))
+    events_passed_sig.append(new_histo.GetBinContent(11)/new_histo.GetBinContent(2))
     del new_histo
 leg.Draw()
 
@@ -65,7 +76,7 @@ for index,folder in enumerate(datasets_sig_mjjfilt):
     new_histo.SetLineColor(eval(Colors[index]))
     leg.AddEntry(new_histo,folder,"l")
     new_histo.Draw("hist same")
-    events_passed_sig_mjj.append(new_histo.GetBinContent(11))
+    events_passed_sig_mjj.append(new_histo.GetBinContent(11)/new_histo.GetBinContent(2))
     del new_histo
 leg.Draw()
 
@@ -79,10 +90,11 @@ c3.cd()
 events_passed_back = []
 for index,folder in enumerate(datasets_back):
     new_histo = root_file.Get(folder+"/"+hist)
+    if "147775" in folder: new_histo.Scale(0.25)
     leg.AddEntry(new_histo,folder,"l")
     new_histo.SetLineColor(eval(Colors[index]))
     new_histo.Draw("hist same")
-    events_passed_back.append(new_histo.GetBinContent(11))
+    events_passed_back.append(new_histo.GetBinContent(11)/new_histo.GetBinContent(2))
     del new_histo
 leg.Draw()
 
@@ -99,7 +111,7 @@ for index,folder in enumerate(datasets_back_mjjfilt):
     leg.AddEntry(new_histo,folder,"l")
     new_histo.SetLineColor(eval(Colors[index]))
     new_histo.Draw("hist same")
-    events_passed_back_mjj.append(new_histo.GetBinContent(11))
+    events_passed_back_mjj.append(new_histo.GetBinContent(11)/new_histo.GetBinContent(2))
     del new_histo
 leg.Draw()
 
@@ -124,10 +136,10 @@ for index in range(1,10):
     accept_back.Fill(index,events_passed_back[index-1])
     accept_back_mjj.Fill(index,events_passed_back_mjj[index-1])
     
-print events_passed_sig
-print events_passed_sig_mjj
-print events_passed_back
-print events_passed_back_mjj
+StyleAcceptHist(accept_sig)
+StyleAcceptHist(accept_sig_mjj)
+StyleAcceptHist(accept_back)
+StyleAcceptHist(accept_back_mjj)
     
 c5.cd()
 accept_sig.Draw()

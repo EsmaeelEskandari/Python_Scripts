@@ -17,17 +17,21 @@
 echo "Input the file name prefix: (e.g. user.cjohnson.powheg.w2jet.81514.txt._)"
 read file_prefix
 os_type=`uname`
-#if [[ "$os_type" == 'Darwin' ]]; then
+if [[ "$os_type" == 'Darwin' ]]; then
+	last_line=`gtac $file |egrep -m 1 .`
 	rename 's/lhe/events/' *.lhe
-#else
-#	rename lhe events *.lhe
-#fi
+else
+	last_line=`tac $file |egrep -m 1 .`
+	rename lhe events *.lhe
+fi
 
 # Add "</LesHouchesEvents>" to end of each file
 # To Do: check if </LesHouchesEvents> is already the last line
 for file in $( ls *.events )
 do
-	echo "</LesHouchesEvents>" >> $file
+	if [[ "$last_line" != '</LesHouchesEvents>' ]]; then
+		echo "</LesHouchesEvents>" >> $file
+	fi
 done
 
 # Rename the file to use the prefix given earlier
