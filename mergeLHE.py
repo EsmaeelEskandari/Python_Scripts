@@ -14,10 +14,10 @@ with open('./outfile.lhe', 'w') as outfile:
         writeHeader = False
         for line in toGetHeader:
             if "<!--" in line: writeHeader = True
+            if writeHeader: outfile.write(line)
             if "</init>" in line:
                 outfile.write(line)
                 break
-            if writeHeader: outfile.write(line)
     for fname in filenames:
         writeLine = False
         stopWrite = False
@@ -32,4 +32,4 @@ with open('./outfile.lhe', 'w') as outfile:
                     outfile.write(line)
     outfile.write("</LesHouchesEvents>")
     
-print "There were %s events processed in %s files." %numEvents, len(filenames)
+print "There were {0} events processed in {1} files.".format(numEvents, len(filenames))

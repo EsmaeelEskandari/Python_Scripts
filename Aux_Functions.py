@@ -281,7 +281,14 @@ def GetListDataset(list_name):
 		  'mc12_8TeV.147323.Sherpa_CT10_Wmunu_MuRdown_MjjFilt.evgen.EVNT.e2355/',
 		  'mc12_8TeV.147324.Sherpa_CT10_Wmunu_MuRup.evgen.EVNT.e2355/',
 		  'mc12_8TeV.147325.Sherpa_CT10_Wmunu_MuRup_MjjFilt.evgen.EVNT.e2355/',
-		  'mc12_8TeV.147775.Sherpa_CT10_Wmunu.evgen.EVNT.e1434/']
+		  'mc12_8TeV.147775.Sherpa_CT10_Wmunu.evgen.EVNT.e1434/',
+          'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.Nominal.v1/',
+          'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.MuFdown.v2/',
+          'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.MuFup.v1/',
+          'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.MuRdown.v1/',
+          'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.MuRup.v1/',
+          'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.MuRdownMuFdown.v1/',
+          'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.MuRupMuFup.v1/']
 	      
     dataset_number = ['129916','129930','147294','147295','147296',
               '147297','147298','147299','147300','147301','147302',
@@ -302,7 +309,9 @@ def GetListDataset(list_name):
 		      "147310.CKKW30", "147311.CKKW30_MjjFilt", "147312.MuFdown", "147313.MuFdown_MjjFilt",
 		      "147314.MuFup", "147315.MuFup_MjjFilt", "147316.mpi1", "147317.mpi1_MjjFilt",
 		      "147318.mpi2", "147319.mpi2_MjjFilt", "147320.Shower1", "147321.Shower1_MjjFilt",
-		      "147322.MuRdown", "147323.MuRdown_MjjFilt", "147324.MuRup", "147325.MuRup_MjjFilt", "147775.Nominal_Sherpa_Background"]
+		      "147322.MuRdown", "147323.MuRdown_MjjFilt", "147324.MuRup", "147325.MuRup_MjjFilt", 
+              "147775.Nominal_Sherpa_Background", "Powheg.Wplus.Nominal", "Powheg.Wplus.MuFdown", "Powheg.Wplus.MuFup",
+              "Powheg.Wplus.MuRdown", "Powheg.Wplus.MuRup", "Powheg.Wplus.MuRdownMuFdown", "Powheg.Wplus.MuRupMuFup"]
 
     dataset_names_1 = ["147294.min_n_tchannels_CKKW30", "147295.min_n_tchannels_CKKW30_MjjFilt",
 			"147296.min_n_tchannels_MuFdown", "147297.min_n_tchannels_MuFdown_MjjFilt",
@@ -354,9 +363,8 @@ def GetListDataset(list_name):
           "FourthZep_4jet_1", "AntiDijetEtaDiff_2jet_1", "AntiDijetEtaDiff_3jet_1", "AntiDijetEtaDiff_4jet_1", "AntiDijetPhiDiff_2jet_1",
 		  "AntiDijetPhiDiff_3jet_1", "AntiDijetPhiDiff_4jet_1", "CutFlow_1", "DeltaR13_3jet_1", "DeltaR23_3jet_1", "NJetsNoCuts",
           "Mjj_Excl_00_Jet_1", "Mjj_Excl_01_Jet_1", "Mjj_Excl_02_Jet_1", "Mjj_Excl_03_Jet_1", "Mjj_Excl_04_Jet_1", "Mjj_Excl_05_Jet_1",
-          "Mjj_Excl_06_Jet_1", "Mjj_Excl_07_Jet_1", "Mjj_Excl_08_Jet_1", "Mjj_Excl_09_Jet_1", "Mjj_Excl_10_Jet_1"]
-          
-    stuff = ["NJetExcl_2", "RatioNJetExcl_2", "FirstJetPt_2jet_2", "FirstJetPt_3jet_2", "FirstJetPt_4jet_2", "SecondJetPt_2jet_2",
+          "Mjj_Excl_06_Jet_1", "Mjj_Excl_07_Jet_1", "Mjj_Excl_08_Jet_1", "Mjj_Excl_09_Jet_1", "Mjj_Excl_10_Jet_1",
+          "NJetExcl_2", "RatioNJetExcl_2", "FirstJetPt_2jet_2", "FirstJetPt_3jet_2", "FirstJetPt_4jet_2", "SecondJetPt_2jet_2",
           "SecondJetPt_3jet_2", "SecondJetPt_4jet_2", "ThirdJetPt_3jet_2","ThirdJetPt_4jet_2", "FourthJetPt_4jet_2",
           "Ht_2jet_2", "Ht_3jet_2", "Ht_4jet_2", "Minv_2jet_2", "Minv_3jet_2", "Minv_4jet_2", "JetRapidity_2", "DeltaYElecJet_2",
           "SumYElecJet_2", "DeltaR_2jet_2", "DeltaY_2jet_2", "DeltaPhi_2jet_2", "DijetMass_2jet_2", "DijetMass_3jet_2",

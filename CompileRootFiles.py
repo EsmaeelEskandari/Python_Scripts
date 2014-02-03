@@ -98,9 +98,18 @@ for folder, data in zip(dataset_names, datasets):
     th2_hist = ROOT.TH2F( "hmj1j2_wvbf", "hmj1j2_wvbf", 10, -0.5, 9.5, 200, 0, 5000 )
     if os.path.exists(folder+"/") == True:
         #First get the crossSection_mean and GenFiltEff_mean for this dataset from AMI for normalizations
-        xsec, effic = get_dataset_xsec_effic(client, data)
-        print folder, xsec, effic
-        xsec = 1000*xsec*effic #Converts nb to pb and applies GenFiltEff
+        if "PowhegPythia8" in data:
+            if ".Nominal." in data: xsec = 3539.19590298
+            if ".MuFdown." in data: xsec = 3083.52221626
+            if ".MuFup." in data: xsec = 3870.21108023
+            if ".MuRdown." in data: xsec = 3464.35407038
+            if ".MuRup." in data: xsec = 3254.18183208
+            if ".MuRdownMuFdown." in data: xsec = 3012.39734672
+            if ".MuRupMuFup." in data: xsec = 3552.69606084
+        else:
+            xsec, effic = get_dataset_xsec_effic(client, data)
+            print folder, xsec, effic
+            xsec = 1000*xsec*effic #Converts nb to pb and applies GenFiltEff
 
         #histogram manipulation and such
         os.chdir(folder+"/")
