@@ -1,39 +1,39 @@
-import glob, os
+import glob, os, math
+import numpy as np
 
-filenames = glob.glob("*.events")
+filenames = glob.glob("*.lhe")
 file_root_names = [os.path.splitext(name)[0] for name in filenames]
 
 def getTheWeights(eventBlock):
     numParticles = int(eventBlock[1][0])
-    currWeight = eventBlock[1][2]
-    renfact = []
-    facfact = []
+    currWeight = float(eventBlock[1][2])
     weight = []
+    weight.append(currWeight)
     for i in range(numParticles+4,numParticles+10):
-        sci_not = '%.5E' % float(eventBlock[i][2])
-        weight.append(sci_not)
-        renfact.append(eventBlock[i][3])
-        facfact.append(eventBlock[i][4])
+        weight.append(float(eventBlock[i][2]))
     
-    return renfact, facfact, weight, currWeight
+    return weight
 	
+numEvents = 0
+acc_weight = np.zeros((7,), dtype=np.float64)
+acc_weight_sqr = np.zeros((7,), dtype=np.float64)
+xsecval = np.zeros((7,), dtype=np.float64)
+xsecerr = np.zeros((7,), dtype=np.float64)
+xsecerr2 = np.zeros((7,), dtype=np.float64)
+
+shifts = ["Nominal", "MuRFdown", "MuFdown", "MuRdown", "MuFup", "MuRup", "MuRFup"]
+
 for name_index,fname in enumerate(filenames):
-    numEvents = 0
-    eventLine = 0
     with open(fname) as infile:
         eventBlock = []
-        allNewWeights = []
-        allCurrWeights = []
-        allRenFacts = []
-        allFacFacts = []
         getWeights = False
         for index,line in enumerate(infile):
             changeWeights = False
             if "<event>" in line: 
                 numEvents += 1
+                if (numEvents % 25000 == 0): print "Processed {0} events!".format(numEvents)
                 getWeights = True
                 changeWeights = False
-                eventLine = index
                 eventBlock = []
             if "</event>" in line: 
                 getWeights = False
@@ -41,8 +41,28 @@ for name_index,fname in enumerate(filenames):
             if getWeights:
                 eventBlock.append(line.split())
             if changeWeights: 
-                renfact, facfact, weight, currWeight = getTheWeights(eventBlock)
-                allNewWeights.append(weight)
-                allCurrWeights.append(currWeight)
-                allRenFacts.append(renfact)
-                allFacFacts.append(facfact)
+                weights = getTheWeights(eventBlock)
+                
+                # weights = [Nominal, MuRFdown, MuFdown, MuRdown, MuFup, MuRup, MuRFup]
+                for i in range(7):
+                    acc_weight[i] += np.float64(weights[i])
+                    acc_weight_sqr[i] += np.float64(weights[i])*np.float64(weights[i])
+                
+                    xsecval[i] = acc_weight[i]/np.float64(numEvents)
+                    xsecerr2[i] = (acc_weight_sqr[i]/np.float64(numEvents) - xsecval[i]*xsecval[i])/np.float64(numEvents)
+                    if xsecerr2[i] < 0: 
+                        print "{0} XS error2 was < 0.0, forcing it to 0.0.".format(shifts[i])
+                        xsecerr2[i] = 0.0
+                    xsecerr[i] = math.sqrt(xsecerr2[i])
+
+for i in range(7):
+    print "Estimated {0} cross-section = {1} +- {2} pb. Calculated from {3} events.".format(shifts[i],xsecval[i],xsecerr[i],numEvents)
+
+#print "Estimated Nominal cross-section = {0} +- {1} pb. Calculated from {2} events.".format(Nom_xs,Nom_xs_err,numEvents)
+#print "Estimated MuFdown cross-section = {0} +- {1} pb. Calculated from {2} events.".format(MuFdown_xs,MuFdown_xs_err,numEvents)
+#print "Estimated MuFup cross-section = {0} +- {1} pb. Calculated from {2} events.".format(MuFup_xs,MuFup_xs_err,numEvents)
+#print "Estimated MuRdown cross-section = {0} +- {1} pb. Calculated from {2} events.".format(MuRdown_xs,MuRdown_xs_err,numEvents)
+#print "Estimated MuRup cross-section = {0} +- {1} pb. Calculated from {2} events.".format(MuRup_xs,MuRup_xs_err,numEvents)
+#print "Estimated MuRdownMuFdown cross-section = {0} +- {1} pb. Calculated from {2} events.".format(MuRFdown_xs,MuRFdown_xs_err,numEvents)
+#print "Estimated MuRupMuFup cross-section = {0} +- {1} pb. Calculated from {2} events.".format(MuRFup_xs,MuRFup_xs_err,numEvents)
+                
