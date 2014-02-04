@@ -26,8 +26,8 @@ for folder in dataset_names:
 	# run number (found from the folder name).
 	os.system("aida2root merged_avg.aida")
 	os.system("aida2root merged_add.aida")
-	file_name = folder.split('.')
-	file_name = file_name[0]
+	file_name = folder.split('.')[0]
+    if "Powheg" in file_name: file_name = folder.replace('.','_')
 	cmd = "mv merged_avg.root "+file_name+".root"
 	os.system(cmd)
 	cmd = "mv merged_add.root "+file_name+"_add.root"
