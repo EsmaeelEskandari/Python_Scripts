@@ -143,7 +143,7 @@ def MakeErrorBandLegend(h1,h2):
     leg.AddEntry(h2,"Systematic Error","f")
     return leg
       
-def FindErrorBands(datasets,root_file,hist):
+def FindErrorBands(datasets,root_file,hist,isPowheg):
     rebin_to = 0	# Set this to how many bins you would like (0 -> no change)
     nom_hist = root_file.Get(datasets[0]+"/Normalized_XS/"+hist+'_norm')
     nom_hist = nom_hist.Clone()
@@ -151,7 +151,7 @@ def FindErrorBands(datasets,root_file,hist):
     print numb_of_bins
     if rebin_to > 0.0: rebin = numb_of_bins/rebin_to
     else: rebin = 1
-    rebin = 5
+    #rebin = 5
     nom_hist.Rebin(rebin)
     nom_graph = ROOT.TGraphAsymmErrors(nom_hist)
     nom_graph.SetLineColor(ROOT.TAttFill.kGreen)
@@ -162,56 +162,48 @@ def FindErrorBands(datasets,root_file,hist):
     tot_stat_errors = []
     sequence = datasets[1:]
     for bin in range(1,nbins+1):
-	positive_shifts2 = []
-	negative_shifts2 = []
-	shifts = []
-	shift_times_unc = []
-	nom_bin_val = nom_hist.GetBinContent(bin)
-	nom_bin_err = nom_hist.GetBinError(bin)
+      positive_shifts2 = []
+      negative_shifts2 = []
+      shifts = []
+      shift_times_unc = []
+      nom_bin_val = nom_hist.GetBinContent(bin)
+      nom_bin_err = nom_hist.GetBinError(bin)
 
-	for dataset in sequence:
-	    if root_file.GetDirectory(dataset) == None:
-		print dataset+" does not exist!"
-		continue
-	    hist_to_clone = root_file.Get(dataset+"/Normalized_XS/"+hist+'_norm')
-	    hist_to_comp = hist_to_clone.Clone(dataset)
-	    hist_to_comp.Rebin(rebin)
+      for dataset in sequence:
+        if root_file.GetDirectory(dataset) == None:
+          print dataset+" does not exist!"
+          continue
+        hist_to_clone = root_file.Get(dataset+"/Normalized_XS/"+hist+'_norm')
+        hist_to_comp = hist_to_clone.Clone(dataset)
+        hist_to_comp.Rebin(rebin)
+        hist_bin_num = hist_to_comp.GetNbinsX()
+        if hist_bin_num != numb_of_bins and bin == 1:
+            print "{0} has {1} bins and Nominal has {2} bins".format(dataset,hist_bin_num,numb_of_bins)
+            print "Should check that bins are properly aligned between Nominal and Varied samples."
 
-	    comp_bin_val = hist_to_comp.GetBinContent(bin)
-	    comp_bin_err = hist_to_comp.GetBinError(bin)
+        comp_bin_val = hist_to_comp.GetBinContent(bin)
+        comp_bin_err = hist_to_comp.GetBinError(bin)
 
-	    diff = comp_bin_val - nom_bin_val
-	    shift_unc = math.sqrt(comp_bin_err*comp_bin_err + nom_bin_err*nom_bin_err) # These errors are mostly non-sense
-	    shifts.append(diff)
-	    shift_times_unc.append(2.0*diff*shift_unc)
+        diff = comp_bin_val - nom_bin_val
         
-	    if (diff > 0.0):
-              if "MuFdown" in dataset: MuFdown = diff*diff
-              elif "MuRdown" in dataset: MuRdown = diff*diff
-              else: positive_shifts2.append(diff*diff)
-	    else:
-              if "MuFup" in dataset: MuFup = diff*diff
-              elif "MuRup" in dataset: MuRup = diff*diff
-	      else: negative_shifts2.append(diff*diff)
-    
-        if MuFdown > MuRdown: positive_shifts2.append(MuFdown)
-        elif MuFdown < MuRdown: positive_shifts2.append(MuRdown)
-        if MuFup > MuRup: negative_shifts2.append(MuFup)
-        elif MuFup < MuRup: negative_shifts2.append(MuRup)
-        print MuFdown, MuRdown, MuFup, MuRup
-        print positive_shifts2, negative_shifts2
-
-	upper_error.append(math.sqrt(math.fsum(positive_shifts2)))
-	lower_error.append(math.sqrt(math.fsum(negative_shifts2)))
-	shifts_sum2, shift_time_unc_sum2 = 0.0, 0.0
-	for entry in shifts:
-	    shifts_sum2 += entry*entry
-	for entry in shift_times_unc:
-	    shift_time_unc_sum2 += entry*entry
-	tot_stat_errors.append(0.25*math.sqrt(shifts_sum2)*math.sqrt(shift_time_unc_sum2))
+        if (diff >= 0.0):
+          positive_shifts2.append(diff*diff)
+          negative_shifts2.append(0.0)
+        else:
+          positive_shifts2.append(0.0)
+          negative_shifts2.append(diff*diff)
+      
+      if isPowheg:
+          upper_error.append(math.sqrt(max(positive_shifts2)))
+          lower_error.append(math.sqrt(max(negative_shifts2)))
+          #upper_error.append(math.sqrt(math.fsum(positive_shifts2)))
+          #lower_error.append(math.sqrt(math.fsum(negative_shifts2)))
+      else:
+          upper_error.append(math.sqrt(math.fsum(positive_shifts2)))
+          lower_error.append(math.sqrt(math.fsum(negative_shifts2)))
 		
-	nom_graph.SetPointEYhigh(bin-1,upper_error[bin-1])
-	nom_graph.SetPointEYlow(bin-1,lower_error[bin-1])
+      nom_graph.SetPointEYhigh(bin-1,upper_error[bin-1])
+      nom_graph.SetPointEYlow(bin-1,lower_error[bin-1])
 
     return nom_hist, nom_graph, tot_stat_errors
       
@@ -236,8 +228,8 @@ def MakeRatioPlot(nom_hist,nom_graph,tot_stat_errors):
 	ratio_plot.SetPointEXlow(point, nom_hist.GetBinWidth(point)/2.0)
 	ratio_plot.SetPointEYhigh(point, ratio_up)
 	ratio_plot.SetPointEYlow(point, ratio_down)
-	stat_plot.SetPoint(point,nom_hist.GetBinWidth(point)/2.0,tot_stat_errors[point])
-	stat_plot.SetPointError(point,nom_hist.GetBinWidth(point)/2.0,tot_stat_errors[point])
+#	stat_plot.SetPoint(point,nom_hist.GetBinWidth(point)/2.0,tot_stat_errors[point])
+#	stat_plot.SetPointError(point,nom_hist.GetBinWidth(point)/2.0,tot_stat_errors[point])
 
     return ratio_plot, stat_plot
 
@@ -249,39 +241,39 @@ def GetListDataset(list_name):
 
     datasets = 	['mc12_8TeV.129916.Sherpa_CT10_Wmunu2JetsEW1JetQCD15GeV_min_n_tchannels.evgen.EVNT.e1557/',
           'mc12_8TeV.129930.Sherpa_CT10_Wmunu_MjjFiltered.evgen.EVNT.e1538/',
-		  'mc12_8TeV.147294.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_CKKW30.evgen.EVNT.e1805/',
-		  'mc12_8TeV.147295.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_CKKW30_MjjFilt.evgen.EVNT.e1805/',
-		  'mc12_8TeV.147296.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_MuFdown.evgen.EVNT.e2355/',
-		  'mc12_8TeV.147297.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_MuFdown_MjjFilt.evgen.EVNT.e2355/',
-		  'mc12_8TeV.147298.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_MuFup.evgen.EVNT.e2355/',
-		  'mc12_8TeV.147299.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_MuFup_MjjFilt.evgen.EVNT.e2355/',
-		  'mc12_8TeV.147300.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_mpi1.evgen.EVNT.e1805/',
-		  'mc12_8TeV.147301.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_mpi1_MjjFilt.evgen.EVNT.e1805/',
-		  'mc12_8TeV.147302.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_mpi2.evgen.EVNT.e1805/',
-		  'mc12_8TeV.147303.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_mpi2_MjjFilt.evgen.EVNT.e1805/',
-		  'mc12_8TeV.147304.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_Shower1.evgen.EVNT.e1805/',
-		  'mc12_8TeV.147305.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_Shower1_MjjFilt.evgen.EVNT.e1805/',
-		  'mc12_8TeV.147306.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_MuRdown.evgen.EVNT.e2355/',
-		  'mc12_8TeV.147307.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_MuRdown_MjjFilt.evgen.EVNT.e2355/',
-		  'mc12_8TeV.147308.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_MuRup.evgen.EVNT.e2355/',
-		  'mc12_8TeV.147309.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_MuRup_MjjFilt.evgen.EVNT.e2355/',
-		  'mc12_8TeV.147310.Sherpa_CT10_Wmunu_CKKW30.evgen.EVNT.e1805/',
-		  'mc12_8TeV.147311.Sherpa_CT10_Wmunu_CKKW30_MjjFilt.evgen.EVNT.e1805/',
-		  'mc12_8TeV.147312.Sherpa_CT10_Wmunu_MuFdown.evgen.EVNT.e2355/',
-		  'mc12_8TeV.147313.Sherpa_CT10_Wmunu_MuFdown_MjjFilt.evgen.EVNT.e2355/',
-		  'mc12_8TeV.147314.Sherpa_CT10_Wmunu_MuFup.evgen.EVNT.e2355/',
-		  'mc12_8TeV.147315.Sherpa_CT10_Wmunu_MuFup_MjjFilt.evgen.EVNT.e2355/',
-		  'mc12_8TeV.147316.Sherpa_CT10_Wmunu_mpi1.evgen.EVNT.e1805/',
-		  'mc12_8TeV.147317.Sherpa_CT10_Wmunu_mpi1_MjjFilt.evgen.EVNT.e1805/',
-		  'mc12_8TeV.147318.Sherpa_CT10_Wmunu_mpi2.evgen.EVNT.e1805/',
-		  'mc12_8TeV.147319.Sherpa_CT10_Wmunu_mpi2_MjjFilt.evgen.EVNT.e1805/',
-		  'mc12_8TeV.147320.Sherpa_CT10_Wmunu_Shower1.evgen.EVNT.e1805/',
-		  'mc12_8TeV.147321.Sherpa_CT10_Wmunu_Shower1_MjjFilt.evgen.EVNT.e1805/',
-		  'mc12_8TeV.147322.Sherpa_CT10_Wmunu_MuRdown.evgen.EVNT.e2355/',
-		  'mc12_8TeV.147323.Sherpa_CT10_Wmunu_MuRdown_MjjFilt.evgen.EVNT.e2355/',
-		  'mc12_8TeV.147324.Sherpa_CT10_Wmunu_MuRup.evgen.EVNT.e2355/',
-		  'mc12_8TeV.147325.Sherpa_CT10_Wmunu_MuRup_MjjFilt.evgen.EVNT.e2355/',
-		  'mc12_8TeV.147775.Sherpa_CT10_Wmunu.evgen.EVNT.e1434/',
+	  'mc12_8TeV.147294.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_CKKW30.evgen.EVNT.e1805/',
+	  'mc12_8TeV.147295.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_CKKW30_MjjFilt.evgen.EVNT.e1805/',
+	  'mc12_8TeV.147296.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_MuFdown.evgen.EVNT.e2355/',
+	  'mc12_8TeV.147297.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_MuFdown_MjjFilt.evgen.EVNT.e2355/',
+	  'mc12_8TeV.147298.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_MuFup.evgen.EVNT.e2355/',
+	  'mc12_8TeV.147299.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_MuFup_MjjFilt.evgen.EVNT.e2355/',
+	  'mc12_8TeV.147300.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_mpi1.evgen.EVNT.e1805/',
+	  'mc12_8TeV.147301.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_mpi1_MjjFilt.evgen.EVNT.e1805/',
+	  'mc12_8TeV.147302.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_mpi2.evgen.EVNT.e1805/',
+	  'mc12_8TeV.147303.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_mpi2_MjjFilt.evgen.EVNT.e1805/',
+	  'mc12_8TeV.147304.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_Shower1.evgen.EVNT.e1805/',
+	  'mc12_8TeV.147305.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_Shower1_MjjFilt.evgen.EVNT.e1805/',
+	  'mc12_8TeV.147306.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_MuRdown.evgen.EVNT.e2355/',
+	  'mc12_8TeV.147307.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_MuRdown_MjjFilt.evgen.EVNT.e2355/',
+	  'mc12_8TeV.147308.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_MuRup.evgen.EVNT.e2355/',
+	  'mc12_8TeV.147309.Sherpa_CT10_EWK_Wmunu_min_n_tchannels_MuRup_MjjFilt.evgen.EVNT.e2355/',
+	  'mc12_8TeV.147310.Sherpa_CT10_Wmunu_CKKW30.evgen.EVNT.e1805/',
+	  'mc12_8TeV.147311.Sherpa_CT10_Wmunu_CKKW30_MjjFilt.evgen.EVNT.e1805/',
+	  'mc12_8TeV.147312.Sherpa_CT10_Wmunu_MuFdown.evgen.EVNT.e2355/',
+	  'mc12_8TeV.147313.Sherpa_CT10_Wmunu_MuFdown_MjjFilt.evgen.EVNT.e2355/',
+	  'mc12_8TeV.147314.Sherpa_CT10_Wmunu_MuFup.evgen.EVNT.e2355/',
+	  'mc12_8TeV.147315.Sherpa_CT10_Wmunu_MuFup_MjjFilt.evgen.EVNT.e2355/',
+	  'mc12_8TeV.147316.Sherpa_CT10_Wmunu_mpi1.evgen.EVNT.e1805/',
+	  'mc12_8TeV.147317.Sherpa_CT10_Wmunu_mpi1_MjjFilt.evgen.EVNT.e1805/',
+	  'mc12_8TeV.147318.Sherpa_CT10_Wmunu_mpi2.evgen.EVNT.e1805/',
+	  'mc12_8TeV.147319.Sherpa_CT10_Wmunu_mpi2_MjjFilt.evgen.EVNT.e1805/',
+	  'mc12_8TeV.147320.Sherpa_CT10_Wmunu_Shower1.evgen.EVNT.e1805/',
+	  'mc12_8TeV.147321.Sherpa_CT10_Wmunu_Shower1_MjjFilt.evgen.EVNT.e1805/',
+	  'mc12_8TeV.147322.Sherpa_CT10_Wmunu_MuRdown.evgen.EVNT.e2355/',
+	  'mc12_8TeV.147323.Sherpa_CT10_Wmunu_MuRdown_MjjFilt.evgen.EVNT.e2355/',
+	  'mc12_8TeV.147324.Sherpa_CT10_Wmunu_MuRup.evgen.EVNT.e2355/',
+	  'mc12_8TeV.147325.Sherpa_CT10_Wmunu_MuRup_MjjFilt.evgen.EVNT.e2355/',
+	  'mc12_8TeV.147775.Sherpa_CT10_Wmunu.evgen.EVNT.e1434/',
           'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.Nominal.v1/',
           'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.MuFdown.v2/',
           'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.MuFup.v1/',
@@ -299,17 +291,17 @@ def GetListDataset(list_name):
 
     dataset_names = ["129916.Nominal_Sherpa_Signal", "129930.Nominal_Sherpa_Background_MjjFilt",
               "147294.min_n_tchannels_CKKW30", "147295.min_n_tchannels_CKKW30_MjjFilt",
-		      "147296.min_n_tchannels_MuFdown", "147297.min_n_tchannels_MuFdown_MjjFilt",
-		      "147298.min_n_tchannels_MuFup", "147299.min_n_tchannels_MuFup_MjjFilt",
-		      "147300.min_n_tchannels_mpi1", "147301.min_n_tchannels_mpi1_MjjFilt",
-		      "147302.min_n_tchannels_mpi2", "147303.min_n_tchannels_mpi2_MjjFilt",
-		      "147304.min_n_tchannels_Shower1", "147305.min_n_tchannels_Shower1_MjjFilt",
-		      "147306.min_n_tchannels_MuRdown", "147307.min_n_tchannels_MuRdown_MjjFilt",
-		      "147308.min_n_tchannels_MuRup", "147309.min_n_tchannels_MuRup_MjjFilt",
-		      "147310.CKKW30", "147311.CKKW30_MjjFilt", "147312.MuFdown", "147313.MuFdown_MjjFilt",
-		      "147314.MuFup", "147315.MuFup_MjjFilt", "147316.mpi1", "147317.mpi1_MjjFilt",
-		      "147318.mpi2", "147319.mpi2_MjjFilt", "147320.Shower1", "147321.Shower1_MjjFilt",
-		      "147322.MuRdown", "147323.MuRdown_MjjFilt", "147324.MuRup", "147325.MuRup_MjjFilt", 
+	      "147296.min_n_tchannels_MuFdown", "147297.min_n_tchannels_MuFdown_MjjFilt",
+	      "147298.min_n_tchannels_MuFup", "147299.min_n_tchannels_MuFup_MjjFilt",
+	      "147300.min_n_tchannels_mpi1", "147301.min_n_tchannels_mpi1_MjjFilt",
+	      "147302.min_n_tchannels_mpi2", "147303.min_n_tchannels_mpi2_MjjFilt",
+	      "147304.min_n_tchannels_Shower1", "147305.min_n_tchannels_Shower1_MjjFilt",
+	      "147306.min_n_tchannels_MuRdown", "147307.min_n_tchannels_MuRdown_MjjFilt",
+	      "147308.min_n_tchannels_MuRup", "147309.min_n_tchannels_MuRup_MjjFilt",
+	      "147310.CKKW30", "147311.CKKW30_MjjFilt", "147312.MuFdown", "147313.MuFdown_MjjFilt",
+	      "147314.MuFup", "147315.MuFup_MjjFilt", "147316.mpi1", "147317.mpi1_MjjFilt",
+	      "147318.mpi2", "147319.mpi2_MjjFilt", "147320.Shower1", "147321.Shower1_MjjFilt",
+	      "147322.MuRdown", "147323.MuRdown_MjjFilt", "147324.MuRup", "147325.MuRup_MjjFilt", 
               "147775.Nominal_Sherpa_Background", "Powheg.Wplus.Nominal", "Powheg.Wplus.MuFdown", "Powheg.Wplus.MuFup",
               "Powheg.Wplus.MuRdown", "Powheg.Wplus.MuRup", "Powheg.Wplus.MuRdownMuFdown", "Powheg.Wplus.MuRupMuFup"]
 
@@ -339,7 +331,7 @@ def GetListDataset(list_name):
 			      "147319.mpi2_MjjFilt","147321.Shower1_MjjFilt","147323.MuRdown_MjjFilt","147325.MuRup_MjjFilt"]
 
     datasets_back = ["147775.Nominal_Sherpa_Background", "147310.CKKW30", "147312.MuFdown", "147314.MuFup", 
-		      "147316.mpi1",	"147318.mpi2", "147320.Shower1", "147322.MuRdown", "147324.MuRup"]
+		          "147316.mpi1", "147318.mpi2", "147320.Shower1", "147322.MuRdown", "147324.MuRup"]
 
     exp_hist_list = ["d01-x01-y01", "d01-x01-y02", "d02-x01-y01", "d02-x01-y02",
 		      "d03-x01-y01", "d03-x01-y02", "d04-x01-y01", "d04-x01-y02",
@@ -373,16 +365,6 @@ def GetListDataset(list_name):
           "AntiDijetPhiDiff_3jet_2", "AntiDijetPhiDiff_4jet_2", "CutFlow_2", "DeltaR13_3jet_2", "DeltaR23_3jet_2", "NJetsNoCuts",
           "Mjj_Excl_00_Jet_2", "Mjj_Excl_01_Jet_2", "Mjj_Excl_02_Jet_2", "Mjj_Excl_03_Jet_2", "Mjj_Excl_04_Jet_2", "Mjj_Excl_05_Jet_2",
           "Mjj_Excl_06_Jet_2", "Mjj_Excl_07_Jet_2", "Mjj_Excl_08_Jet_2", "Mjj_Excl_09_Jet_2", "Mjj_Excl_10_Jet_2"]
-          
-    hist_list_147311 = ["NJetExcl_1", "RatioNJetExcl_1", "FirstJetPt_2jet_1", "FirstJetPt_3jet_1", "FirstJetPt_4jet_1", "SecondJetPt_2jet_1",
-		  "SecondJetPt_3jet_1", "SecondJetPt_4jet_1", "ThirdJetPt_3jet_1","ThirdJetPt_4jet_1", "FourthJetPt_4jet_1",
-          "Ht_2jet_1", "Ht_3jet_1", "Ht_4jet_1", "Minv_2jet_1", "Minv_3jet_1", "Minv_4jet_1", "JetRapidity_1", "DeltaYElecJet_1",
-          "SumYElecJet_1", "DeltaR_2jet_1", "DeltaY_2jet_1", "DeltaPhi_2jet_1", "DijetMass_2jet_1", "DijetMass_3jet_1",
-		  "DijetMass_4jet_1", "AntiDijetMass_2jet_1", "AntiDijetMass_3jet_1", "AntiDijetMass_4jet_1", "ThirdZep_3jet_1", "ThirdZep_4jet_1",
-          "FourthZep_4jet_1", "AntiDijetEtaDiff_2jet_1", "AntiDijetEtaDiff_3jet_1", "AntiDijetEtaDiff_4jet_1", "AntiDijetPhiDiff_2jet_1",
-		  "AntiDijetPhiDiff_3jet_1", "AntiDijetPhiDiff_4jet_1", "CutFlow_1", "DeltaR13_3jet_1", "DeltaR23_3jet_1", "NJetsNoCuts",
-          "Mjj_Excl_00_Jet_1", "Mjj_Excl_01_Jet_1", "Mjj_Excl_02_Jet_1", "Mjj_Excl_03_Jet_1", "Mjj_Excl_04_Jet_1", "Mjj_Excl_05_Jet_1",
-          "Mjj_Excl_06_Jet_1", "Mjj_Excl_07_Jet_1", "Mjj_Excl_08_Jet_1", "Mjj_Excl_09_Jet_1", "Mjj_Excl_10_Jet_1"]
 
     title_list = ["Jet Multiplicity (W+#geq 2 jets)", "Jet Multiplicity Ratio", "First Jet p_{T} (W+#geq 2 jets)", "First Jet p_{T} (W+#geq 3 jets)", "First Jet p_{T} (W+#geq 4 jets)",
 		  "Second Jet p_{T}", "Second Jet p_{T} (W+#geq 3 jets)", "Second Jet p_{T} (W+#geq 4 jets)", "Third Jet p_{T}", "Third Jet p_{T} (W+#geq 4 jets)",

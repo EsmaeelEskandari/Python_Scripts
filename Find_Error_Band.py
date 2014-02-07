@@ -47,7 +47,7 @@ datasets_back = GetListDataset('datasets_back')
 datasets_sig_MjjFilt = GetListDataset('datasets_sig_MjjFilt')
 datasets_back_MjjFilt = GetListDataset('datasets_back_MjjFilt')
 dataset_lists_to_check = [datasets_sig,datasets_sig_MjjFilt,datasets_back,datasets_back_MjjFilt]
-dataset_lists_names = ['Sig','Sig_MjjFilt','Back','Back_MjjFilt']
+dataset_lists_names = ['Sig_Sherpa','Sig_MjjFilt_Sherpa','Back_Sherpa','Back_MjjFilt_Sherpa']
 
 root_file = ROOT.TFile("VBF_Systematics.root")
 c1 = ROOT.TCanvas('c1','Theory_Systematics',0,0,640,960)
@@ -55,7 +55,8 @@ c1 = ROOT.TCanvas('c1','Theory_Systematics',0,0,640,960)
 #hist = 'DijetMass_2jet_1'	# Change this to check another histogram
 hists_to_comp = ['DijetMass_2jet_1','FirstJetPt_2jet_1','Ht_2jet_1']
 
-#-----Find Error Bands for Signal---------------------------------------
+#-----Find Error Bands for Sherpa---------------------------------------
+isPowheg = False
 for idx,dataset_list in enumerate(dataset_lists_to_check):
     for hist in hists_to_comp:
 	error_pad = ROOT.TPad('pad1','Error Band',0.,0.34,1.0,1.0)
@@ -65,7 +66,7 @@ for idx,dataset_list in enumerate(dataset_lists_to_check):
 
 	error_pad.cd()
 	error_pad.SetLogy()
-	nom_hist, nom_graph, tot_stat_errors = FindErrorBands(dataset_list,root_file,hist)
+	nom_hist, nom_graph, tot_stat_errors = FindErrorBands(dataset_list,root_file,hist,isPowheg)
 	nom_hist.Draw("hist")
 	nom_graph.SetFillColor(ROOT.TAttFill.kGreen)
 	nom_graph.Draw("E5 same")
@@ -93,7 +94,7 @@ for idx,dataset_list in enumerate(dataset_lists_to_check):
 	line.SetRange(lower_ratio_lim,0.0,upper_ratio_lim,2.0)	# fix this so it gets the min_x and max_x from input nom_hist
 	line.SetMaximum(1.75)
 	line.SetMinimum(0.5)
-	line.GetYaxis().SetTitle("Nominal/Systematic")
+	line.GetYaxis().SetTitle("Systematic/Nominal")
 	line.Draw()
 	ratio_plot.Draw("E5 same")
 	stat_plot.Draw("E5 same")
@@ -105,4 +106,61 @@ for idx,dataset_list in enumerate(dataset_lists_to_check):
 	c1.SaveAs(hist+'_'+dataset_lists_names[idx]+".pdf")
 	c1.Clear()
 	del nom_hist, nom_graph, line, ratio_plot, tot_stat_errors, stat_plot
+    
+    
+datasets_back = ["Powheg.Wplus.Nominal","Powheg.Wplus.MuFdown","Powheg.Wplus.MuFup","Powheg.Wplus.MuRdown",
+                "Powheg.Wplus.MuRup","Powheg.Wplus.MuRdownMuFdown","Powheg.Wplus.MuRupMuFup"]
+dataset_lists_to_check = [datasets_back]
+dataset_lists_names = ['Back_POWHEG']
+    
+#-----Find Error Bands for POWHEG---------------------------------------
+isPowheg = True
+for idx,dataset_list in enumerate(dataset_lists_to_check):
+    for hist in hists_to_comp:
+	error_pad = ROOT.TPad('pad1','Error Band',0.,0.34,1.0,1.0)
+	ratio_pad = ROOT.TPad('pad2','Error Ratio',0.0,0.0,1.0,0.33)
+	error_pad.Draw()
+	ratio_pad.Draw()
 
+	error_pad.cd()
+	error_pad.SetLogy()
+	nom_hist, nom_graph, tot_stat_errors = FindErrorBands(dataset_list,root_file,hist,isPowheg)
+	nom_hist.Draw("hist")
+	nom_graph.SetFillColor(ROOT.TAttFill.kGreen)
+	nom_graph.Draw("E5 same")
+	nom_hist.GetYaxis().SetTitleOffset(1)
+	nom_hist.Draw("hist same")
+	leg = MakeErrorBandLegend(nom_hist,nom_graph)
+	leg.Draw()
+	l.DrawLatex(lx,ly,"ATLAS")
+	p.DrawLatex(px,py,"Internal")
+	error_pad.Modified()
+
+	ratio_pad.cd()
+	ratio_plot, stat_plot = MakeRatioPlot(nom_hist,nom_graph,tot_stat_errors)
+	ratio_plot.SetFillColor(ROOT.TAttFill.kYellow)
+	ratio_plot.SetLineColor(ROOT.TAttFill.kYellow)
+	stat_plot.SetFillColor(ROOT.TAttFill.kRed-7)
+	stat_plot.SetLineColor(ROOT.TAttFill.kRed-7)
+	# This gives us a dotted line at 'y = 1'
+	line = ROOT.TF1("one","1",0,1)
+	line.SetLineColor(1)
+	line.SetLineWidth(1)
+	line.SetLineStyle(1)
+	upper_ratio_lim = nom_hist.GetXaxis().GetXmax()
+	lower_ratio_lim = nom_hist.GetXaxis().GetXmin()
+	line.SetRange(lower_ratio_lim,0.0,upper_ratio_lim,2.0)	# fix this so it gets the min_x and max_x from input nom_hist
+	line.SetMaximum(1.75)
+	line.SetMinimum(0.5)
+	line.GetYaxis().SetTitle("Systematic/Nominal")
+	line.Draw()
+	ratio_plot.Draw("E5 same")
+	stat_plot.Draw("E5 same")
+	line.Draw("same")
+	ROOT.gPad.RedrawAxis()
+	ratio_pad.Modified()
+
+	c1.Update()
+	c1.SaveAs(hist+'_'+dataset_lists_names[idx]+".pdf")
+	c1.Clear()
+	del nom_hist, nom_graph, line, ratio_plot, tot_stat_errors, stat_plot

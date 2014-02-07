@@ -7,7 +7,7 @@ from pyAMI.query import *
 from pyAMI.exceptions import *
 
 hf = ROOT.TFile("VBF_Systematics.root", "RECREATE")
-th2_hist = ROOT.TH2F( "hmj1j2_wvbf", "hmj1j2_wvbf", 10, -0.5, 9.5, 200, 0, 5000 )
+#th2_hist = ROOT.TH2F( "hmj1j2_wvbf", "hmj1j2_wvbf", 10, -0.5, 9.5, 200, 0, 5000 )
 
 datasets = GetListDataset('datasets')
 dataset_names = GetListDataset('dataset_names')
@@ -20,10 +20,10 @@ y_axis_list = GetListDataset('y_axis_list')
 y_axis_list_norm = GetListDataset('y_axis_list_norm')
 
 def StyleHistogram(index, h1):
-	h1.SetTitle(title_list[index])
-	h1.GetXaxis().SetTitle(x_axis_list[index])
-	h1.GetYaxis().SetTitle(y_axis_list[index])
-	h1.SetOption("HIST E")
+    h1.SetTitle(title_list[index])
+    h1.GetXaxis().SetTitle(x_axis_list[index])
+    h1.GetYaxis().SetTitle(y_axis_list[index])
+    h1.SetOption("HIST E")
     
 def StyleCutFlow(h1):
     h1.GetXaxis().SetBinLabel(2,"No Cuts")
@@ -95,10 +95,12 @@ if os.path.exists("Exp_Data_arXiv12011276.root") == True:
 #Root file needs to be named after the dataset run number
 #for folder in dataset_names:
 for folder, data in zip(dataset_names, datasets):
-    th2_hist = ROOT.TH2F( "hmj1j2_wvbf", "hmj1j2_wvbf", 10, -0.5, 9.5, 200, 0, 5000 )
+    th2_hist_30 = ROOT.TH2F( "hmj1j2_wvbf_30", "hmj1j2_wvbf_30", 10, -0.5, 9.5, 200, 0, 5000 )
+    th2_hist_20 = ROOT.TH2F( "hmj1j2_wvbf_20", "hmj1j2_wvbf_20", 10, -0.5, 9.5, 200, 0, 5000 )
     if os.path.exists(folder+"/") == True:
         #First get the crossSection_mean and GenFiltEff_mean for this dataset from AMI for normalizations
         if "PowhegPythia8" in data:
+            effic = 1.0
             if ".Nominal." in data: xsec = 3539.19590298
             if ".MuFdown." in data: xsec = 3083.52221626
             if ".MuFup." in data: xsec = 3870.21108023
@@ -108,8 +110,8 @@ for folder, data in zip(dataset_names, datasets):
             if ".MuRupMuFup." in data: xsec = 3552.69606084
         else:
             xsec, effic = get_dataset_xsec_effic(client, data)
-            print folder, xsec, effic
             xsec = 1000*xsec*effic #Converts nb to pb and applies GenFiltEff
+        print folder, xsec, effic
 
         #histogram manipulation and such
         os.chdir(folder+"/")
@@ -122,9 +124,19 @@ for folder, data in zip(dataset_names, datasets):
         root_file = ROOT.TFile.Open(file_name+".root")
         root_file_add = ROOT.TFile.Open(file_name+"_add.root")
         for index, hist in enumerate(hist_list):
+            if index > len(title_list)-1: index = index-len(title_list)
             # No normalization
-            histogram = root_file.Get(hist)
-            histogram_add = root_file_add.Get(hist)
+            if root_file.GetListOfKeys().Contains(hist):
+              histogram = root_file.Get(hist)
+              histogram_add = root_file_add.Get(hist)
+            else:
+              hist1 = hist.replace("_Jet_","_Jet")
+              if root_file.GetListOfKeys().Contains(hist1):
+                histogram = root_file.Get(hist1)
+                histogram = histogram.Clone(hist)
+                histogram_add = root_file_add.Get(hist1)
+                histogram_add = histogram_add.Clone(hist)
+              else: continue
             hf.cd(folder)
             StyleHistogram(index, histogram)
             if "CutFlow" in hist:
@@ -148,13 +160,17 @@ for folder, data in zip(dataset_names, datasets):
             #      ROOT.gDirectory.cd("Shape_Comparisons")
             #      histogram_area.Write()
             #      ROOT.gDirectory.cd()
-            if "Mjj_" in hist:
-                th2_hist = CompileDijetMass(histogram_norm,th2_hist)
+            if "Mjj_" in hist and "Jet_1" in hist:
+                th2_hist_30 = CompileDijetMass(histogram_norm,th2_hist_30)
+            if "Mjj_" in hist and "Jet_2" in hist:
+                th2_hist_20 = CompileDijetMass(histogram_norm,th2_hist_20)
             del histogram_norm #, histogram_area
         hf.cd(folder)
-        StyleTH2(th2_hist)
-        th2_hist.Write()
-        del th2_hist
+        StyleTH2(th2_hist_30)
+        StyleTH2(th2_hist_20)
+        th2_hist_30.Write()
+        th2_hist_20.Write()
+        del th2_hist_30, th2_hist_20
         root_file.Close()
         hf.cd()
         os.chdir("..")

@@ -15,7 +15,7 @@ else: setXS = False
 print setXS, options.xSection
 
 #filenames = ["powheg.events"]
-filenames = glob.glob("*.events")
+filenames = glob.glob("*.lhe")
 file_root_names = [os.path.splitext(name)[0] for name in filenames]
 
 def getTheWeights(eventBlock):
