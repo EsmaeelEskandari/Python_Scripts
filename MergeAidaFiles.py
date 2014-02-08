@@ -35,7 +35,8 @@ for folder in dataset_names:
 		
 	# Remove the merged.aida file in case the script fails.
 	# This keeps you from having to delete them by hand before re-running script.
-	os.system("rm merged_add.aida merged_avg.aida")
+	os.system("mv merged_add.aida merged_add.save")
+    os.system("mv merged_avg.aida merged_avg.save")
 	
 	# Prepare for next folder
 	os.chdir("..")
