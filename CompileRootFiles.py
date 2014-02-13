@@ -13,7 +13,7 @@ datasets = GetListDataset('datasets')
 dataset_names = GetListDataset('dataset_names')
 exp_hist_list = GetListDataset('exp_hist_list')
 hist_list = GetListDataset('hist_list')
-#hist_list_147311 = GetListDataset('hist_list_147311')
+cross_sections = GetListDataset('cross_sections')
 title_list = GetListDataset('title_list')
 x_axis_list = GetListDataset('x_axis_list')
 y_axis_list = GetListDataset('y_axis_list')
@@ -72,10 +72,10 @@ def CompileDijetMass(ExclMjj,th2_hist):
 
 #Setup AMIClient.	
 #This works only on my laptop, otherwise you need to run 'ami auth'
-client = AMIClient()
-if not os.path.exists(AMI_CONFIG):
-	create_auth_config()
-client.read_config(AMI_CONFIG)
+# client = AMIClient()
+# if not os.path.exists(AMI_CONFIG):
+#     create_auth_config()
+# client.read_config(AMI_CONFIG)
 
 if os.path.exists("Exp_Data_arXiv12011276.root") == True:
 	hf.mkdir("Exp_Data_2012")
@@ -93,24 +93,27 @@ if os.path.exists("Exp_Data_arXiv12011276.root") == True:
 #Folder names must be the same as in the dataset_names list in Aux_Functions.py
 #I could try to get the script to just to check for run number in folder name (do this later)
 #Root file needs to be named after the dataset run number
-#for folder in dataset_names:
-for folder, data in zip(dataset_names, datasets):
+for idx,folder in enumerate(dataset_names):
+#for folder, data in zip(dataset_names, datasets):
     th2_hist_30 = ROOT.TH2F( "hmj1j2_wvbf_30", "hmj1j2_wvbf_30", 10, -0.5, 9.5, 200, 0, 5000 )
     th2_hist_20 = ROOT.TH2F( "hmj1j2_wvbf_20", "hmj1j2_wvbf_20", 10, -0.5, 9.5, 200, 0, 5000 )
     if os.path.exists(folder+"/") == True:
         #First get the crossSection_mean and GenFiltEff_mean for this dataset from AMI for normalizations
-        if "PowhegPythia8" in data:
-            effic = 1.0
-            if ".Nominal." in data: xsec = 3539.19590298
-            if ".MuFdown." in data: xsec = 3083.52221626
-            if ".MuFup." in data: xsec = 3870.21108023
-            if ".MuRdown." in data: xsec = 3464.35407038
-            if ".MuRup." in data: xsec = 3254.18183208
-            if ".MuRdownMuFdown." in data: xsec = 3012.39734672
-            if ".MuRupMuFup." in data: xsec = 3552.69606084
-        else:
-            xsec, effic = get_dataset_xsec_effic(client, data)
-            xsec = 1000*xsec*effic #Converts nb to pb and applies GenFiltEff
+        xsec = cross_sections[idx][0]
+        effic = cross_sections[idx][1]
+        #xsec = xsec*effic          # Do not use MjjFilt efficiencies
+        # if "PowhegPythia8" in data:                       # Only necessary if using AMI
+        #     effic = 1.0
+        #     if ".Nominal." in data: xsec = 3539.19590298
+        #     if ".MuFdown." in data: xsec = 3083.52221626
+        #     if ".MuFup." in data: xsec = 3870.21108023
+        #     if ".MuRdown." in data: xsec = 3464.35407038
+        #     if ".MuRup." in data: xsec = 3254.18183208
+        #     if ".MuRdownMuFdown." in data: xsec = 3012.39734672
+        #     if ".MuRupMuFup." in data: xsec = 3552.69606084
+        # else:
+        #     xsec, effic = get_dataset_xsec_effic(client, data)
+        #     xsec = 1000*xsec*effic #Converts nb to pb and applies GenFiltEff
         print folder, xsec, effic
 
         #histogram manipulation and such

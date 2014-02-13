@@ -274,20 +274,37 @@ def GetListDataset(list_name):
 	  'mc12_8TeV.147324.Sherpa_CT10_Wmunu_MuRup.evgen.EVNT.e2355/',
 	  'mc12_8TeV.147325.Sherpa_CT10_Wmunu_MuRup_MjjFilt.evgen.EVNT.e2355/',
 	  'mc12_8TeV.147775.Sherpa_CT10_Wmunu.evgen.EVNT.e1434/',
-          'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.Nominal.v1/',
-          'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.MuFdown.v2/',
-          'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.MuFup.v1/',
-          'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.MuRdown.v1/',
-          'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.MuRup.v1/',
-          'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.MuRdownMuFdown.v1/',
-          'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.MuRupMuFup.v1/']
+      'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.Nominal.v1/',
+      'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.MuFdown.v2/',
+      'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.MuFup.v1/',
+      'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.MuRdown.v1/',
+      'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.MuRup.v1/',
+      'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.MuRdownMuFdown.v1/',
+      'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wplus.bornsuppfact.MuRupMuFup.v1/']
 	      
     dataset_number = ['129916','129930','147294','147295','147296',
               '147297','147298','147299','147300','147301','147302',
               '147303','147304','147305','147306','147307','147308',
               '147309','147310','147311','147312','147313','147314',
               '147315','147316','147317','147318','147319','147320',
-              '147321','147322','147323','147324','147325','147775']
+              '147321','147322','147323','147324','147325','147775',
+              '000001','000002','000003','000004','000005','000006','000007',
+              '000008','000009','000010','000011','000012','000013','000014']
+    
+    # List of Cross-sections and Generator Filter Efficiencies (xsec,effic)          
+    cross_sections = [(4.2128, 1.0), (11866.0, 0.41371), (4.0071, 1.0), (4.0065, 0.54318), 
+                      (4.3523, 1.0), (4.3563, 0.54952), (4.0461, 1.0), (4.0593, 0.53842),
+                      (4.2188, 1.0), (4.2135, 0.54688), (4.2072, 1.0), (4.2148, 0.54514),
+                      (4.2158, 1.0), (4.2201, 0.54904), (4.7407, 1.0), (4.75, 0.54916),
+                      (3.8679, 1.0), (3.8726, 0.54682), (11711.0, 1.0), (11705.0, 0.3935),
+                      (11215.0, 1.0), (11208.0, 0.42849), (12308.0, 1.0), (12303.0, 0.45837),
+                      (11864.0, 1.0), (11866.0, 0.4209), (11871.0, 1.0), (11864.0, 0.43504),
+                      (11865.0, 1.0), (11865.0, 0.43722), (12985.0, 1.0), (12977.0, 0.41737),
+                      (11971.0, 1.0), (11964.0, 0.42458), (11867.0, 1.0), (3539.19590298, 1.0),
+                      (3083.52221626, 1.0), (3870.21108023, 1.0), (3464.35407038, 1.0),
+                      (3254.18183208, 1.0), (3012.39734672, 1.0), (3552.69606084, 1.0),
+                      (7.06976216385, 1.0), (7.03611758462, 1.0), (7.12759465151, 1.0), (7.10477339246, 1.0),
+                      (7.04168397094, 1.0), (7.06976216385, 1.0), (7.08366321813, 1.0)]
 
     dataset_names = ["129916.Nominal_Sherpa_Signal", "129930.Nominal_Sherpa_Background_MjjFilt",
               "147294.min_n_tchannels_CKKW30", "147295.min_n_tchannels_CKKW30_MjjFilt",
@@ -302,8 +319,12 @@ def GetListDataset(list_name):
 	      "147314.MuFup", "147315.MuFup_MjjFilt", "147316.mpi1", "147317.mpi1_MjjFilt",
 	      "147318.mpi2", "147319.mpi2_MjjFilt", "147320.Shower1", "147321.Shower1_MjjFilt",
 	      "147322.MuRdown", "147323.MuRdown_MjjFilt", "147324.MuRup", "147325.MuRup_MjjFilt", 
-              "147775.Nominal_Sherpa_Background", "Powheg.Wplus.Nominal", "Powheg.Wplus.MuFdown", "Powheg.Wplus.MuFup",
-              "Powheg.Wplus.MuRdown", "Powheg.Wplus.MuRup", "Powheg.Wplus.MuRdownMuFdown", "Powheg.Wplus.MuRupMuFup"]
+          "147775.Nominal_Sherpa_Background", "000001.Powheg.W2jets.Nominal", "000002.Powheg.W2jets.MuFdown", 
+          "000003.Powheg.W2jets.MuFup", "000004.Powheg.W2jets.MuRdown", "000005.Powheg.W2jets.MuRup", 
+          "000006.Powheg.W2jets.MuRdownMuFdown", "000007.Powheg.W2jets.MuRupMuFup",
+          "000008.Powheg.VBF.Nominal.bornsuppfact", "000009.Powheg.VBF.MuFdown.bornsuppfact", "000010.Powheg.VBF.MuFup.bornsuppfact",
+          "000011.Powheg.VBF.MuRdown.bornsuppfact", "000012.Powheg.VBF.MuRup.bornsuppfact", "000013.Powheg.VBF.MuRdownMuFdown.bornsuppfact",
+          "000014.Powheg.VBF.MuRupMuFup.bornsuppfact"]
 
     dataset_names_1 = ["147294.min_n_tchannels_CKKW30", "147295.min_n_tchannels_CKKW30_MjjFilt",
 			"147296.min_n_tchannels_MuFdown", "147297.min_n_tchannels_MuFdown_MjjFilt",
@@ -332,6 +353,16 @@ def GetListDataset(list_name):
 
     datasets_back = ["147775.Nominal_Sherpa_Background", "147310.CKKW30", "147312.MuFdown", "147314.MuFup", 
 		          "147316.mpi1", "147318.mpi2", "147320.Shower1", "147322.MuRdown", "147324.MuRup"]
+                  
+    pwhg_sig_ptjgencut = []
+    
+    pwhg_sig_bornsupp = ["000008.Powheg.VBF.Nominal.bornsuppfact", "000009.Powheg.VBF.MuFdown.bornsuppfact", "000010.Powheg.VBF.MuFup.bornsuppfact",
+                         "000011.Powheg.VBF.MuRdown.bornsuppfact", "000012.Powheg.VBF.MuRup.bornsuppfact", "000013.Powheg.VBF.MuRdownMuFdown.bornsuppfact",
+                         "000014.Powheg.VBF.MuRupMuFup.bornsuppfact"]
+                          
+    pwhg_back_bornsupp = ["000001.Powheg.W2jets.Nominal", "000002.Powheg.W2jets.MuFdown", 
+                          "000003.Powheg.W2jets.MuFup", "000004.Powheg.W2jets.MuRdown", "000005.Powheg.W2jets.MuRup", 
+                          "000006.Powheg.W2jets.MuRdownMuFdown", "000007.Powheg.W2jets.MuRupMuFup"]
 
     exp_hist_list = ["d01-x01-y01", "d01-x01-y02", "d02-x01-y01", "d02-x01-y02",
 		      "d03-x01-y01", "d03-x01-y02", "d04-x01-y01", "d04-x01-y02",
@@ -427,7 +458,7 @@ def GetListDataset(list_name):
 
     list_of_lists = ['datasets', 'dataset_names', 'dataset_names_1', 'dataset_names_2', 'datasets_sig','datasets_sig_MjjFilt',
 		      'datasets_back', 'datasets_back_MjjFilt', 'exp_hist_list', 'hist_list', 'title_list', 'x_axis_list',
-		      'y_axis_list', 'y_axis_list_norm', 'dataset_number', 'hist_list_147311']
+		      'y_axis_list', 'y_axis_list_norm', 'dataset_number', 'cross_sections', 'pwhg_back_bornsupp', 'pwhg_sig_bornsupp']
 
     if list_name in list_of_lists: return eval(list_name)
     else: print 'The given list is not defined.'

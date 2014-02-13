@@ -27,7 +27,7 @@ for folder in dataset_names:
 	os.system("aida2root merged_avg.aida")
 	os.system("aida2root merged_add.aida")
 	file_name = folder.split('.')[0]
-    if "Powheg" in file_name: file_name = folder.replace('.','_')
+	#if "Powheg" in file_name: file_name = folder.replace('.','_')
 	cmd = "mv merged_avg.root "+file_name+".root"
 	os.system(cmd)
 	cmd = "mv merged_add.root "+file_name+"_add.root"
@@ -36,7 +36,7 @@ for folder in dataset_names:
 	# Remove the merged.aida file in case the script fails.
 	# This keeps you from having to delete them by hand before re-running script.
 	os.system("mv merged_add.aida merged_add.save")
-    os.system("mv merged_avg.aida merged_avg.save")
+	os.system("mv merged_avg.aida merged_avg.save")
 	
 	# Prepare for next folder
 	os.chdir("..")
