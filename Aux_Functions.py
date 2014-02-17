@@ -396,7 +396,8 @@ def GetListDataset(list_name):
 			"147306.min_n_tchannels_MuRdown", "147307.min_n_tchannels_MuRdown_MjjFilt",
 			"147308.min_n_tchannels_MuRup", "147309.min_n_tchannels_MuRup_MjjFilt"]
 
-    dataset_names_2 = ["147310.CKKW30", "147311.CKKW30_MjjFilt", "147312.MuFdown", "147313.MuFdown_MjjFilt",
+    dataset_names_2 = ["147775.Nominal_Sherpa_Background", "129930.Nominal_Sherpa_Background_MjjFilt","147310.CKKW30",
+            "147311.CKKW30_MjjFilt", "147312.MuFdown", "147313.MuFdown_MjjFilt",
 			"147314.MuFup", "147315.MuFup_MjjFilt", "147316.mpi1", "147317.mpi1_MjjFilt",
 			"147318.mpi2", "147319.mpi2_MjjFilt", "147320.Shower1", "147321.Shower1_MjjFilt",
 			"147322.MuRdown", "147323.MuRdown_MjjFilt", "147324.MuRup", "147325.MuRup_MjjFilt"]
@@ -415,7 +416,9 @@ def GetListDataset(list_name):
     datasets_back = ["147775.Nominal_Sherpa_Background", "147310.CKKW30", "147312.MuFdown", "147314.MuFup", 
 		          "147316.mpi1", "147318.mpi2", "147320.Shower1", "147322.MuRdown", "147324.MuRup"]
                   
-    pwhg_sig_ptjgencut = []
+    pwhg_sig_ptjgencut = ["000015.Powheg.VBF.Nominal.ptj_gencut", "000016.Powheg.VBF.MuFdown.ptj_gencut", "000017.Powheg.VBF.MuFup.ptj_gencut",
+                         "000018.Powheg.VBF.MuRdown.ptj_gencut", "000019.Powheg.VBF.MuRup.ptj_gencut", "000020.Powheg.VBF.MuRdownMuFdown.ptj_gencut",
+                         "000021.Powheg.VBF.MuRupMuFup.ptj_gencut"]
     
     pwhg_sig_bornsupp = ["000008.Powheg.VBF.Nominal.bornsuppfact", "000009.Powheg.VBF.MuFdown.bornsuppfact", "000010.Powheg.VBF.MuFup.bornsuppfact",
                          "000011.Powheg.VBF.MuRdown.bornsuppfact", "000012.Powheg.VBF.MuRup.bornsuppfact", "000013.Powheg.VBF.MuRdownMuFdown.bornsuppfact",

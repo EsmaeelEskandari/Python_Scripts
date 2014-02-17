@@ -16,23 +16,26 @@
   Double_t RY2=0;
   Double_t RATRY1=0.0;
   Double_t RATRY2=3.0;
-  bool NORMED = true;
+  bool NORMED = false;
   Double_t max_val = 0.0;
   Double_t max_val_tmp;
 
   // number of files to be opened
-  Int_t FILES=1;
+  Int_t FILES=2;
   // number of curves to be plotted
-  Int_t REPNFIL=3;
+  Int_t REPNFIL=1;
   // histogram base name
   TString hist_base = "DijetMass_2jet_1";
   if (NORMED) hist_base = "Normalized_XS/" + hist_base + "_norm";
 
   //open files, set normalization, retrieve+scale && rebin histos
-  std::string fnames1[FILES]={"VBF_Systematics.root"};
-  std::string legents[REPNFIL]={"Sherpa Nominal", "Sherpa Nominal MjjFilt", "POWHEG Nominal bornsuppfact"};
+  //std::string fnames1[FILES]={"VBF_Systematics.root"};
+  std::string fnames1[FILES]={"VBF_Systematics.root", "VBF_Systematics_merged_stats.root"};
+  //std::string legents[REPNFIL]={"Sherpa Nominal", "Sherpa Nominal MjjFilt", "POWHEG Nominal bornsuppfact"};
+  std::string legents[REPNFIL]={"Sherpa Nominal MjjFilt"};
   // Create a list of all paths so that I can just reference that list.
-  TString histpaths[REPNFIL]={"147775.Nominal_Sherpa_Background/", "129930.Nominal_Sherpa_Background_MjjFilt/", "000001.Powheg.W2jets.Nominal/"};
+  //TString histpaths[REPNFIL]={"147775.Nominal_Sherpa_Background/", "129930.Nominal_Sherpa_Background_MjjFilt/", "000001.Powheg.W2jets.Nominal/"};
+  TString histpaths[REPNFIL]={"129930.Nominal_Sherpa_Background_MjjFilt/"};
 
   TFile* fpoint1[FILES];
   for (i=0; i<FILES; i++)
@@ -67,6 +70,21 @@
       hvect1[i]->SetMarkerSize(MarkerSize[i]);
       hvect1[i]->SetMarkerColor(LineColor[i]);
     }
+    // for (i=REPNFIL; i<REPNFIL*FILES; i++)
+    //   {
+    //     //std::string hist_to_get = std::string(histpaths[i])+hist_base;
+    //     hist_to_get = histpaths[i] + hist_base;
+    //     hvect1[i]=(TH1*)fpoint1[1]->Get(hist_to_get);
+    //     hvect1[i]->Rebin(5); 
+    //     max_val_tmp=hvect1[i].GetMaximum();
+    //     if (max_val < max_val_tmp): max_val = max_val_tmp;
+    //     hvect1[i]->SetLineStyle(LineStyle[i]);
+    //     hvect1[i]->SetLineColor(LineColor[i]);
+    //     hvect1[i]->SetLineWidth(LineWidth[i]);
+    //     hvect1[i]->SetMarkerStyle(MarkerStyle[i]);
+    //     hvect1[i]->SetMarkerSize(MarkerSize[i]);
+    //     hvect1[i]->SetMarkerColor(LineColor[i]);
+    //   }
   
   //---------------------------------------------------------------------------------------
   // plot

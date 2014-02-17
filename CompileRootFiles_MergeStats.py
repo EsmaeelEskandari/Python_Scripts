@@ -6,11 +6,12 @@ from Aux_Functions import *
 # from pyAMI.query import *
 # from pyAMI.exceptions import *
 
-hf = ROOT.TFile("VBF_Systematics.root", "RECREATE")
+hf = ROOT.TFile("VBF_Systematics_merged_stats.root", "RECREATE")
 
-datasets = GetListDataset('datasets')
 dataset_names = GetListDataset('dataset_names')
-exp_hist_list = GetListDataset('exp_hist_list')
+dataset_names_1 = GetListDataset('dataset_names_1')
+dataset_names_2 = GetListDataset('dataset_names_2')
+datasets_to_merge = dataset_names_1+dataset_names_2
 hist_list = GetListDataset('hist_list')
 cross_sections = GetListDataset('cross_sections')
 title_list = GetListDataset('title_list')
@@ -68,86 +69,115 @@ def CompileDijetMass(ExclMjj,th2_hist):
         th2_hist.SetBinError(jet_num+1,bin,bin_err[bin])
         
     return th2_hist
-
-#Setup AMIClient.	
-#This works only on my laptop, otherwise you need to run 'ami auth'
-# client = AMIClient()
-# if not os.path.exists(AMI_CONFIG):
-#     create_auth_config()
-# client.read_config(AMI_CONFIG)
-
-if os.path.exists("Exp_Data_arXiv12011276.root") == True:
-	hf.mkdir("Exp_Data_2012")
-	hf.cd("Exp_Data_2012")
-	exp_data = ROOT.TFile.Open("Exp_Data_arXiv12011276.root")
-	for index, hist in enumerate(exp_hist_list):
-		histogram = exp_data.Get(hist)
-		hf.cd("Exp_Data_2012")
-		StyleData(index, histogram)
-		histogram.Write()
-		del histogram
-	exp_data.Close()
-	hf.cd()
+    
+def MergeHistograms(hist1,hist2):
+    bin_cont = []
+    bin_err = []
+    bin_cont_mjj = []
+    bin_err_mjj = []
+    num_xbins = hist1.GetNbinsX()
+    histo = hist1.Clone()
+    histo.Reset()
+    for bin in range(num_xbins+2):
+        bin_cont.append(hist2.GetBinContent(bin))
+        bin_err.append(hist2.GetBinError(bin))
+        bin_cont_mjj.append(hist1.GetBinContent(bin))
+        bin_err_mjj.append(hist1.GetBinError(bin))
+        
+    for bin in range(num_xbins+2):
+        if bin_err[bin] == 0.0: weight_nofilt = 0.0
+        else: weight_nofilt = 1.0/(bin_err[bin]**2)
+        if bin_err_mjj[bin] == 0.0: weight_mjjfilt = 0.0
+        else: weight_mjjfilt = 1.0/(bin_err_mjj[bin]**2)
+        a = weight_nofilt*bin_cont[bin]
+        b = weight_mjjfilt*bin_cont_mjj[bin]
+        c = weight_nofilt+weight_mjjfilt
+        if c != 0.0:
+            new_bin_content = (a + b)/c
+            new_bin_err = math.sqrt(1.0/c)
+            
+        histo.SetBinContent(bin,new_bin_content)
+        histo.SetBinError(bin,new_bin_err)
+    
+    return histo
 
 # Folder names must be the same as in the dataset_names list in Aux_Functions.py
 # I could try to get the script to just to check for run number in folder name (do this later)
 # Root file needs to be named after the dataset run number
 _h_xsecs = ROOT.TH1F("Cross_Sections","Cross_Sections",len(dataset_names),0,len(dataset_names))
 _h_xsecs.GetYaxis().SetTitle("Cross Section [pb]")
-for idx,folder in enumerate(dataset_names):
-#for folder, data in zip(dataset_names, datasets):
+for idx,folder in enumerate(datasets_to_merge):
+    if (idx % 2 == 0):
+        folder_nofilt = folder
+        continue
+        
     th2_hist_30 = ROOT.TH2F( "hmj1j2_wvbf", "hmj1j2_wvbf", 10, -0.5, 9.5, 200, 0, 5000 )
     th2_hist_20 = ROOT.TH2F( "hmj1j2_wvbf_20", "hmj1j2_wvbf_20", 10, -0.5, 9.5, 200, 0, 5000 )
     if os.path.exists(folder+"/") == True:
+        folder_mjjfilt = folder
         # First get the crossSection_mean and GenFiltEff_mean for this dataset from AMI for normalizations
-        xsec = cross_sections[idx][0]
-        effic = cross_sections[idx][1] # Do not use efficiency for MjjFilt datasets
-        _h_xsecs.Fill(idx,xsec)
-        print folder, xsec
-
+        xs_idx_mjjfilt = dataset_names.index(folder_mjjfilt)
+        xs_idx_nofilt = dataset_names.index(folder_nofilt)
+        xsec = (cross_sections[xs_idx_mjjfilt][0],cross_sections[xs_idx_nofilt][0])
+        effic = (cross_sections[xs_idx_mjjfilt][1],1.0) # Do not use efficiency for MjjFilt datasets
+        _h_xsecs.Fill(idx,xsec[0])
+        print folder_mjjfilt, xsec, folder_nofilt
+        
         # histogram manipulation and such
-        os.chdir(folder+"/")
-        hf.mkdir(folder)
-        hf.cd(folder)
-        ROOT.gDirectory.mkdir("Normalized_XS")
-        file_name = folder.split('.')
-        file_name = file_name[0]
+        os.chdir(folder_mjjfilt+"/")
+        file_name = folder_mjjfilt.split('.')[0]
+        root_file_mjjfilt = ROOT.TFile.Open(file_name+".root")
+        root_file_add_mjjfilt = ROOT.TFile.Open(file_name+"_add.root")
+        os.chdir("../"+folder_nofilt+"/")
+        file_name = folder_nofilt.split('.')[0]
+        root_file_nofilt = ROOT.TFile.Open(file_name+".root")
+        root_file_add_nofilt = ROOT.TFile.Open(file_name+"_add.root")
         _h_xsecs.GetXaxis().SetBinLabel(idx+1,file_name)
-        root_file = ROOT.TFile.Open(file_name+".root")
-        root_file_add = ROOT.TFile.Open(file_name+"_add.root")
+        hf.mkdir(folder_mjjfilt)
+        hf.cd(folder_mjjfilt)
+        ROOT.gDirectory.mkdir("Normalized_XS")
+        
         for index, hist in enumerate(hist_list):
             if index > len(title_list)-1: index = index-len(title_list)
             # No normalization
-            histogram = root_file.Get(hist)
-            if "_MjjFilt" in folder:            # Remove these two lines when the new data (without
-                histogram.Scale(1.0/effic)      # genfilteffic) have been acquired.
-            histogram_add = root_file_add.Get(hist)
+            histo1 = root_file_mjjfilt.Get(hist)
+            histo2 = root_file_nofilt.Get(hist)
+            histo1.Scale(1.0/effic[0])
+            histo1_add = root_file_add_mjjfilt.Get(hist)
+            histo2_add = root_file_add_nofilt.Get(hist)
             hf.cd(folder)
-            StyleHistogram(index, histogram)
             if "CutFlow" in hist:
+                histogram_add = histo1_add.Clone()
+                histogram_add.Add(histo2)
                 StyleCutFlow(histogram_add) # Labels the Cut Flow histograms
                 histogram_add.Write()
             else:
+                histogram = MergeHistograms(histo1,histo2)
+                StyleHistogram(index, histogram)
                 histogram.Write()
             # Clone root histograms, normalize to XS, and move to Normalized_XS directory
             histogram_norm = histogram.Clone(hist+"_norm")
             histogram_norm.GetYaxis().SetTitle("(1/#sigma) "+y_axis_list_norm[index])
-            histogram_norm.Scale(1.0/xsec)
-            ROOT.gDirectory.cd("Normalized_XS")
-            histogram_norm.Write()
-            ROOT.gDirectory.cd()
+            histogram_norm.Scale(1.0/xsec[0])
             if "Mjj_" in hist and "Jet_1" in hist:
                 th2_hist_30 = CompileDijetMass(histogram_norm,th2_hist_30)
             if "Mjj_" in hist and "Jet_2" in hist:
                 th2_hist_20 = CompileDijetMass(histogram_norm,th2_hist_20)
-            del histogram_norm
-        hf.cd(folder)
+            ROOT.gDirectory.cd("Normalized_XS")
+            histogram_norm.Write()
+            ROOT.gDirectory.cd()
+            del histogram_norm #, histogram_add, histogram
+        
+        hf.cd(folder_mjjfilt)
         StyleTH2(th2_hist_30)
         StyleTH2(th2_hist_20)
         th2_hist_30.Write()
         th2_hist_20.Write()
         del th2_hist_30, th2_hist_20
-        root_file.Close()
+        root_file_mjjfilt.Close()
+        root_file_add_mjjfilt.Close()
+        root_file_nofilt.Close()
+        root_file_add_nofilt.Close()
         hf.cd()
         os.chdir("..")
     else:
