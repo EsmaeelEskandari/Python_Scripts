@@ -1,5 +1,6 @@
 import ROOT
 import math
+from collections import Counter
 
 #--------------Atlas Style---------------------------------------------------
 class AtlasStyle( ROOT.TStyle ):
@@ -232,6 +233,66 @@ def MakeRatioPlot(nom_hist,nom_graph,tot_stat_errors):
 #	stat_plot.SetPointError(point,nom_hist.GetBinWidth(point)/2.0,tot_stat_errors[point])
 
     return ratio_plot, stat_plot
+    
+#-----------Cut Flow and Acceptance Plot----------------------------------------
+
+def MakeCutFlow(datasets,root_file,pdf_name,gen_accept=True,save_as_pdf=True,tolerance=0.05):
+    # datasets: list of datasets to retrieve cut flow from
+    # root_file: root file to get the data from (must already be opened)
+    # pdf_name: name to save the plot as (in .pdf format)
+    # gen_accept: boolean to decide whether to produce acceptance plot or not
+    # save_as_pdf: boolean to decide whether to save pdfs or not
+    # tolerance: how far the first bin can stray from the mode before being scaled
+    # TODO: Add the ability to create Acceptance plots here
+    hist = "CutFlow_1" # Or CutFlow_2 for 20GeV pT threshold
+    dataset_names = GetListDataset('dataset_names')
+    cross_sections = GetListDataset('cross_sections')
+    Colors = ["ROOT.TAttFill.kBlack", "ROOT.TAttFill.kOrange", "ROOT.TAttFill.kRed", 
+            "ROOT.TAttFill.kOrange+7", "ROOT.TAttFill.kGreen+3", "ROOT.TAttFill.kViolet-6",
+            "ROOT.TAttFill.kMagenta-3", "ROOT.TAttFill.kTeal+4", "ROOT.TAttFill.kBlue"]
+    if len(datasets) > len(Colors): print "Need to define more colors!"
+    root_file = ROOT.TFile("VBF_Systematics.root")
+    c1 = ROOT.TCanvas('c1','Cut_Flow',0,0,640,640)
+    c1.SetLogy()
+    leg = ROOT.TLegend(0.2,0.2,0.5,0.4)
+    leg.SetFillColor(0)
+    leg.SetBorderSize(0)
+    leg.SetTextSize(0.02)
+    
+    events_passed = []
+    events_in_first_bin = []
+    for folder in datasets:
+        new_histo = root_file.Get(folder+"/"+hist)
+        events_in_first_bin.append(new_histo.GetBinContent(2))
+        del new_histo
+    count = Counter(events_in_first_bin)
+    mode = count.most_common(1)[0][0]    
+    for index,folder in enumerate(datasets):
+        xs_index = dataset_names.index(folder)
+        xsec = cross_sections[xs_index][0]
+        new_histo = root_file.Get(folder+"/"+hist)
+        new_histo.GetYaxis().SetTitle("Events")
+        first_bin = new_histo.GetBinContent(2)
+        last_bin = new_histo.GetBinContent(11)
+        # Check that the histograms are scaled such that the first are within 5% of the mode.
+        # Add the scale factor to the legend.
+        if (abs(first_bin - mode) > mode*tolerance):
+            new_histo.Scale(mode/first_bin)
+            leg_string = " x "+str(mode/first_bin)
+        else: leg_string = ""
+        new_histo.SetLineColor(eval(Colors[index]))
+        leg.AddEntry(new_histo,folder+leg_string,"l")
+        new_histo.Draw("hist same")
+        events_passed.append(last_bin/first_bin*xsec) # Acceptance Calculation
+        del new_histo
+    leg.Draw()
+    if save_as_pdf: c1.SaveAs(pdf_name+".pdf")
+    c1.Clear()
+    
+    # Returns Acceptance for each dataset
+    return events_passed
+    
+#def MakeAcceptancePlots():
 
 #-----------Used by all---------------------------------------------------------
 def GetListDataset(list_name):
