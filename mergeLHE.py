@@ -5,7 +5,8 @@ import glob
 #           inputting specific files by hand
 #       add the capability to name output file
 
-filenames = glob.glob('*.events')
+#filenames = glob.glob('*.events')
+filenames = glob.glob('*.lhe')
 
 with open('./outfile.lhe', 'w') as outfile:
     numEvents = 0

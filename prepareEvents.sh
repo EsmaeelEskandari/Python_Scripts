@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Starting time:
+T="$(date +%s)"
+
 # To remove any incomplete events from the end of the file
 #echo "Removing incomplete events from the end of the file"
 #python removeIncEvents.py
@@ -54,3 +57,9 @@ done
 #echo "Tarballing the whole package"
 #tar zcf events.tar.gz user.cjohnson*
 #rm user.cjohnson*
+
+# Finishing time:
+T="$(($(date +%s)-T))"
+# And display time:
+echo "Time in seconds: ${T}"
+printf "Formatted Time: %02d:%02d:%02d:%02d\n" "$((T/86400))" "$((T/3600%24))" "$((T/60%60))" "$((T%60))"

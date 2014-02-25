@@ -1,8 +1,11 @@
 #!/bin/bash
 
-for i in $( ls *.lhe ); 
+for folder in "MuFdown" "MuFup" "MuRdown" "MuRup" "MuRdownMuFdown" "MuRupMuFup"; 
 do
-  echo $i
-  lhef2hepmc $i $i.hepmc
+  echo $folder
+  cd $folder
+#  mv Wminus_${folder}.events Wminus_${folder}.lhe
+  lhef2hepmc Wplus_${folder}.events Wplus_${folder}.hepmc
   wait
+  cd ..
 done
