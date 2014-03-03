@@ -77,7 +77,7 @@ for path, hs in inhistos.iteritems():
 
         try:
             if (opts.performSum): outhistos[path].getBin(i).setErr(sum_err2**0.5 )
-            #if (opts.performSum): outhistos[path].getBin(i).setEff(sum_err2**0.5 / n)
+            #if (opts.performSum): outhistos[path].getBin(i).setErr(sum_err2**0.5 / n)
             else:                 outhistos[path].getBin(i).setErr(sum_err2**0.5 / n)
         except OverflowError:
             # to get back to numerics, replace an eventual 'inf' 
