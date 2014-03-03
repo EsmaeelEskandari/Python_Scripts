@@ -108,8 +108,7 @@ for idx,dataset_list in enumerate(dataset_lists_to_check):
 	del nom_hist, nom_graph, line, ratio_plot, tot_stat_errors, stat_plot
     
     
-datasets_back = ["Powheg.Wplus.Nominal","Powheg.Wplus.MuFdown","Powheg.Wplus.MuFup","Powheg.Wplus.MuRdown",
-                "Powheg.Wplus.MuRup","Powheg.Wplus.MuRdownMuFdown","Powheg.Wplus.MuRupMuFup"]
+datasets_back = GetListDataset('pwhg_back_bornsupp')
 dataset_lists_to_check = [datasets_back]
 dataset_lists_names = ['Back_POWHEG']
     

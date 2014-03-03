@@ -373,9 +373,9 @@ def GetListDataset(list_name):
                       (11215.0, 1.0), (11208.0, 0.42849), (12308.0, 1.0), (12303.0, 0.45837),
                       (11864.0, 1.0), (11866.0, 0.4209), (11871.0, 1.0), (11864.0, 0.43504),
                       (11865.0, 1.0), (11865.0, 0.43722), (12985.0, 1.0), (12977.0, 0.41737),
-                      (11971.0, 1.0), (11964.0, 0.42458), (11867.0, 1.0), (3539.19590298, 1.0),
-                      (3083.52221626, 1.0), (3870.21108023, 1.0), (3464.35407038, 1.0),
-                      (3254.18183208, 1.0), (3012.39734672, 1.0), (3552.69606084, 1.0),
+                      (11971.0, 1.0), (11964.0, 0.42458), (11867.0, 1.0), 
+                      (7191.86534513, 1.0), (6646.05897293, 1.0), (7544.87946260, 1.0), (7748.04996739, 1.0),
+                      (6328.70634563, 1.0), (7590.89250011, 1.0), (6736.35318198, 1.0),
                       (7.06976216385, 1.0), (7.03611758462, 1.0), (7.12759465151, 1.0), (7.10477339246, 1.0),
                       (7.04168397094, 1.0), (7.06976216385, 1.0), (7.08366321813, 1.0),
                       (3.44758708752, 1.0), (3.45743547345, 1.0), (3.45739988439, 1.0), (3.44663832821, 1.0),
@@ -403,7 +403,7 @@ def GetListDataset(list_name):
           "000014.Powheg.VBF.MuRupMuFup.bornsuppfact", "000015.Powheg.VBF.Nominal.ptj_gencut", "000016.Powheg.VBF.MuFdown.ptj_gencut", 
           "000017.Powheg.VBF.MuFup.ptj_gencut", "000018.Powheg.VBF.MuRdown.ptj_gencut", "000019.Powheg.VBF.MuRup.ptj_gencut",
           "000020.Powheg.VBF.MuRdownMuFdown.ptj_gencut", "000021.Powheg.VBF.MuRupMuFup.ptj_gencut",
-          "147774.Nominal_Sherpa_Bkgd_enu", "129915.Nominal_Sherpa_Sgnl_enu", "129930.Nominal_Sherpa_Bkgd_enu_MjjFilt"]
+          "147774.Nominal_Sherpa_Bkgd_enu", "129915.Nominal_Sherpa_Sgnl_enu", "129929.Nominal_Sherpa_Bkgd_enu_MjjFilt"]
 
     dataset_names_1 = ["147294.min_n_tchannels_CKKW30", "147295.min_n_tchannels_CKKW30_MjjFilt",
 			"147296.min_n_tchannels_MuFdown", "147297.min_n_tchannels_MuFdown_MjjFilt",
@@ -460,7 +460,7 @@ def GetListDataset(list_name):
 		      "d23-x01-y01", "d23-x01-y02", "d24-x01-y01", "d24-x01-y02",
 		      "d25-x01-y01", "d25-x01-y02"]
 
-    hist_list = ["NJetExcl_1", "RatioNJetExcl_1", "FirstJetPt_2jet_1", "FirstJetPt_3jet_1", "FirstJetPt_4jet_1", "SecondJetPt_2jet_1",
+    hist_list = ["NJetExcl_1", "FirstJetPt_2jet_1", "FirstJetPt_3jet_1", "FirstJetPt_4jet_1", "SecondJetPt_2jet_1",
 		  "SecondJetPt_3jet_1", "SecondJetPt_4jet_1", "ThirdJetPt_3jet_1","ThirdJetPt_4jet_1", "FourthJetPt_4jet_1",
           "Ht_2jet_1", "Ht_3jet_1", "Ht_4jet_1", "Minv_2jet_1", "Minv_3jet_1", "Minv_4jet_1", "JetRapidity_1", "DeltaYElecJet_1",
           "SumYElecJet_1", "DeltaR_2jet_1", "DeltaY_2jet_1", "DeltaPhi_2jet_1", "DijetMass_2jet_1", "DijetMass_3jet_1",
@@ -469,7 +469,7 @@ def GetListDataset(list_name):
 		  "AntiDijetPhiDiff_3jet_1", "AntiDijetPhiDiff_4jet_1", "CutFlow_1", "DeltaR13_3jet_1", "DeltaR23_3jet_1", "NJetsNoCuts",
           "Mjj_Excl_00_Jet_1", "Mjj_Excl_01_Jet_1", "Mjj_Excl_02_Jet_1", "Mjj_Excl_03_Jet_1", "Mjj_Excl_04_Jet_1", "Mjj_Excl_05_Jet_1",
           "Mjj_Excl_06_Jet_1", "Mjj_Excl_07_Jet_1", "Mjj_Excl_08_Jet_1", "Mjj_Excl_09_Jet_1", "Mjj_Excl_10_Jet_1",
-          "NJetExcl_2", "RatioNJetExcl_2", "FirstJetPt_2jet_2", "FirstJetPt_3jet_2", "FirstJetPt_4jet_2", "SecondJetPt_2jet_2",
+          "NJetExcl_2", "FirstJetPt_2jet_2", "FirstJetPt_3jet_2", "FirstJetPt_4jet_2", "SecondJetPt_2jet_2",
           "SecondJetPt_3jet_2", "SecondJetPt_4jet_2", "ThirdJetPt_3jet_2","ThirdJetPt_4jet_2", "FourthJetPt_4jet_2",
           "Ht_2jet_2", "Ht_3jet_2", "Ht_4jet_2", "Minv_2jet_2", "Minv_3jet_2", "Minv_4jet_2", "JetRapidity_2", "DeltaYElecJet_2",
           "SumYElecJet_2", "DeltaR_2jet_2", "DeltaY_2jet_2", "DeltaPhi_2jet_2", "DijetMass_2jet_2", "DijetMass_3jet_2",
@@ -479,7 +479,7 @@ def GetListDataset(list_name):
           "Mjj_Excl_00_Jet_2", "Mjj_Excl_01_Jet_2", "Mjj_Excl_02_Jet_2", "Mjj_Excl_03_Jet_2", "Mjj_Excl_04_Jet_2", "Mjj_Excl_05_Jet_2",
           "Mjj_Excl_06_Jet_2", "Mjj_Excl_07_Jet_2", "Mjj_Excl_08_Jet_2", "Mjj_Excl_09_Jet_2", "Mjj_Excl_10_Jet_2"]
 
-    title_list = ["Jet Multiplicity (W+#geq 2 jets)", "Jet Multiplicity Ratio", "First Jet p_{T} (W+#geq 2 jets)", "First Jet p_{T} (W+#geq 3 jets)", "First Jet p_{T} (W+#geq 4 jets)",
+    title_list = ["Jet Multiplicity (W+#geq 2 jets)", "First Jet p_{T} (W+#geq 2 jets)", "First Jet p_{T} (W+#geq 3 jets)", "First Jet p_{T} (W+#geq 4 jets)",
 		  "Second Jet p_{T}", "Second Jet p_{T} (W+#geq 3 jets)", "Second Jet p_{T} (W+#geq 4 jets)", "Third Jet p_{T}", "Third Jet p_{T} (W+#geq 4 jets)",
 		  "Fourth Jet p_{T}", "H_{T} (W+#geq 2 jets)", "H_{T} (W+#geq 3 jets)", "H_{T} (W+#geq 4 jets)", "Jet Invariant Mass (W+ #geq 2 jets)",
 		  "Jet Invariant Mass (W+ #geq 3 jets)", "Jet Invariant Mass (W+ #geq 4 jets)", "First Jet Rapidity", "Lepton-Jet Rapidity Difference", "Lepton-Jet Rapidity Sum", 
@@ -493,7 +493,7 @@ def GetListDataset(list_name):
           "Number of Jets in Event (No Cuts)", "Dijet Mass (#jets = 0)", "Dijet Mass (#jets = 1)", "Dijet Mass (#jets = 2)", "Dijet Mass (#jets = 3)", "Dijet Mass (#jets = 4)",
           "Dijet Mass (#jets = 5)", "Dijet Mass (#jets = 6)", "Dijet Mass (#jets = 7)", "Dijet Mass (#jets = 8)", "Dijet Mass (#jets = 9)", "Dijet Mass (#jets = 10)"]
 
-    x_axis_list = 	["N_{jet}", "N_{jet}", "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]",
+    x_axis_list = 	["N_{jet}", "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]",
 		      "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]", "H_{T} [GeV]", "H_{T} [GeV]", "H_{T} [GeV]",
 		      "m(jets) [GeV]", "m(jets) [GeV]", "m(jets) [GeV]", "y", "y(Lepton)-y(First Jet)", "y(Lepton)+y(First Jet)",
 		      "#Delta R(First Jet, Second Jet)", "#Delta y(First Jet, Second Jet)", "#Delta#phi(First Jet, Second Jet)",
@@ -504,7 +504,7 @@ def GetListDataset(list_name):
               "m(jets) [GeV]", "m(jets) [GeV]", "m(jets) [GeV]", "m(jets) [GeV]", "m(jets) [GeV]", "m(jets) [GeV]",
               "m(jets) [GeV]", "m(jets) [GeV]"]
 
-    y_axis_list = 	["#sigma (W+#geq N_{jet} jets) [pb]", "#sigma (#geq N_{jet} jets)/#sigma (#geq N_{jet}-1 jets)",
+    y_axis_list = 	["#sigma (W+#geq N_{jet} jets) [pb]",
 		      "d#sigma/dp_{T} [pb/GeV]", "d#sigma/dp_{T} [pb/GeV]", "d#sigma/dp_{T} [pb/GeV]",
 		      "d#sigma/dp_{T} [pb/GeV]", "d#sigma/dp_{T} [pb/GeV]", "d#sigma/dp_{T} [pb/GeV]",
 		      "d#sigma/dp_{T} [pb/GeV]", "d#sigma/dp_{T} [pb/GeV]", "d#sigma/dp_{T} [pb/GeV]",
@@ -521,7 +521,7 @@ def GetListDataset(list_name):
               "d#sigma/d#it{m} [pb/GeV]", "d#sigma/d#it{m} [pb/GeV]", "d#sigma/d#it{m} [pb/GeV]", "d#sigma/d#it{m} [pb/GeV]",
               "d#sigma/d#it{m} [pb/GeV]", "d#sigma/d#it{m} [pb/GeV]","d#sigma/d#it{m} [pb/GeV]", "d#sigma/d#it{m} [pb/GeV]"]
 
-    y_axis_list_norm = ["#sigma (W+#geq N_{jet} jets)", "#sigma (#geq N_{jet} jets)/#sigma (#geq N_{jet}-1 jets)",
+    y_axis_list_norm = ["#sigma (W+#geq N_{jet} jets)",
 			"d#sigma/dp_{T} [events/GeV]", "d#sigma/dp_{T} [events/GeV]", "d#sigma/dp_{T} [events/GeV]",
 			"d#sigma/dp_{T} [events/GeV]", "d#sigma/dp_{T} [events/GeV]", "d#sigma/dp_{T} [events/GeV]",
 			"d#sigma/dp_{T} [events/GeV]", "d#sigma/dp_{T} [events/GeV]", "d#sigma/dp_{T} [events/GeV]",

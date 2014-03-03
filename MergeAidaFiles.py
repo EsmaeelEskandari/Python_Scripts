@@ -14,7 +14,7 @@ for folder in dataset_names:
 	i = len(Aida_Files)
 	print "There were %i in the directory: "%i + current_dir
 
-        if i == 0: continue
+    if i == 0: continue
 	# Run aidamerge.py over every file in the Aida_Files list.
 	arguments = "%s" % " ".join(map(str, Aida_Files))
 	cmd = "python ../aidamerge.py -o merged_avg.aida "+arguments

@@ -26,15 +26,15 @@ def StyleHistogram(index, h1):
     
 def StyleCutFlow(h1):
     h1.GetXaxis().SetBinLabel(2,"No Cuts")
-    h1.GetXaxis().SetBinLabel(3, "1#it{l} & 1#nu")
-    h1.GetXaxis().SetBinLabel(4, "#slash{E}_{T} > 25GeV")
-    h1.GetXaxis().SetBinLabel(5, "m_T(W) > 40GeV")
-    h1.GetXaxis().SetBinLabel(6, "#geq 2jets")
-    h1.GetXaxis().SetBinLabel(7, "p_{T,1} > 80GeV")
-    h1.GetXaxis().SetBinLabel(8, "p_{T,2} > 60GeV")
-    h1.GetXaxis().SetBinLabel(9, "M_{jj} > 500GeV")
-    h1.GetXaxis().SetBinLabel(10, "CJV")
-    h1.GetXaxis().SetBinLabel(11, "OJV")
+    h1.GetXaxis().SetBinLabel(3, "WFinder and #geq 2jets") # WFinder include MET cut
+    h1.GetXaxis().SetBinLabel(4, "p_{T,1} > 80GeV")
+    h1.GetXaxis().SetBinLabel(5, "p_{T,2} > 60GeV")
+    h1.GetXaxis().SetBinLabel(6, "M_{jj} > 500GeV")
+    h1.GetXaxis().SetBinLabel(7, "CJV")
+    h1.GetXaxis().SetBinLabel(8, "OLV")
+    h1.GetXaxis().SetBinLabel(9, "")
+    h1.GetXaxis().SetBinLabel(10, "")
+    h1.GetXaxis().SetBinLabel(11, "")
     
 def StyleTH2(th2):
     th2.SetTitle("Differential Dijet Mass and N_{jets} Distribution")
@@ -96,12 +96,12 @@ _h_xsecs = ROOT.TH1F("Cross_Sections","Cross_Sections",len(dataset_names),0,len(
 _h_xsecs.GetYaxis().SetTitle("Cross Section [pb]")
 for idx,folder in enumerate(dataset_names):
 #for folder, data in zip(dataset_names, datasets):
-    th2_hist_30 = ROOT.TH2F( "hmj1j2_wvbf", "hmj1j2_wvbf", 10, -0.5, 9.5, 200, 0, 5000 )
-    th2_hist_20 = ROOT.TH2F( "hmj1j2_wvbf_20", "hmj1j2_wvbf_20", 10, -0.5, 9.5, 200, 0, 5000 )
     if os.path.exists(folder+"/") == True:
+        th2_hist_30 = ROOT.TH2F( "hmj1j2_wvbf", "hmj1j2_wvbf", 10, -0.5, 9.5, 200, 0, 5000 )
+        th2_hist_20 = ROOT.TH2F( "hmj1j2_wvbf_20", "hmj1j2_wvbf_20", 10, -0.5, 9.5, 200, 0, 5000 )
         # First get the crossSection_mean and GenFiltEff_mean for this dataset from AMI for normalizations
         xsec = cross_sections[idx][0]
-        effic = cross_sections[idx][1] # Do not use efficiency for MjjFilt datasets
+        #effic = cross_sections[idx][1] # Do not use efficiency for MjjFilt datasets
         _h_xsecs.Fill(idx,xsec)
         print folder, xsec
 
@@ -119,8 +119,8 @@ for idx,folder in enumerate(dataset_names):
             if index > len(title_list)-1: index = index-len(title_list)
             # No normalization
             histogram = root_file.Get(hist)
-            if "_MjjFilt" in folder:            # Remove these two lines when the new data (without
-                histogram.Scale(1.0/effic)      # genfilteffic) have been acquired.
+            #if "_MjjFilt" in folder:            # Remove these two lines when the new data (without
+            #    histogram.Scale(1.0/effic)      # genfilteffic) have been acquired.
             histogram_add = root_file_add.Get(hist)
             hf.cd(folder)
             StyleHistogram(index, histogram)

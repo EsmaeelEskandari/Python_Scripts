@@ -10,8 +10,8 @@ void large_label_title(TH1 *histo1)
   histo1->GetXaxis()->SetTitleSize(0.06);
   histo1->GetYaxis()->SetTitleSize(0.06);
   histo1->GetXaxis()->SetTickLength(0.03);
-  //histo1->GetYaxis()->SetLabelSize(33);
-  //histo1->GetYaxis()->SetTitleSize(35);
+  histo1->GetYaxis()->SetLabelSize(33);
+  histo1->GetYaxis()->SetTitleSize(35);
   histo1->GetYaxis()->SetTickLength(0.03);
   //histo1->GetYaxis()->SetNdivisions(507);
 }

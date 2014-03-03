@@ -16,14 +16,15 @@
   Double_t RY2=0;
   Double_t RATRY1=0.0;
   Double_t RATRY2=3.0;
-  bool NORMED = false;
+  bool NORMED = true;
+  bool INTEGRATE = false;
   Double_t max_val = 0.0;
   Double_t max_val_tmp;
 
   // number of files to be opened
   Int_t FILES=1;
   // number of curves to be plotted
-  Int_t REPNFIL=2;
+  Int_t REPNFIL=3;
   // histogram base name
   TString hist_base = "DijetMass_2jet_1";
   if (NORMED) hist_base = "Normalized_XS/" + hist_base + "_norm";
@@ -31,11 +32,11 @@
   //open files, set normalization, retrieve+scale && rebin histos
   std::string fnames1[FILES]={"VBF_Systematics.root"};
   //std::string fnames1[FILES]={"VBF_Systematics.root", "VBF_Systematics_merged_stats.root"};
-  //std::string legents[REPNFIL]={"Sherpa Nominal", "Sherpa Nominal MjjFilt", "POWHEG Nominal bornsuppfact"};
-  std::string legents[REPNFIL]={"Sherpa Nominal MjjFilt", "Powheg VBF bornsuppfact"};
+  std::string legents[REPNFIL]={"Sherpa Nominal", "Sherpa Nominal MjjFilt", "POWHEG Nominal bornsuppfact"};
+  //std::string legents[REPNFIL]={"Sherpa Nominal MjjFilt", "Powheg VBF bornsuppfact"};
   // Create a list of all paths so that I can just reference that list.
-  //TString histpaths[REPNFIL]={"147775.Nominal_Sherpa_Background/", "129930.Nominal_Sherpa_Background_MjjFilt/", "000001.Powheg.W2jets.Nominal/"};
-  TString histpaths[REPNFIL]={"129916.Nominal_Sherpa_Signal/", "000008.Powheg.VBF.Nominal.bornsuppfact/"};
+  TString histpaths[REPNFIL]={"147775.Nominal_Sherpa_Background/", "129930.Nominal_Sherpa_Background_MjjFilt/", "000001.Powheg.W2jets.Nominal/"};
+  //TString histpaths[REPNFIL]={"129916.Nominal_Sherpa_Signal/", "000008.Powheg.VBF.Nominal.bornsuppfact/"};
 
   TFile* fpoint1[FILES];
   for (i=0; i<FILES; i++)
@@ -99,7 +100,7 @@
   if (SETNDIV==1) hvect1[0]->GetXaxis()->SetNdivisions();
   if (CENTERLAB==1) hvect1[0]->GetXaxis()->CenterLabels();
 
-  hvect1[0]->SetMaximum(2.0*max_val);
+  //hvect1[0]->SetMaximum(2.0*max_val);
   hvect1[0]->DrawClone("");
   for (i=0; i<REPNFIL; i++){hvect1[i]->DrawClone("same");hvect1[i]->DrawClone("samep");}
 
