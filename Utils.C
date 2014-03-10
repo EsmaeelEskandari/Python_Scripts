@@ -6,19 +6,19 @@ void no_xlabel_xtitle(TH1 *histo1)
 
 void large_label_title(TH1 *histo1)
 {
-  //histo1->GetXaxis()->SetLabelSize(33);
+  histo1->GetXaxis()->SetLabelSize(33);
   histo1->GetXaxis()->SetTitleSize(0.06);
   histo1->GetYaxis()->SetTitleSize(0.06);
   histo1->GetXaxis()->SetTickLength(0.03);
   histo1->GetYaxis()->SetLabelSize(33);
   histo1->GetYaxis()->SetTitleSize(35);
   histo1->GetYaxis()->SetTickLength(0.03);
-  //histo1->GetYaxis()->SetNdivisions(507);
+  histo1->GetYaxis()->SetNdivisions(507);
 }
 
 void Large_label_title_bot(TH1 *histo1)
 {
-  //histo1->GetXaxis()->SetLabelSize(33);
+  histo1->GetXaxis()->SetLabelSize(33);
   histo1->GetXaxis()->SetTitleSize(0.12);
   histo1->GetYaxis()->SetTitleSize(0.12);
   histo1->GetXaxis()->SetTickLength(0.05);
@@ -26,7 +26,7 @@ void Large_label_title_bot(TH1 *histo1)
   histo1->GetXaxis()->SetLabelSize(0.12);
   histo1->GetYaxis()->SetLabelSize(0.12);
   histo1->GetYaxis()->SetTitleOffset(0.45);
-  //histo1->GetYaxis()->SetNdivisions(507);
+  histo1->GetYaxis()->SetNdivisions(507);
   histo1->SetLineWidth(2);
 
 }
@@ -34,14 +34,14 @@ void Large_label_title_bot(TH1 *histo1)
 
 void Large_label_title_top(TH1 *histo1)
 {
-  //histo1->GetXaxis()->SetLabelSize(33);
+  histo1->GetXaxis()->SetLabelSize(33);
   histo1->GetXaxis()->SetTitleSize(0.065);
   histo1->GetYaxis()->SetTitleSize(0.065);
   histo1->GetXaxis()->SetTickLength(0.04);
   histo1->GetYaxis()->SetTickLength(0.04);
   histo1->GetXaxis()->SetLabelSize(0.065);
   histo1->GetYaxis()->SetLabelSize(0.065);
-  //histo1->GetYaxis()->SetNdivisions(507);
+  histo1->GetYaxis()->SetNdivisions(507);
   histo1->GetYaxis()->SetTitleOffset(0.62*1.37);
   histo1->SetLineWidth(2);
 

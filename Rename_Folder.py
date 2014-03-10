@@ -19,10 +19,7 @@ for dataset in dataset_names:
   cmd = 'mkdir '+dataset
   os.system(cmd)
   names = dataset.split(".")
-  if len(names) == 2:
-    new_list = [ x for x in folder_list if (names[0] in x) ]
-  elif len(names) == 3:
-    new_list = [ x for x in folder_list if (names[0] in x and names[2] in x) ]
+  new_list = [ x for x in folder_list if (names[0] in x) ]
   for folder in new_list:
     folder_list.remove(folder)
     cmd = 'mv '+folder+'/* '+dataset+' && rm -r '+folder
