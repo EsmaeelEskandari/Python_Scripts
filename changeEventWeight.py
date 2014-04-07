@@ -100,7 +100,7 @@ for name_index,fname in enumerate(filenames):
     if setXS: os.rename(fname+".1",fname)
     
     infile = open(fname)    
-    with open("./MuRdownMuFdown/"+file_root_names[name_index]+"_MuRdownMuFdown.events", "w") as out_MuRMuFdown:
+    with open("./MuRdownMuFdown/"+file_root_names[name_index]+"_MuRdownMuFdown.lhe", "w") as out_MuRMuFdown:
         numEvents = 0
         for index,line in enumerate(infile):
             if "<event>" in line:
@@ -114,7 +114,7 @@ for name_index,fname in enumerate(filenames):
     infile.close()
             
     infile = open(fname)
-    with open("./MuFdown/"+file_root_names[name_index]+"_MuFdown.events", "w") as out_MuFdown:
+    with open("./MuFdown/"+file_root_names[name_index]+"_MuFdown.lhe", "w") as out_MuFdown:
         numEvents = 0
         for index,line in enumerate(infile):
             if "<event>" in line: 
@@ -128,7 +128,7 @@ for name_index,fname in enumerate(filenames):
     infile.close()
             
     infile = open(fname)
-    with open("./MuRdown/"+file_root_names[name_index]+"_MuRdown.events", "w") as out_MuRdown:
+    with open("./MuRdown/"+file_root_names[name_index]+"_MuRdown.lhe", "w") as out_MuRdown:
         numEvents = 0
         for index,line in enumerate(infile):
             if "<event>" in line:
@@ -142,7 +142,7 @@ for name_index,fname in enumerate(filenames):
     infile.close()
         
     infile = open(fname)    
-    with open("./MuFup/"+file_root_names[name_index]+"_MuFup.events", "w") as out_MuFup:
+    with open("./MuFup/"+file_root_names[name_index]+"_MuFup.lhe", "w") as out_MuFup:
         numEvents = 0
         for index,line in enumerate(infile):
             if "<event>" in line:
@@ -156,7 +156,7 @@ for name_index,fname in enumerate(filenames):
     infile.close()
      
     infile = open(fname)       
-    with open("./MuRup/"+file_root_names[name_index]+"_MuRup.events", "w") as out_MuRup:
+    with open("./MuRup/"+file_root_names[name_index]+"_MuRup.lhe", "w") as out_MuRup:
         numEvents = 0
         for index,line in enumerate(infile):
             if "<event>" in line:
@@ -170,7 +170,7 @@ for name_index,fname in enumerate(filenames):
     infile.close()
     
     infile = open(fname)        
-    with open("./MuRupMuFup/"+file_root_names[name_index]+"_MuRupMuFup.events", "w") as out_MuRMuFup:
+    with open("./MuRupMuFup/"+file_root_names[name_index]+"_MuRupMuFup.lhe", "w") as out_MuRMuFup:
         numEvents = 0
         for index,line in enumerate(infile):
             if "<event>" in line:

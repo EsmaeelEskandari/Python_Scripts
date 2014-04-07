@@ -351,7 +351,8 @@ def GetListDataset(list_name):
       'user.cjohnson.8TeV.PowhegPythia8.CT10.w2jet.Wminus.bornsuppfact.MuRupMuFup.v1/',
       'mc12_8TeV.147774.Sherpa_CT10_Wenu.evgen.EVNT.e1434/',
       'mc12_8TeV.129915.Sherpa_CT10_Wenu2JetsEW1JetQCD15GeV_min_n_tchannels.evgen.EVNT.e1557/',
-      'mc12_8TeV.129929.Sherpa_CT10_Wenu_MjjFiltered.evgen.EVNT.e1538/']
+      'mc12_8TeV.129929.Sherpa_CT10_Wenu_MjjFiltered.evgen.EVNT.e1538/',
+      'mc12_valid.200900.Sherpa_CT10_Wenu.evgen.EVNT.e2505/']
 	      
     dataset_number = ['129916','129930','147294','147295','147296',
               '147297','147298','147299','147300','147301','147302',
@@ -362,7 +363,7 @@ def GetListDataset(list_name):
               '000001','000002','000003','000004','000005','000006','000007',
               '000008','000009','000010','000011','000012','000013','000014',
               '000015','000016','000017','000018','000019','000020','000021',
-              '147774','129915','129929']
+              '147774','129915','129929','200900']
     
     # List of Cross-sections and Generator Filter Efficiencies (xsec,effic)          
     cross_sections = [(4.2128, 1.0), (11866.0, 0.41371), (4.0071, 1.0), (4.0065, 0.54318), 
@@ -380,7 +381,7 @@ def GetListDataset(list_name):
                       (7.04168397094, 1.0), (7.06976216385, 1.0), (7.08366321813, 1.0),
                       (3.44758708752, 1.0), (3.45743547345, 1.0), (3.45739988439, 1.0), (3.44663832821, 1.0),
                       (3.44834797044, 1.0), (3.44332503928, 1.0), (3.44604220929, 1.0),
-                      (11866.0,1.0), (4.2114,1.0), (11866.0,1.0)]
+                      (11866.0,1.0), (4.2114,1.0), (11866.0,1.0), (11506.0,1.0)]
 
     dataset_names = ["129916.Nominal_Sherpa_Signal", "129930.Nominal_Sherpa_Background_MjjFilt",
               "147294.min_n_tchannels_CKKW30", "147295.min_n_tchannels_CKKW30_MjjFilt",
@@ -403,7 +404,8 @@ def GetListDataset(list_name):
           "000014.Powheg.VBF.MuRupMuFup.bornsuppfact", "000015.Powheg.VBF.Nominal.ptj_gencut", "000016.Powheg.VBF.MuFdown.ptj_gencut", 
           "000017.Powheg.VBF.MuFup.ptj_gencut", "000018.Powheg.VBF.MuRdown.ptj_gencut", "000019.Powheg.VBF.MuRup.ptj_gencut",
           "000020.Powheg.VBF.MuRdownMuFdown.ptj_gencut", "000021.Powheg.VBF.MuRupMuFup.ptj_gencut",
-          "147774.Nominal_Sherpa_Bkgd_enu", "129915.Nominal_Sherpa_Sgnl_enu", "129929.Nominal_Sherpa_Bkgd_enu_MjjFilt"]
+          "147774.Nominal_Sherpa_Bkgd_enu", "129915.Nominal_Sherpa_Sgnl_enu", "129929.Nominal_Sherpa_Bkgd_enu_MjjFilt",
+          "200900.Nominal_Sherpa_NLO_Bkgd_enu"]
 
     dataset_names_1 = ["147294.min_n_tchannels_CKKW30", "147295.min_n_tchannels_CKKW30_MjjFilt",
 			"147296.min_n_tchannels_MuFdown", "147297.min_n_tchannels_MuFdown_MjjFilt",

@@ -32,9 +32,9 @@ def StyleCutFlow(h1):
     h1.GetXaxis().SetBinLabel(6, "M_{jj} > 500GeV")
     h1.GetXaxis().SetBinLabel(7, "CJV")
     h1.GetXaxis().SetBinLabel(8, "OLV")
-    h1.GetXaxis().SetBinLabel(9, "")
-    h1.GetXaxis().SetBinLabel(10, "")
-    h1.GetXaxis().SetBinLabel(11, "")
+    #h1.GetXaxis().SetBinLabel(9, "")
+    #h1.GetXaxis().SetBinLabel(10, "")
+    #h1.GetXaxis().SetBinLabel(11, "")
     
 def StyleTH2(th2):
     th2.SetTitle("Differential Dijet Mass and N_{jets} Distribution")
