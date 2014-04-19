@@ -1,4 +1,4 @@
-import ROOT
+import ROOT,sys
 
 root_file = ROOT.TFile.Open("VBF_Systematics.root")
 ROOT.gStyle.SetOptStat(0)
@@ -9,11 +9,14 @@ leg.SetFillColor(0)
 leg.SetBorderSize(0)
 leg.SetTextSize(0.02)
 
-colors = ["ROOT.TAttFill.kBlack","ROOT.TAttFill.kRed","ROOT.TAttFill.kGreen","ROOT.TAttFill.kBlue"]
-datasets_to_get = ["200900.Nominal_Sherpa_NLO_Bkgd_enu", "129929.Nominal_Sherpa_Bkgd_enu_MjjFilt"]
+colors = ["ROOT.TAttFill.kBlack","ROOT.TAttFill.kRed","ROOT.TAttFill.kGreen+1","ROOT.TAttFill.kBlue",
+          "ROOT.TAttFill.kMagenta+2","ROOT.TAttFill.kOrange+8","ROOT.TAttFill.kSpring+3"]
+datasets_to_get = ["129916.Nominal_Sherpa_Signal", "000015.Powheg.VBF.Nominal.ptj_gencut"]
 histograms_to_get = ["DijetMass_2jet_1", "DijetMass_CR_1"]
 print "Reference histogram is datasets_to_get[0]: {0}".format(datasets_to_get[0])
-if len(datasets_to_get) > len(colors): print "You need to define more colors!!"
+if len(datasets_to_get) > len(colors): 
+    print "You need to define more colors!! (in colors list)"
+    sys.exit()
 
 NORMALIZE = True    # Boolean: Decides whether to normalize to integral or not.
 FORCE_REBIN = False # Boolean: Decides whether to force rebinning to specified number.
@@ -48,22 +51,22 @@ for hist_to_get in histograms_to_get:
 #------------Histograms-------------------------
     pad1.cd()
     pad1.SetLogy()
-    for idx,dataset in enumerate(datasets_to_get):
+    for idx in range(len(datasets_to_get)):
         histos[idx].Draw("HIST E SAME")
     leg.Draw()
 
 #------------Ratio Plot-------------------------
     pad2.cd()
-    for idx,dataset in enumerate(datasets_to_get):
+    histo_err = histos[0].Clone()
+    histo_ref = histos[0].Clone()
+    histo_err.Divide(histo_err)
+    histo_err.SetFillStyle(3004)
+    histo_err.SetFillColor(ROOT.TAttLine.kBlack)
+    histo_err.Draw("E2")
+    for idx in range(1,len(datasets_to_get)):
         histo_rat = histos[idx].Clone()
-        if idx == 0:
-            histo_rat.Divide(histo_rat)
-            histo_rat.SetFillStyle(3004)
-            histo_rat.SetFillColor(ROOT.TAttLine.kBlack)
-            histo_rat.Draw("E2")
-        else:
-            histo_rat.Divide(histos[0])
-            histo_rat.Draw("SAME")
+        histo_rat.Divide(histo_ref)
+        histo_rat.Draw("SAME")
 
     c1.SaveAs(hist_to_get+".pdf")
     leg.Clear()

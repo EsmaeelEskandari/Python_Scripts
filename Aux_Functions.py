@@ -471,7 +471,8 @@ def GetListDataset(list_name):
 		  "AntiDijetPhiDiff_3jet_1", "AntiDijetPhiDiff_4jet_1", "CutFlow_1", "DeltaR13_3jet_1", "DeltaR23_3jet_1", "NJetsNoCuts",
           "Mjj_Excl_00_Jet_1", "Mjj_Excl_01_Jet_1", "Mjj_Excl_02_Jet_1", "Mjj_Excl_03_Jet_1", "Mjj_Excl_04_Jet_1", "Mjj_Excl_05_Jet_1",
           "Mjj_Excl_06_Jet_1", "Mjj_Excl_07_Jet_1", "Mjj_Excl_08_Jet_1", "Mjj_Excl_09_Jet_1", "Mjj_Excl_10_Jet_1",
-          "DijetMass_CR_1"]
+          "DijetMass_CR_1", "Weight_vs_pT1", "Weight_vs_pT2", "Weight_vs_Mjj", "DijetMass_nocuts", "FirstJetPt_nocuts",
+          "SecondJetPt_nocuts", "BosonPt_nocuts"]
           # "NJetExcl_2", "FirstJetPt_2jet_2", "FirstJetPt_3jet_2", "FirstJetPt_4jet_2", "SecondJetPt_2jet_2",
           # "SecondJetPt_3jet_2", "SecondJetPt_4jet_2", "ThirdJetPt_3jet_2","ThirdJetPt_4jet_2", "FourthJetPt_4jet_2",
           # "Ht_2jet_2", "Ht_3jet_2", "Ht_4jet_2", "Minv_2jet_2", "Minv_3jet_2", "Minv_4jet_2", "JetRapidity_2", "DeltaYElecJet_2",
@@ -481,7 +482,8 @@ def GetListDataset(list_name):
           # "AntiDijetPhiDiff_3jet_2", "AntiDijetPhiDiff_4jet_2", "CutFlow_2", "DeltaR13_3jet_2", "DeltaR23_3jet_2", "NJetsNoCuts",
           # "Mjj_Excl_00_Jet_2", "Mjj_Excl_01_Jet_2", "Mjj_Excl_02_Jet_2", "Mjj_Excl_03_Jet_2", "Mjj_Excl_04_Jet_2", "Mjj_Excl_05_Jet_2",
           # "Mjj_Excl_06_Jet_2", "Mjj_Excl_07_Jet_2", "Mjj_Excl_08_Jet_2", "Mjj_Excl_09_Jet_2", "Mjj_Excl_10_Jet_2",
-          # "DijetMass_CR_2"]
+          # "DijetMass_CR_2", "Weight_vs_pT1", "Weight_vs_pT2", "Weight_vs_Mjj", "DijetMass_nocuts", "FirstJetPt_nocuts",
+          # "SecondJetPt_nocuts", "BosonPt_nocuts"]
 
     title_list = ["Jet Multiplicity (W+#geq 2 jets)", "First Jet p_{T} (W+#geq 2 jets)", "First Jet p_{T} (W+#geq 3 jets)", "First Jet p_{T} (W+#geq 4 jets)",
 		  "Second Jet p_{T}", "Second Jet p_{T} (W+#geq 3 jets)", "Second Jet p_{T} (W+#geq 4 jets)", "Third Jet p_{T}", "Third Jet p_{T} (W+#geq 4 jets)",
@@ -496,7 +498,8 @@ def GetListDataset(list_name):
 		  "cos|#phi_{j_1}-#phi_{j_2}| b/w Most Forward-Rearward Jets (W+#geq 4 jets)", "Cut Flow", "Rapidity Diff b/w Jets 1 and 3", "Rapidity Diff b/w Jets 2 and 3",
           "Number of Jets in Event (No Cuts)", "Dijet Mass (#jets = 0)", "Dijet Mass (#jets = 1)", "Dijet Mass (#jets = 2)", "Dijet Mass (#jets = 3)", "Dijet Mass (#jets = 4)",
           "Dijet Mass (#jets = 5)", "Dijet Mass (#jets = 6)", "Dijet Mass (#jets = 7)", "Dijet Mass (#jets = 8)", "Dijet Mass (#jets = 9)", "Dijet Mass (#jets = 10)",
-          "Dijet Mass - Control Region"]
+          "Dijet Mass - Control Region", "Weight vs Leading Jet pT", "Weight vs Second Jet pT", "Weight vs Dijet Mass", "Dijet Mass with no cuts",
+          "Leading Jet pT with no cuts", "Second Jet pT no cuts", "Boson pT no cuts"]
 
     x_axis_list = 	["N_{jet}", "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]",
 		      "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]", "H_{T} [GeV]", "H_{T} [GeV]", "H_{T} [GeV]",
@@ -507,7 +510,8 @@ def GetListDataset(list_name):
               "#Delta#eta_{j_1j_2}", "cos|#phi_{j_1}-#phi_{j_2}|", "cos|#phi_{j_1}-#phi_{j_2}|", "cos|#phi_{j_1}-#phi_{j_2}|",
 		      "Cut", "#Delta R_{1,3}", "#Delta R_{2,3}", "N_{jet}", "m(jets) [GeV]", "m(jets) [GeV]", "m(jets) [GeV]",
               "m(jets) [GeV]", "m(jets) [GeV]", "m(jets) [GeV]", "m(jets) [GeV]", "m(jets) [GeV]", "m(jets) [GeV]",
-              "m(jets) [GeV]", "m(jets) [GeV]", "m(jets) [GeV]"]
+              "m(jets) [GeV]", "m(jets) [GeV]", "m(jets) [GeV]", "p_{T} [GeV]", "p_{T} [GeV]", "m(jets) [GeV]", "m(jets) [GeV]",
+              "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]"]
 
     y_axis_list = 	["#sigma (W+#geq N_{jet} jets) [pb]",
 		      "d#sigma/dp_{T} [pb/GeV]", "d#sigma/dp_{T} [pb/GeV]", "d#sigma/dp_{T} [pb/GeV]",
@@ -525,7 +529,8 @@ def GetListDataset(list_name):
 		      "[events/cut]", "[pb]", "[pb]", "[events]", "d#sigma/d#it{m} [pb/GeV]", "d#sigma/d#it{m} [pb/GeV]", "d#sigma/d#it{m} [pb/GeV]",
               "d#sigma/d#it{m} [pb/GeV]", "d#sigma/d#it{m} [pb/GeV]", "d#sigma/d#it{m} [pb/GeV]", "d#sigma/d#it{m} [pb/GeV]",
               "d#sigma/d#it{m} [pb/GeV]", "d#sigma/d#it{m} [pb/GeV]","d#sigma/d#it{m} [pb/GeV]", "d#sigma/d#it{m} [pb/GeV]",
-              "d#sigma/d#it{m} [pb/GeV]"]
+              "d#sigma/d#it{m} [pb/GeV]", "d#sigma/dp_{T} [pb/GeV]", "d#sigma/dp_{T} [pb/GeV]", "d#sigma/dm_{jj} [pb/GeV]",
+              "d#sigma/dm_{jj} [pb/GeV]", "d#sigma/dp_{T} [pb/GeV]", "d#sigma/dp_{T} [pb/GeV]", "d#sigma/dp_{T} [pb/GeV]"]
 
     y_axis_list_norm = ["#sigma (W+#geq N_{jet} jets)",
 			"d#sigma/dp_{T} [events/GeV]", "d#sigma/dp_{T} [events/GeV]", "d#sigma/dp_{T} [events/GeV]",
@@ -543,12 +548,13 @@ def GetListDataset(list_name):
 			"[events/cut]", "[events]", "[events]", "[events]","d#sigma/d#it{m} [events/GeV]","d#sigma/d#it{m} [events/GeV]", "d#sigma/d#it{m} [events/GeV]",
             "d#sigma/d#it{m} [events/GeV]","d#sigma/d#it{m} [events/GeV]", "d#sigma/d#it{m} [events/GeV]", "d#sigma/d#it{m} [events/GeV]",
             "d#sigma/d#it{m} [events/GeV]", "d#sigma/d#it{m} [events/GeV]","d#sigma/d#it{m} [events/GeV]","d#sigma/d#it{m} [events/GeV]",
-            "d#sigma/d#it{m} [events/GeV]"]
+            "d#sigma/d#it{m} [events/GeV]", "d#sigma/dp_{T} [events/GeV]", "d#sigma/dp_{T} [events/GeV]", "d#sigma/dm_{jj} [events/GeV]",
+            "d#sigma/dm_{jj} [events/GeV]", "d#sigma/dp_{T} [events/GeV]", "d#sigma/dp_{T} [events/GeV]", "d#sigma/dp_{T} [events/GeV]"]
 
     list_of_lists = ['datasets', 'dataset_names', 'dataset_names_1', 'dataset_names_2', 'datasets_sig','datasets_sig_MjjFilt',
-		      'datasets_back', 'datasets_back_MjjFilt', 'exp_hist_list', 'hist_list', 'title_list', 'x_axis_list',
-		      'y_axis_list', 'y_axis_list_norm', 'dataset_number', 'cross_sections', 'pwhg_back_bornsupp', 'pwhg_sig_bornsupp',
-                      'pwhg_sig_ptjgencut']
+		             'datasets_back', 'datasets_back_MjjFilt', 'exp_hist_list', 'hist_list', 'title_list', 'x_axis_list',
+		             'y_axis_list', 'y_axis_list_norm', 'dataset_number', 'cross_sections', 'pwhg_back_bornsupp', 'pwhg_sig_bornsupp',
+                     'pwhg_sig_ptjgencut']
 
     if list_name in list_of_lists: return eval(list_name)
     else: print 'The given list is not defined.'
