@@ -363,7 +363,7 @@ def GetListDataset(list_name):
               '000001','000002','000003','000004','000005','000006','000007',
               '000008','000009','000010','000011','000012','000013','000014',
               '000015','000016','000017','000018','000019','000020','000021',
-              '147774','129915','129929','200900']
+              '000022','147774','129915','129929','200900']
     
     # List of Cross-sections and Generator Filter Efficiencies (xsec,effic)          
     cross_sections = [(4.2128, 1.0), (11866.0, 0.41371), (4.0071, 1.0), (4.0065, 0.54318), 
@@ -380,7 +380,7 @@ def GetListDataset(list_name):
                       (7.06976216385, 1.0), (7.03611758462, 1.0), (7.12759465151, 1.0), (7.10477339246, 1.0),
                       (7.04168397094, 1.0), (7.06976216385, 1.0), (7.08366321813, 1.0),
                       (3.44758708752, 1.0), (3.45743547345, 1.0), (3.45739988439, 1.0), (3.44663832821, 1.0),
-                      (3.44834797044, 1.0), (3.44332503928, 1.0), (3.44604220929, 1.0),
+                      (3.44834797044, 1.0), (3.44332503928, 1.0), (3.44604220929, 1.0), (2.628075,1.0),
                       (11866.0,1.0), (4.2114,1.0), (11866.0,1.0), (11506.0,1.0)]
 
     dataset_names = ["129916.Nominal_Sherpa_Signal", "129930.Nominal_Sherpa_Background_MjjFilt",
@@ -403,7 +403,7 @@ def GetListDataset(list_name):
           "000011.Powheg.VBF.MuRdown.bornsuppfact", "000012.Powheg.VBF.MuRup.bornsuppfact", "000013.Powheg.VBF.MuRdownMuFdown.bornsuppfact",
           "000014.Powheg.VBF.MuRupMuFup.bornsuppfact", "000015.Powheg.VBF.Nominal.ptj_gencut", "000016.Powheg.VBF.MuFdown.ptj_gencut", 
           "000017.Powheg.VBF.MuFup.ptj_gencut", "000018.Powheg.VBF.MuRdown.ptj_gencut", "000019.Powheg.VBF.MuRup.ptj_gencut",
-          "000020.Powheg.VBF.MuRdownMuFdown.ptj_gencut", "000021.Powheg.VBF.MuRupMuFup.ptj_gencut",
+          "000020.Powheg.VBF.MuRdownMuFdown.ptj_gencut", "000021.Powheg.VBF.MuRupMuFup.ptj_gencut", "000022.Powheg.VBF.Nominal.ptj_gencut_7TeV",
           "147774.Nominal_Sherpa_Bkgd_enu", "129915.Nominal_Sherpa_Sgnl_enu", "129929.Nominal_Sherpa_Bkgd_enu_MjjFilt",
           "200900.Nominal_Sherpa_NLO_Bkgd_enu"]
 
@@ -438,7 +438,7 @@ def GetListDataset(list_name):
                   
     pwhg_sig_ptjgencut = ["000015.Powheg.VBF.Nominal.ptj_gencut", "000016.Powheg.VBF.MuFdown.ptj_gencut", "000017.Powheg.VBF.MuFup.ptj_gencut",
                          "000018.Powheg.VBF.MuRdown.ptj_gencut", "000019.Powheg.VBF.MuRup.ptj_gencut", "000020.Powheg.VBF.MuRdownMuFdown.ptj_gencut",
-                         "000021.Powheg.VBF.MuRupMuFup.ptj_gencut"]
+                         "000021.Powheg.VBF.MuRupMuFup.ptj_gencut", "000022.Powheg.VBF.Nominal.ptj_gencut_7TeV"]
     
     pwhg_sig_bornsupp = ["000008.Powheg.VBF.Nominal.bornsuppfact", "000009.Powheg.VBF.MuFdown.bornsuppfact", "000010.Powheg.VBF.MuFup.bornsuppfact",
                          "000011.Powheg.VBF.MuRdown.bornsuppfact", "000012.Powheg.VBF.MuRup.bornsuppfact", "000013.Powheg.VBF.MuRdownMuFdown.bornsuppfact",
@@ -472,7 +472,7 @@ def GetListDataset(list_name):
           "Mjj_Excl_00_Jet_1", "Mjj_Excl_01_Jet_1", "Mjj_Excl_02_Jet_1", "Mjj_Excl_03_Jet_1", "Mjj_Excl_04_Jet_1", "Mjj_Excl_05_Jet_1",
           "Mjj_Excl_06_Jet_1", "Mjj_Excl_07_Jet_1", "Mjj_Excl_08_Jet_1", "Mjj_Excl_09_Jet_1", "Mjj_Excl_10_Jet_1",
           "DijetMass_CR_1", "Weight_vs_pT1", "Weight_vs_pT2", "Weight_vs_Mjj", "DijetMass_nocuts", "FirstJetPt_nocuts",
-          "SecondJetPt_nocuts", "BosonPt_nocuts"]
+          "SecondJetPt_nocuts", "BosonPt_nocuts", "WBosonPt_1"]
           # "NJetExcl_2", "FirstJetPt_2jet_2", "FirstJetPt_3jet_2", "FirstJetPt_4jet_2", "SecondJetPt_2jet_2",
           # "SecondJetPt_3jet_2", "SecondJetPt_4jet_2", "ThirdJetPt_3jet_2","ThirdJetPt_4jet_2", "FourthJetPt_4jet_2",
           # "Ht_2jet_2", "Ht_3jet_2", "Ht_4jet_2", "Minv_2jet_2", "Minv_3jet_2", "Minv_4jet_2", "JetRapidity_2", "DeltaYElecJet_2",
@@ -483,7 +483,7 @@ def GetListDataset(list_name):
           # "Mjj_Excl_00_Jet_2", "Mjj_Excl_01_Jet_2", "Mjj_Excl_02_Jet_2", "Mjj_Excl_03_Jet_2", "Mjj_Excl_04_Jet_2", "Mjj_Excl_05_Jet_2",
           # "Mjj_Excl_06_Jet_2", "Mjj_Excl_07_Jet_2", "Mjj_Excl_08_Jet_2", "Mjj_Excl_09_Jet_2", "Mjj_Excl_10_Jet_2",
           # "DijetMass_CR_2", "Weight_vs_pT1", "Weight_vs_pT2", "Weight_vs_Mjj", "DijetMass_nocuts", "FirstJetPt_nocuts",
-          # "SecondJetPt_nocuts", "BosonPt_nocuts"]
+          # "SecondJetPt_nocuts", "BosonPt_nocuts", "WBosonPt_2"]
 
     title_list = ["Jet Multiplicity (W+#geq 2 jets)", "First Jet p_{T} (W+#geq 2 jets)", "First Jet p_{T} (W+#geq 3 jets)", "First Jet p_{T} (W+#geq 4 jets)",
 		  "Second Jet p_{T}", "Second Jet p_{T} (W+#geq 3 jets)", "Second Jet p_{T} (W+#geq 4 jets)", "Third Jet p_{T}", "Third Jet p_{T} (W+#geq 4 jets)",
@@ -499,7 +499,7 @@ def GetListDataset(list_name):
           "Number of Jets in Event (No Cuts)", "Dijet Mass (#jets = 0)", "Dijet Mass (#jets = 1)", "Dijet Mass (#jets = 2)", "Dijet Mass (#jets = 3)", "Dijet Mass (#jets = 4)",
           "Dijet Mass (#jets = 5)", "Dijet Mass (#jets = 6)", "Dijet Mass (#jets = 7)", "Dijet Mass (#jets = 8)", "Dijet Mass (#jets = 9)", "Dijet Mass (#jets = 10)",
           "Dijet Mass - Control Region", "Weight vs Leading Jet pT", "Weight vs Second Jet pT", "Weight vs Dijet Mass", "Dijet Mass with no cuts",
-          "Leading Jet pT with no cuts", "Second Jet pT no cuts", "Boson pT no cuts"]
+          "Leading Jet pT with no cuts", "Second Jet pT no cuts", "Boson pT no cuts", "W Boson pT"]
 
     x_axis_list = 	["N_{jet}", "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]",
 		      "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]", "H_{T} [GeV]", "H_{T} [GeV]", "H_{T} [GeV]",
@@ -511,7 +511,7 @@ def GetListDataset(list_name):
 		      "Cut", "#Delta R_{1,3}", "#Delta R_{2,3}", "N_{jet}", "m(jets) [GeV]", "m(jets) [GeV]", "m(jets) [GeV]",
               "m(jets) [GeV]", "m(jets) [GeV]", "m(jets) [GeV]", "m(jets) [GeV]", "m(jets) [GeV]", "m(jets) [GeV]",
               "m(jets) [GeV]", "m(jets) [GeV]", "m(jets) [GeV]", "p_{T} [GeV]", "p_{T} [GeV]", "m(jets) [GeV]", "m(jets) [GeV]",
-              "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]"]
+              "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]", "p_{T} [GeV]"]
 
     y_axis_list = 	["#sigma (W+#geq N_{jet} jets) [pb]",
 		      "d#sigma/dp_{T} [pb/GeV]", "d#sigma/dp_{T} [pb/GeV]", "d#sigma/dp_{T} [pb/GeV]",
@@ -530,7 +530,8 @@ def GetListDataset(list_name):
               "d#sigma/d#it{m} [pb/GeV]", "d#sigma/d#it{m} [pb/GeV]", "d#sigma/d#it{m} [pb/GeV]", "d#sigma/d#it{m} [pb/GeV]",
               "d#sigma/d#it{m} [pb/GeV]", "d#sigma/d#it{m} [pb/GeV]","d#sigma/d#it{m} [pb/GeV]", "d#sigma/d#it{m} [pb/GeV]",
               "d#sigma/d#it{m} [pb/GeV]", "d#sigma/dp_{T} [pb/GeV]", "d#sigma/dp_{T} [pb/GeV]", "d#sigma/dm_{jj} [pb/GeV]",
-              "d#sigma/dm_{jj} [pb/GeV]", "d#sigma/dp_{T} [pb/GeV]", "d#sigma/dp_{T} [pb/GeV]", "d#sigma/dp_{T} [pb/GeV]"]
+              "d#sigma/dm_{jj} [pb/GeV]", "d#sigma/dp_{T} [pb/GeV]", "d#sigma/dp_{T} [pb/GeV]", "d#sigma/dp_{T} [pb/GeV]",
+              "d#sigma/dp_{T} [pb/GeV]"]
 
     y_axis_list_norm = ["#sigma (W+#geq N_{jet} jets)",
 			"d#sigma/dp_{T} [events/GeV]", "d#sigma/dp_{T} [events/GeV]", "d#sigma/dp_{T} [events/GeV]",
@@ -549,7 +550,8 @@ def GetListDataset(list_name):
             "d#sigma/d#it{m} [events/GeV]","d#sigma/d#it{m} [events/GeV]", "d#sigma/d#it{m} [events/GeV]", "d#sigma/d#it{m} [events/GeV]",
             "d#sigma/d#it{m} [events/GeV]", "d#sigma/d#it{m} [events/GeV]","d#sigma/d#it{m} [events/GeV]","d#sigma/d#it{m} [events/GeV]",
             "d#sigma/d#it{m} [events/GeV]", "d#sigma/dp_{T} [events/GeV]", "d#sigma/dp_{T} [events/GeV]", "d#sigma/dm_{jj} [events/GeV]",
-            "d#sigma/dm_{jj} [events/GeV]", "d#sigma/dp_{T} [events/GeV]", "d#sigma/dp_{T} [events/GeV]", "d#sigma/dp_{T} [events/GeV]"]
+            "d#sigma/dm_{jj} [events/GeV]", "d#sigma/dp_{T} [events/GeV]", "d#sigma/dp_{T} [events/GeV]", "d#sigma/dp_{T} [events/GeV]",
+            "d#sigma/dp_{T} [events/GeV]"]
 
     list_of_lists = ['datasets', 'dataset_names', 'dataset_names_1', 'dataset_names_2', 'datasets_sig','datasets_sig_MjjFilt',
 		             'datasets_back', 'datasets_back_MjjFilt', 'exp_hist_list', 'hist_list', 'title_list', 'x_axis_list',
