@@ -1,4 +1,9 @@
 import ROOT
+from optparse import OptionParser
+
+parser = OptionParser()
+parser.add_option("-n", "--norm", action="store_true", dest="normalize", default=False, help="Plot histograms that are normalized to their respective cross-section.")
+(options, args) = parser.parse_args()
 ROOT.gStyle.SetOptStat(0)
 
 def Large_label_title_top(histo1):
@@ -169,7 +174,7 @@ def PlotCurves(hist_base,NORMED,fnames1,legents,histpaths):
 
 #-----------Define things here-----------------------------------------------------------
 # Histogram base name
-NORMED=True
+NORMED = options.normalize
 histograms = ["DijetMass_2jet_1","DijetMass_CR_1"]
 if (NORMED): 
     for j,base_name in enumerate(histograms):
@@ -177,8 +182,8 @@ if (NORMED):
 
 # open files, set normalization, retrieve+scale && rebin histos
 fnames1 = ["VBF_Systematics.root"]
-legents = ["Sherpa Nominal", "POWHEG Nominal"]
-histpaths = ["129916.Nominal_Sherpa_Signal/", "000015.Powheg.VBF.Nominal.ptj_gencut/"]
+legents = ["Sherpa Nominal", "POWHEG Nominal 8TeV", "POWHEG Nominal 7TeV"]
+histpaths = ["129916.Nominal_Sherpa_Signal/", "000015.Powheg.VBF.Nominal.ptj_gencut/", "000022.Powheg.VBF.Nominal.ptj_gencut_7TeV/"]
 
 for hist_base in histograms:
     PlotCurves(hist_base,NORMED,fnames1,legents,histpaths)
