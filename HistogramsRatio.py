@@ -2,7 +2,8 @@ import ROOT
 from optparse import OptionParser
 
 parser = OptionParser()
-parser.add_option("-n", "--norm", action="store_true", dest="normalize", default=False, help="Plot histograms that are normalized to their respective cross-section.")
+parser.add_option("-n", "--normXS", action="store_true", dest="normalizeXS", default=False, help="Plot histograms that are normalized by their respective cross-section.")
+parser.add_option("-i", "--integrate", action="store_true", dest="integrate", default=False, help="Plot histograms that are normalized by their respective integrals.")
 (options, args) = parser.parse_args()
 ROOT.gStyle.SetOptStat(0)
 
@@ -30,7 +31,7 @@ def Large_label_title_bot(histo1):
     histo1.GetYaxis().SetNdivisions(507)
     histo1.SetLineWidth(2)
 
-def PlotCurves(hist_base,NORMED,fnames1,legents,histpaths):
+def PlotCurves(hist_base,NORMED_XS,NORMED_INT,fnames1,legents,histpaths):
     SETLOGY=True
     SETXRANGE=0
     SETYRANGE=0
@@ -69,7 +70,10 @@ def PlotCurves(hist_base,NORMED,fnames1,legents,histpaths):
     for i in range(REPNFIL):
         hist_to_get = histpaths[i] + hist_base
         hvect1.append(fpoint1[0].Get(hist_to_get))
-        hvect1[i].Rebin(5) 
+        if NORMED_INT: hvect1[i].Scale(1.0/hvect1[i].Integral("width"))
+        num_xbins = hvect1[i].GetNbinsX()
+        if (num_xbins > 52) and (num_xbins <= 102): hvect1[i].Rebin(2)
+        elif (num_xbins > 102): hvect1[i].Rebin(5)
         max_val_tmp=hvect1[i].GetMaximum()
         if (max_val < max_val_tmp): max_val = max_val_tmp
         hvect1[i].SetLineStyle(LineStyle[i])
@@ -123,6 +127,7 @@ def PlotCurves(hist_base,NORMED,fnames1,legents,histpaths):
 
     # legend
     leg = ROOT.TLegend(lx1,ly1,lx2,ly2)
+    leg.SetFillStyle(0)
     leg.SetFillColor(0)
     leg.SetShadowColor(0)
     leg.SetBorderSize(0)
@@ -152,8 +157,7 @@ def PlotCurves(hist_base,NORMED,fnames1,legents,histpaths):
     hist_clones[0].Divide(hist_clones[0])
 
     if (SETYRATRANGE == 1): hist_clones[0].SetAxisRange(RATRY1,RATRY2,"y")
-    #hist_clones[0].GetXaxis().SetTitle("pt[GeV]")
-    hist_clones[0].GetYaxis().SetTitle("Filt/NoFilt")
+    hist_clones[0].GetYaxis().SetTitle("Powheg/Sherpa")
     hist_clones[0].SetFillStyle(3004)
     hist_clones[0].SetFillColor(eval(LineColor[0]))
     Large_label_title_bot(hist_clones[0])
@@ -164,19 +168,28 @@ def PlotCurves(hist_base,NORMED,fnames1,legents,histpaths):
         hist_clones[i].Draw("samep")
 
     #---------------------------------------------------------------------------------------
-    if not NORMED: c0.SaveAs("Distribution_"+hist_base+".pdf")
-    if NORMED: 
+    if not NORMED_XS and not NORMED_INT:
+        c0.SaveAs("Distribution_"+hist_base+".pdf")
+    elif NORMED_XS and not NORMED_INT: 
         hist_base = hist_base.split("/")[1]
         c0.SaveAs("Normalized_"+hist_base+".pdf")
+    elif not NORMED_XS and NORMED_INT:
+        c0.SaveAs("Integrated_"+hist_base+".pdf")
+    else:
+        print "You are trying to normalize histograms by both the"
+        print "cross-section and integral. Don't do this yet..."
     
     c0.Destructor()
     return
 
 #-----------Define things here-----------------------------------------------------------
 # Histogram base name
-NORMED = options.normalize
-histograms = ["DijetMass_2jet_1","DijetMass_CR_1"]
-if (NORMED): 
+NORMED_XS = options.normalizeXS
+NORMED_INT = option.integrate
+histograms = ["WBosonPt_1","DeltaPhi_2jet_1","DeltaR_2jet_1","DeltaYElecJet_1","DeltaY_2jet_1",
+              "DijetMass_2jet_1","DijetMass_CR_1","FirstJetPt_2jet_1",
+              "Ht_2jet_1","JetRapidity_1","SecondJetPt_2jet_1","ThirdZep_3jet_1"]
+if (NORMED_XS): 
     for j,base_name in enumerate(histograms):
         histograms[j] = "Normalized_XS/"+base_name+"_norm"
 
@@ -186,6 +199,6 @@ legents = ["Sherpa Nominal", "POWHEG Nominal 8TeV", "POWHEG Nominal 7TeV"]
 histpaths = ["129916.Nominal_Sherpa_Signal/", "000015.Powheg.VBF.Nominal.ptj_gencut/", "000022.Powheg.VBF.Nominal.ptj_gencut_7TeV/"]
 
 for hist_base in histograms:
-    PlotCurves(hist_base,NORMED,fnames1,legents,histpaths)
+    PlotCurves(hist_base,NORMED_XS,NORMED_INT,fnames1,legents,histpaths)
 
 ROOT.gROOT.ProcessLine(".q")
