@@ -5,15 +5,23 @@ def getFolderName(channel,shift,folder_names,E_cm):
         for folder in folder_names[0:7]:
             if shift in folder:
                 is_Dir = os.path.isdir("./"+folder)
-                return folder
+                return folder,is_Dir
     elif channel == "VBF_Wmunu":
         for folder in folder_names[7:15]:
             if E_cm == "7TeV":
                 is_Dir = os.path.isdir("./"+folder)
-                return folder_names[14]
+                return folder_names[14],is_Dir
             elif shift in folder:
                 is_Dir = os.path.isdir("./"+folder)
-                return folder
+                return folder,is_Dir
+                
+def makeAndMove(is_Dir,channel,folder):
+    if not is_Dir:
+        cmd = "mkdir {0}".format(folder)
+        os.system(cmd)
+    cmd = "mv {0} {1}".format(channel,folder)
+    os.system(cmd)
+    return
 
 folder_names = ["000001.Powheg.W2jets.Nominal.bornsuppfact", "000002.Powheg.W2jets.MuFdown.bornsuppfact", 
                 "000003.Powheg.W2jets.MuFup.bornsuppfact", "000004.Powheg.W2jets.MuRdown.bornsuppfact", 
@@ -29,31 +37,33 @@ shifts = [".Nominal.", ".MuFdown.", ".MuFup.", ".MuRdown.", ".MuRup.", ".MuRdown
 dataset_folders = glob.glob("*.PowhegPythia8.*")
 
 for dataset in dataset_folders:
+    if dataset.split("_")[-1] == "r1":
+        dest = "_".join(dataset.split("_")[:-1])
+        cmd = "mv {0}/* {1}".format(dataset,dest)
+        os.system(cmd)
+        cmd = "rm -r {0}".format(dataset)
+        os.system(cmd)
+        
+dataset_folders = glob.glob("*.PowhegPythia8.*")
+
+for dataset in dataset_folders:
     for shift in shifts:
         E_cm = "8TeV"
         if ("VBF_Wmunu" in dataset) and (shift in dataset) and ("Wplus" in dataset):
             if "7TeV" in dataset: E_cm = "7TeV"
-            folder = getFolderName("VBF_Wmunu",shift,folder_names,E_cm)
+            folder,is_Dir = getFolderName("VBF_Wmunu",shift,folder_names,E_cm)
             os.rename(dataset, "Wplus")
-            cmd = "mv Wplus {0}".format(folder)
-            os.system(cmd)
-            #shutil.move("Wplus", folder)
+            makeAndMove(is_Dir,"Wplus",folder)
         elif ("VBF_Wmunu" in dataset) and (shift in dataset) and ("Wminus" in dataset):
             if "7TeV" in dataset: E_cm = "7TeV"
-            folder = getFolderName("VBF_Wmunu",shift,folder_names,E_cm)
+            folder,is_Dir = getFolderName("VBF_Wmunu",shift,folder_names,E_cm)
             os.rename(dataset, "Wminus")
-            cmd = "mv Wminus {0}".format(folder)
-            os.system(cmd)
-            #shutil.move("Wminus", folder)
+            makeAndMove(is_Dir,"Wminus",folder)
         elif ("w2jet" in dataset) and (shift in dataset) and ("Wplus" in dataset):
-            folder = getFolderName("w2jet",shift,folder_names,E_cm)
+            folder,is_Dir = getFolderName("w2jet",shift,folder_names,E_cm)
             os.rename(dataset, "Wplus")
-            cmd = "mv Wplus {0}".format(folder)
-            os.system(cmd)
-            #shutil.move("Wplus", folder)
+            makeAndMove(is_Dir,"Wplus",folder)
         elif ("w2jet" in dataset) and (shift in dataset) and ("Wminus" in dataset):
-            folder = getFolderName("w2jet",shift,folder_names,E_cm)
+            folder,is_Dir = getFolderName("w2jet",shift,folder_names,E_cm)
             os.rename(dataset, "Wminus")
-            cmd = "mv Wminus {0}".format(folder)
-            os.system(cmd)
-            #shutil.move("Wminus", folder)
+            makeAndMove(is_Dir,"Wminus",folder)
