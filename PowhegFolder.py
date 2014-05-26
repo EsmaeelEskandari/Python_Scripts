@@ -31,17 +31,25 @@ for dataset in dataset_folders:
             if "7TeV" in dataset: E_cm = "7TeV"
             folder = getFolderName("VBF_Wmunu",shift,folder_names,E_cm)
             os.rename(dataset, "Wplus")
-            shutil.move("Wplus", folder)
+            cmd = "mv Wplus {0}".format(folder)
+            os.system(cmd)
+            #shutil.move("Wplus", folder)
         elif ("VBF_Wmunu" in dataset) and (shift in dataset) and ("Wminus" in dataset):
             if "7TeV" in dataset: E_cm = "7TeV"
             folder = getFolderName("VBF_Wmunu",shift,folder_names,E_cm)
             os.rename(dataset, "Wminus")
-            shutil.move("Wminus", folder)
+            cmd = "mv Wminus {0}".format(folder)
+            os.system(cmd)
+            #shutil.move("Wminus", folder)
         elif ("w2jet" in dataset) and (shift in dataset) and ("Wplus" in dataset):
             folder = getFolderName("w2jet",shift,folder_names,E_cm)
             os.rename(dataset, "Wplus")
-            shutil.move("Wplus", folder)
+            cmd = "mv Wplus {0}".format(folder)
+            os.system(cmd)
+            #shutil.move("Wplus", folder)
         elif ("w2jet" in dataset) and (shift in dataset) and ("Wminus" in dataset):
             folder = getFolderName("w2jet",shift,folder_names,E_cm)
             os.rename(dataset, "Wminus")
-            shutil.move("Wminus", folder)
+            cmd = "mv Wminus {0}".format(folder)
+            os.system(cmd)
+            #shutil.move("Wminus", folder)
