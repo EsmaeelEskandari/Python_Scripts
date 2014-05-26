@@ -4,11 +4,15 @@ def getFolderName(channel,shift,folder_names,E_cm):
     if channel == "w2jet":
         for folder in folder_names[0:7]:
             if shift in folder:
+                is_Dir = os.path.isdir("./"+folder)
                 return folder
     elif channel == "VBF_Wmunu":
-        for folder in folder_names[7:14]:
-            if E_cm == "7TeV": return folder_names[14]
+        for folder in folder_names[7:15]:
+            if E_cm == "7TeV":
+                is_Dir = os.path.isdir("./"+folder)
+                return folder_names[14]
             elif shift in folder:
+                is_Dir = os.path.isdir("./"+folder)
                 return folder
 
 folder_names = ["000001.Powheg.W2jets.Nominal.bornsuppfact", "000002.Powheg.W2jets.MuFdown.bornsuppfact", 
