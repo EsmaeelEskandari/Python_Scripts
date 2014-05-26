@@ -1,13 +1,14 @@
 import glob, os, shutil
 
-def getFolderName(channel,shift,folder_names):
+def getFolderName(channel,shift,folder_names,E_cm):
     if channel == "w2jet":
         for folder in folder_names[0:7]:
             if shift in folder:
                 return folder
     elif channel == "VBF_Wmunu":
         for folder in folder_names[7:14]:
-            if shift in folder:
+            if E_cm == "7TeV": return folder_names[14]
+            elif shift in folder:
                 return folder
 
 folder_names = ["000001.Powheg.W2jets.Nominal.bornsuppfact", "000002.Powheg.W2jets.MuFdown.bornsuppfact", 
@@ -25,19 +26,22 @@ dataset_folders = glob.glob("*.PowhegPythia8.*")
 
 for dataset in dataset_folders:
     for shift in shifts:
+        E_cm = "8TeV"
         if ("VBF_Wmunu" in dataset) and (shift in dataset) and ("Wplus" in dataset):
-            folder = getFolderName("VBF_Wmunu",shift,folder_names)
+            if "7TeV" in dataset: E_cm = "7TeV"
+            folder = getFolderName("VBF_Wmunu",shift,folder_names,E_cm)
             os.rename(dataset, "Wplus")
             shutil.move("Wplus", folder)
         elif ("VBF_Wmunu" in dataset) and (shift in dataset) and ("Wminus" in dataset):
-            folder = getFolderName("VBF_Wmunu",shift,folder_names)
+            if "7TeV" in dataset: E_cm = "7TeV"
+            folder = getFolderName("VBF_Wmunu",shift,folder_names,E_cm)
             os.rename(dataset, "Wminus")
             shutil.move("Wminus", folder)
         elif ("w2jet" in dataset) and (shift in dataset) and ("Wplus" in dataset):
-            folder = getFolderName("w2jet",shift,folder_names)
+            folder = getFolderName("w2jet",shift,folder_names,E_cm)
             os.rename(dataset, "Wplus")
             shutil.move("Wplus", folder)
         elif ("w2jet" in dataset) and (shift in dataset) and ("Wminus" in dataset):
-            folder = getFolderName("w2jet",shift,folder_names)
+            folder = getFolderName("w2jet",shift,folder_names,E_cm)
             os.rename(dataset, "Wminus")
             shutil.move("Wminus", folder)
