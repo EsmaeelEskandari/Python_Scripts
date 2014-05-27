@@ -2,6 +2,7 @@
 #!/bin/bash
 
 for folder in $( ls -d 0* ); do
+#####---Make sure aidamerge.py is NOT averaging when using -s option.---#####
 #  echo $folder
 #  cd $folder
 #  for channel in "Wminus" "Wplus"; do
@@ -13,6 +14,7 @@ for folder in $( ls -d 0* ); do
 #  done
 #  cd ..
 
+######----Make sure aidamerge.py is averaging when using -s option.----######
   IFS='.' read -a string_bits <<< "${folder}"
   cd $folder
   echo $folder
