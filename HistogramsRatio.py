@@ -185,16 +185,16 @@ def PlotCurves(hist_base,NORMED_XS,NORMED_INT,fnames1,legents,histpaths):
 #-----------Define things here-----------------------------------------------------------
 # Histogram base name
 NORMED_XS = options.normalizeXS
-NORMED_INT = option.integrate
+NORMED_INT = options.integrate
 histograms = ["WBosonPt_1","DeltaPhi_2jet_1","DeltaR_2jet_1","DeltaYElecJet_1","DeltaY_2jet_1",
-              "DijetMass_2jet_1","DijetMass_CR_1","FirstJetPt_2jet_1",
+              "DijetMass_2jet_1","DijetMass_CR_antiJ3C_1","FirstJetPt_2jet_1",
               "Ht_2jet_1","JetRapidity_1","SecondJetPt_2jet_1","ThirdZep_3jet_1"]
 if (NORMED_XS): 
     for j,base_name in enumerate(histograms):
         histograms[j] = "Normalized_XS/"+base_name+"_norm"
 
 # open files, set normalization, retrieve+scale && rebin histos
-fnames1 = ["VBF_Systematics.root"]
+fnames1 = ["VBF_Systematics_JLC.root"]
 legents = ["Sherpa Nominal", "POWHEG Nominal 8TeV", "POWHEG Nominal 7TeV"]
 histpaths = ["129916.Nominal_Sherpa_Signal/", "000015.Powheg.VBF.Nominal.ptj_gencut/", "000022.Powheg.VBF.Nominal.ptj_gencut_7TeV/"]
 
