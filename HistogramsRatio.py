@@ -196,7 +196,8 @@ if (NORMED_XS):
 # open files, set normalization, retrieve+scale && rebin histos
 fnames1 = ["VBF_Systematics_JLC.root"]
 legents = ["Sherpa Nominal", "POWHEG Nominal 8TeV", "POWHEG Nominal 7TeV"]
-histpaths = ["129916.Nominal_Sherpa_Signal/", "000015.Powheg.VBF.Nominal.ptj_gencut/", "000022.Powheg.VBF.Nominal.ptj_gencut_7TeV/"]
+histpaths = ["129916.Nominal_Sherpa_Signal/", "000015.Powheg.VBF.Nominal.ptj_gencut/",
+             "000022.Powheg.VBF.Nominal.ptj_gencut_7TeV/", "000023.Powheg.VBF.Nominal.7TeV_noshower/"]
 
 for hist_base in histograms:
     PlotCurves(hist_base,NORMED_XS,NORMED_INT,fnames1,legents,histpaths)
