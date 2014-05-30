@@ -1,11 +1,35 @@
-import ROOT
+import ROOT, os, sys
 from optparse import OptionParser
 
-parser = OptionParser()
+help_text = """python HistogramRatio.py <-i|-n> [root file (default=VBF_Systematics_JLC.root)]"""
+parser = OptionParser(usage=help_text)
 parser.add_option("-n", "--normXS", action="store_true", dest="normalizeXS", default=False, help="Plot histograms that are normalized by their respective cross-section.")
 parser.add_option("-i", "--integrate", action="store_true", dest="integrate", default=False, help="Plot histograms that are normalized by their respective integrals.")
 (options, args) = parser.parse_args()
 ROOT.gStyle.SetOptStat(0)
+
+def query_yes_no(question, default="yes"):
+    valid = {"yes":True,   "y":True,  "ye":True,
+             "no":False,     "n":False}
+    if default == None:
+        prompt = " [y/n] "
+    elif default == "yes":
+        prompt = " [Y/n] "
+    elif default == "no":
+        prompt = " [y/N] "
+    else:
+        raise ValueError("invalid default answer: '%s'" % default)
+
+    while True:
+        sys.stdout.write(question + prompt)
+        choice = raw_input().lower()
+        if default is not None and choice == '':
+            return valid[default]
+        elif choice in valid:
+            return valid[choice]
+        else:
+            sys.stdout.write("Please respond with 'yes' or 'no' "\
+                             "(or 'y' or 'n').\n")
 
 def Large_label_title_top(histo1):
     histo1.GetXaxis().SetLabelSize(33)
@@ -60,17 +84,29 @@ def PlotCurves(hist_base,NORMED_XS,NORMED_INT,fnames1,legents,histpaths):
             ROOT.gROOT.ProcessLine(".q")
         
     hvect1 = []
-    LineStyle = [1 , 1, 1]
-    LineColor = ["ROOT.TAttLine.kBlack" , "ROOT.TAttLine.kRed+1", "ROOT.TAttLine.kBlue"]
-    LineWidth = [2 , 2, 2]
-    MarkerStyle = [0 , 0, 0]
-    MarkerSize = [0 , 0, 0]
-    if (REPNFIL > len(LineColor)): print "Define more line attributes, too many curves...check lines 57-61"
+    LineStyle = [1 , 1, 1, 1]
+    LineColor = ["ROOT.TAttLine.kBlack" , "ROOT.TAttLine.kRed+1", "ROOT.TAttLine.kBlue", "ROOT.TAttLine.kGreen+3"]
+    LineWidth = [2 , 2, 2, 1]
+    MarkerStyle = [0 , 0, 0, 0]
+    MarkerSize = [0 , 0, 0, 0]
+    if (REPNFIL > len(LineColor)): 
+        use_default = def query_yes_no("Would you like to use default values for line Style/Color/Width\n and marker style/size.")
+        if use_default:
+            for k in range(REPNFIL-len(LineColor)):
+                LineStyle.append(LineStyle[0])
+                LineColor.append(LineColor[0])
+                LineWidth.append(LineWidth[0])
+                MarkerStyle.append(MarkerStyle[0])
+                MarkerSize.append(MarkerSize[0])
+        else:
+            print "Define more line attributes, too many curves...check lines 63-67"
         
     for i in range(REPNFIL):
         hist_to_get = histpaths[i] + hist_base
         hvect1.append(fpoint1[0].Get(hist_to_get))
-        if NORMED_INT: hvect1[i].Scale(1.0/hvect1[i].Integral("width"))
+        if NORMED_INT:
+            hvect1[i].Scale(1.0/hvect1[i].Integral("width"))
+            hvect1[i].GetYaxis().SetTitle("Norm to One")
         num_xbins = hvect1[i].GetNbinsX()
         if (num_xbins > 52) and (num_xbins <= 102): hvect1[i].Rebin(2)
         elif (num_xbins > 102): hvect1[i].Rebin(5)
@@ -194,8 +230,19 @@ if (NORMED_XS):
         histograms[j] = "Normalized_XS/"+base_name+"_norm"
 
 # open files, set normalization, retrieve+scale && rebin histos
-fnames1 = ["VBF_Systematics_JLC.root"]
-legents = ["Sherpa Nominal", "POWHEG Nominal 8TeV", "POWHEG Nominal 7TeV"]
+if len(args) > 0:
+    fnames1 = args[0:1]
+    File_Exists = os.path.isfile(fnames1[0])
+    if not File_Exists: 
+        print "{0} does not exist!".format(fnames1[0])
+else:
+    fnames1 = ["VBF_Systematics_JLC.root"]
+    File_Exists = os.path.isfile(fnames1[0])
+    if not File_Exists: 
+        print "VBF_Systematics_JLC.root does not exist!"
+        print "Define a histogram root file in command line arguments. (see --help)"
+    
+legents = ["Sherpa Nominal", "POWHEG Nominal 8TeV", "POWHEG Nominal 7TeV (s)", "POWHEG Nominal 7TeV (ns)"]
 histpaths = ["129916.Nominal_Sherpa_Signal/", "000015.Powheg.VBF.Nominal.ptj_gencut/",
              "000022.Powheg.VBF.Nominal.ptj_gencut_7TeV/", "000023.Powheg.VBF.Nominal.7TeV_noshower/"]
 
