@@ -57,12 +57,4 @@ for name_index,fname in enumerate(filenames):
 
 for i in range(7):
     print "Estimated {0} cross-section = {1} +- {2} pb. Calculated from {3} events.".format(shifts[i],xsecval[i],xsecerr[i],numEvents)
-
-#print "Estimated Nominal cross-section = {0} +- {1} pb. Calculated from {2} events.".format(Nom_xs,Nom_xs_err,numEvents)
-#print "Estimated MuFdown cross-section = {0} +- {1} pb. Calculated from {2} events.".format(MuFdown_xs,MuFdown_xs_err,numEvents)
-#print "Estimated MuFup cross-section = {0} +- {1} pb. Calculated from {2} events.".format(MuFup_xs,MuFup_xs_err,numEvents)
-#print "Estimated MuRdown cross-section = {0} +- {1} pb. Calculated from {2} events.".format(MuRdown_xs,MuRdown_xs_err,numEvents)
-#print "Estimated MuRup cross-section = {0} +- {1} pb. Calculated from {2} events.".format(MuRup_xs,MuRup_xs_err,numEvents)
-#print "Estimated MuRdownMuFdown cross-section = {0} +- {1} pb. Calculated from {2} events.".format(MuRFdown_xs,MuRFdown_xs_err,numEvents)
-#print "Estimated MuRupMuFup cross-section = {0} +- {1} pb. Calculated from {2} events.".format(MuRFup_xs,MuRFup_xs_err,numEvents)
                 
