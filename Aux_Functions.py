@@ -381,7 +381,7 @@ def GetListDataset(list_name):
                       (7.04168397094, 1.0), (7.06976216385, 1.0), (7.08366321813, 1.0),
                       (3.44758708752, 1.0), (3.45743547345, 1.0), (3.45739988439, 1.0), (3.44663832821, 1.0),
                       (3.44834797044, 1.0), (3.44332503928, 1.0), (3.44604220929, 1.0),
-                      (2.628075,1.0), (2.628075,1.0),
+                      (2.628075,1.0), (2.628075,1.0), (7191.86534513, 1.0),
                       (11866.0,1.0), (4.2114,1.0), (11866.0,1.0), (11506.0,1.0)]
 
     dataset_names = ["129916.Nominal_Sherpa_Signal", "129930.Nominal_Sherpa_Background_MjjFilt",
@@ -407,7 +407,7 @@ def GetListDataset(list_name):
           "000014.Powheg.VBF.MuRupMuFup.bornsuppfact", "000015.Powheg.VBF.Nominal.ptj_gencut", "000016.Powheg.VBF.MuFdown.ptj_gencut", 
           "000017.Powheg.VBF.MuFup.ptj_gencut", "000018.Powheg.VBF.MuRdown.ptj_gencut", "000019.Powheg.VBF.MuRup.ptj_gencut",
           "000020.Powheg.VBF.MuRdownMuFdown.ptj_gencut", "000021.Powheg.VBF.MuRupMuFup.ptj_gencut",
-          "000022.Powheg.VBF.Nominal.ptj_gencut_7TeV", "000023.Powheg.VBF.Nominal.7TeV_noshower/",
+          "000022.Powheg.VBF.Nominal.ptj_gencut_7TeV", "000023.Powheg.VBF.Nominal.7TeV_noshower/", "000024.Powheg.W2jets.Nominal.bornsuppfact.Hpp",
           "147774.Nominal_Sherpa_Bkgd_enu", "129915.Nominal_Sherpa_Sgnl_enu", "129929.Nominal_Sherpa_Bkgd_enu_MjjFilt",
           "200900.Nominal_Sherpa_NLO_Bkgd_enu"]
 
@@ -448,9 +448,10 @@ def GetListDataset(list_name):
                          "000011.Powheg.VBF.MuRdown.bornsuppfact", "000012.Powheg.VBF.MuRup.bornsuppfact", "000013.Powheg.VBF.MuRdownMuFdown.bornsuppfact",
                          "000014.Powheg.VBF.MuRupMuFup.bornsuppfact"]
                           
-    pwhg_back_bornsupp = ["000001.Powheg.W2jets.Nominal", "000002.Powheg.W2jets.MuFdown", 
-                          "000003.Powheg.W2jets.MuFup", "000004.Powheg.W2jets.MuRdown", "000005.Powheg.W2jets.MuRup", 
-                          "000006.Powheg.W2jets.MuRdownMuFdown", "000007.Powheg.W2jets.MuRupMuFup"]
+    pwhg_back_bornsupp = ["000001.Powheg.W2jets.Nominal.bornsuppfact", "000002.Powheg.W2jets.MuFdown.bornsuppfact", 
+                          "000003.Powheg.W2jets.MuFup.bornsuppfact", "000004.Powheg.W2jets.MuRdown.bornsuppfact", "000005.Powheg.W2jets.MuRup.bornsuppfact", 
+                          "000006.Powheg.W2jets.MuRdownMuFdown.bornsuppfact", "000007.Powheg.W2jets.MuRupMuFup.bornsuppfact",
+                          "000024.Powheg.W2jets.Nominal.bornsuppfact.Hpp"]
 
     exp_hist_list = ["d01-x01-y01", "d01-x01-y02", "d02-x01-y01", "d02-x01-y02",
 		      "d03-x01-y01", "d03-x01-y02", "d04-x01-y01", "d04-x01-y02",
