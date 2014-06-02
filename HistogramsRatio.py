@@ -1,11 +1,14 @@
+#!/usr/local/bin/python
+
 import ROOT, os, sys
 from optparse import OptionParser
 
-help_text = """python HistogramRatio.py <-i|-n> [root file (default=VBF_Systematics_JLC.root)]"""
+help_text = """./HistogramRatio.py <-i|-n|-l> [root file (default=VBF_Systematics_JLC.root)]"""
 parser = OptionParser(usage=help_text)
 parser.add_option("-n", "--normXS", action="store_true", dest="normalizeXS", default=False, help="Plot histograms that are normalized by their respective cross-section.")
 parser.add_option("-i", "--integrate", action="store_true", dest="integrate", default=False, help="Plot histograms that are normalized by their respective integrals.")
 parser.add_option("-r", "--rebin", type="int", dest="new_rebin", metavar="REBIN", default=None, help="Rebin override: forces scirpt to rebin using given number.")
+parser.add_option("-l", "--lin-y", action="store_true", dest="linear", default=False, help="Sets the y-axis to linear scale (Defaults to log.).")
 (options, args) = parser.parse_args()
 ROOT.gStyle.SetOptStat(0)
 
@@ -57,7 +60,7 @@ def Large_label_title_bot(histo1):
     histo1.SetLineWidth(2)
 
 def PlotCurves(hist_base,NORMED_XS,NORMED_INT,fnames1,legents,histpaths):
-    SETLOGY=True
+    SETLOGY= not options.linear
     SETXRANGE=0
     SETYRANGE=0
     SETYRATRANGE=1
@@ -165,7 +168,8 @@ def PlotCurves(hist_base,NORMED_XS,NORMED_INT,fnames1,legents,histpaths):
     if (SETNDIV==1): hvect1[0].GetXaxis().SetNdivisions()
     if (CENTERLAB==1): hvect1[0].GetXaxis().CenterLabels()
 
-    hvect1[0].SetMaximum(2.0*max_val)
+    if SETLOGY: hvect1[0].SetMaximum(2.0*max_val)
+    else: hvect1[0].SetMaximum(1.1*max_val)
     hvect1[0].Draw()
     for i in range(REPNFIL):
         hvect1[i].SetBit(ROOT.TH1.kNoTitle)
@@ -265,11 +269,13 @@ else:
     
 #legents = ["Nominal", "MuFdown", "MuFup", "MuRdown", "MuRup", "MuR/Fdown", "MuR/Fup"]
 #legents = ["Nominal", "CKKW(20->30)", "MPI_1", "MPI_2", "Shower_1"]
+legents = ["Sherpa", "Herwig++", "Pythia"]
 
 # Be sure directory names end in /
 #histpaths = ["129930.Nominal_Sherpa_Background_MjjFilt/", "147313.MuFdown_MjjFilt/", "147315.MuFup_MjjFilt/", "147323.MuRdown_MjjFilt/", "147325.MuRup_MjjFilt/"]
 #histpaths = ["129930.Nominal_Sherpa_Background_MjjFilt/","147311.CKKW30_MjjFilt/","147317.mpi1_MjjFilt/","147319.mpi2_MjjFilt/","147321.Shower1_MjjFilt/"]
 #histpaths = ["000001.Powheg.W2jets.Nominal.bornsuppfact/","000002.Powheg.W2jets.MuFdown.bornsuppfact/","000003.Powheg.W2jets.MuFup.bornsuppfact/","000004.Powheg.W2jets.MuRdown.bornsuppfact/","000005.Powheg.W2jets.MuRup.bornsuppfact/","000006.Powheg.W2jets.MuRdownMuFdown.bornsuppfact/","000007.Powheg.W2jets.MuRupMuFup.bornsuppfact/"]
+histpaths = ["129930.Nominal_Sherpa_Background_MjjFilt/", "000024.Powheg.W2jets.Nominal.bornsuppfact.Hpp/", "000001.Powheg.W2jets.Nominal.bornsuppfact/"]
 
 for hist_base in histograms:
     PlotCurves(hist_base,NORMED_XS,NORMED_INT,fnames1,legents,histpaths)
