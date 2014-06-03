@@ -2,7 +2,7 @@
 #!/bin/bash
 
 for folder in $( ls -d 0* ); do
-#####---Make sure aidamerge.py is NOT averaging when using -s option.---#####
+#####---Make sure aidamerge.py is NOT averaging errors when using -s option.---#####
 #  echo $folder
 #  cd $folder
 #  for channel in "Wminus" "Wplus"; do
@@ -14,7 +14,7 @@ for folder in $( ls -d 0* ); do
 #  done
 #  cd ..
 
-######----Make sure aidamerge.py is averaging when using -s option.----######
+######----Make sure aidamerge.py is averaging errors when using -s option.----######
   IFS='.' read -a string_bits <<< "${folder}"
   cd $folder
   echo $folder
@@ -24,3 +24,5 @@ for folder in $( ls -d 0* ); do
   aida2root ${string_bits[0]}_add.aida
   cd ..
 done
+
+#localSetupSFT MCGenerators_lcgcmt65/rivet/1.8.3 --cmtConfig=x86_64-slc6-gcc47-opt
