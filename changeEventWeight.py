@@ -24,7 +24,7 @@ def getTheWeights(eventBlock):
     renfact = []
     facfact = []
     weight = []
-    for i in range(numParticles+4,numParticles+10):
+    for i in range(numParticles+4,numParticles+14):
         sci_not = '%.5E' % float(eventBlock[i][2])
         weight.append(sci_not)
         renfact.append(eventBlock[i][3])
@@ -32,7 +32,8 @@ def getTheWeights(eventBlock):
     
     return renfact, facfact, weight, currWeight
     
-dir_names = ["MuRdownMuFdown", "MuFdown", "MuRdown", "MuFup", "MuRup", "MuRupMuFup"]
+dir_names = ["MuRdownMuFdown", "MuFdown", "MuRdown", "MuFup", "MuRup", "MuRupMuFup",
+             "NNPDF23_as_118", "CT10as", "MSTW2008nlo68cl", "MSTW2008nlo90cl"]
 for dir_name in dir_names:
     if not os.path.exists("./"+dir_name):
         os.mkdir("./"+dir_name)
@@ -100,7 +101,7 @@ for name_index,fname in enumerate(filenames):
     if setXS: os.rename(fname+".1",fname)
     
     infile = open(fname)    
-    with open("./MuRdownMuFdown/"+file_root_names[name_index]+"_MuRdownMuFdown.lhe", "w") as out_MuRMuFdown:
+    with open("./MuRdownMuFdown/"+file_root_names[name_index]+".lhe", "w") as out_MuRMuFdown:
         numEvents = 0
         for index,line in enumerate(infile):
             if "<event>" in line:
@@ -114,7 +115,7 @@ for name_index,fname in enumerate(filenames):
     infile.close()
             
     infile = open(fname)
-    with open("./MuFdown/"+file_root_names[name_index]+"_MuFdown.lhe", "w") as out_MuFdown:
+    with open("./MuFdown/"+file_root_names[name_index]+".lhe", "w") as out_MuFdown:
         numEvents = 0
         for index,line in enumerate(infile):
             if "<event>" in line: 
@@ -128,7 +129,7 @@ for name_index,fname in enumerate(filenames):
     infile.close()
             
     infile = open(fname)
-    with open("./MuRdown/"+file_root_names[name_index]+"_MuRdown.lhe", "w") as out_MuRdown:
+    with open("./MuRdown/"+file_root_names[name_index]+".lhe", "w") as out_MuRdown:
         numEvents = 0
         for index,line in enumerate(infile):
             if "<event>" in line:
@@ -142,7 +143,7 @@ for name_index,fname in enumerate(filenames):
     infile.close()
         
     infile = open(fname)    
-    with open("./MuFup/"+file_root_names[name_index]+"_MuFup.lhe", "w") as out_MuFup:
+    with open("./MuFup/"+file_root_names[name_index]+".lhe", "w") as out_MuFup:
         numEvents = 0
         for index,line in enumerate(infile):
             if "<event>" in line:
@@ -156,7 +157,7 @@ for name_index,fname in enumerate(filenames):
     infile.close()
      
     infile = open(fname)       
-    with open("./MuRup/"+file_root_names[name_index]+"_MuRup.lhe", "w") as out_MuRup:
+    with open("./MuRup/"+file_root_names[name_index]+".lhe", "w") as out_MuRup:
         numEvents = 0
         for index,line in enumerate(infile):
             if "<event>" in line:
@@ -170,7 +171,7 @@ for name_index,fname in enumerate(filenames):
     infile.close()
     
     infile = open(fname)        
-    with open("./MuRupMuFup/"+file_root_names[name_index]+"_MuRupMuFup.lhe", "w") as out_MuRMuFup:
+    with open("./MuRupMuFup/"+file_root_names[name_index]+".lhe", "w") as out_MuRMuFup:
         numEvents = 0
         for index,line in enumerate(infile):
             if "<event>" in line:
@@ -180,5 +181,61 @@ for name_index,fname in enumerate(filenames):
                 newline = line
                 if index == eventLine+1:
                     newline = line.replace(allCurrWeights[numEvents-1],allNewWeights[numEvents-1][5])
+                out_MuRMuFup.write(newline)
+    infile.close()
+    
+    infile = open(fname)        
+    with open("./NNPDF23_as_118/"+file_root_names[name_index]+".lhe", "w") as out_MuRMuFup:
+        numEvents = 0
+        for index,line in enumerate(infile):
+            if "<event>" in line:
+                numEvents += 1
+                eventLine = index
+            if "#new" not in line:
+                newline = line
+                if index == eventLine+1:
+                    newline = line.replace(allCurrWeights[numEvents-1],allNewWeights[numEvents-1][6])
+                out_MuRMuFup.write(newline)
+    infile.close()
+    
+    infile = open(fname)        
+    with open("./CT10as/"+file_root_names[name_index]+".lhe", "w") as out_MuRMuFup:
+        numEvents = 0
+        for index,line in enumerate(infile):
+            if "<event>" in line:
+                numEvents += 1
+                eventLine = index
+            if "#new" not in line:
+                newline = line
+                if index == eventLine+1:
+                    newline = line.replace(allCurrWeights[numEvents-1],allNewWeights[numEvents-1][7])
+                out_MuRMuFup.write(newline)
+    infile.close()
+    
+    infile = open(fname)        
+    with open("./MSTW2008nlo68cl/"+file_root_names[name_index]+".lhe", "w") as out_MuRMuFup:
+        numEvents = 0
+        for index,line in enumerate(infile):
+            if "<event>" in line:
+                numEvents += 1
+                eventLine = index
+            if "#new" not in line:
+                newline = line
+                if index == eventLine+1:
+                    newline = line.replace(allCurrWeights[numEvents-1],allNewWeights[numEvents-1][8])
+                out_MuRMuFup.write(newline)
+    infile.close()
+    
+    infile = open(fname)        
+    with open("./MSTW2008nlo90cl/"+file_root_names[name_index]+".lhe", "w") as out_MuRMuFup:
+        numEvents = 0
+        for index,line in enumerate(infile):
+            if "<event>" in line:
+                numEvents += 1
+                eventLine = index
+            if "#new" not in line:
+                newline = line
+                if index == eventLine+1:
+                    newline = line.replace(allCurrWeights[numEvents-1],allNewWeights[numEvents-1][9])
                 out_MuRMuFup.write(newline)
     infile.close()
