@@ -364,6 +364,7 @@ def GetListDataset(list_name):
               '000008','000009','000010','000011','000012','000013','000014',
               '000015','000016','000017','000018','000019','000020','000021',
               '000022','000023','000024','000025','000026','000027','000028',
+              '000029',
               '147774','129915','129929','200900']
     
     # List of Cross-sections and Generator Filter Efficiencies (xsec,effic)          
@@ -384,6 +385,7 @@ def GetListDataset(list_name):
                       (3.44834797044, 1.0), (3.44332503928, 1.0), (3.44604220929, 1.0),
                       (2.628075,1.0), (2.628075,1.0), (7191.86534513, 1.0),
                       (6648.65296181,1.0), (7296.62835667,1.0), (7410.79316717,1.0), (7407.27818743,1.0),
+                      (7191.86534513, 1.0),
                       (11866.0,1.0), (4.2114,1.0), (11866.0,1.0), (11506.0,1.0)]
 
     dataset_names = ["129916.Nominal_Sherpa_Signal", "129930.Nominal_Sherpa_Background_MjjFilt",
@@ -409,8 +411,9 @@ def GetListDataset(list_name):
           "000014.Powheg.VBF.MuRupMuFup.bornsuppfact", "000015.Powheg.VBF.Nominal.ptj_gencut", "000016.Powheg.VBF.MuFdown.ptj_gencut", 
           "000017.Powheg.VBF.MuFup.ptj_gencut", "000018.Powheg.VBF.MuRdown.ptj_gencut", "000019.Powheg.VBF.MuRup.ptj_gencut",
           "000020.Powheg.VBF.MuRdownMuFdown.ptj_gencut", "000021.Powheg.VBF.MuRupMuFup.ptj_gencut",
-          "000022.Powheg.VBF.Nominal.ptj_gencut_7TeV", "000023.Powheg.VBF.Nominal.7TeV_noshower/", "000024.Powheg.W2jets.Nominal.bornsuppfact.Hpp",
-          "000025.Powheg.W2jets.Nominal.CT10as", "000026.Powheg.W2jets.Nominal.NNPDF23_as_118", "000027.Powheg.W2jets.Nominal.MSTW2008nlo68cl", "000028.Powheg.W2jets.Nominal.MSTW2008nlo90cl",
+          "000022.Powheg.VBF.Nominal.ptj_gencut_7TeV", "000023.Powheg.VBF.Nominal.7TeV_noshower", "000024.Powheg.W2jets.Nominal.bornsuppfact.Hpp",
+          "000025.Powheg.W2jets.Nominal.CT10as", "000026.Powheg.W2jets.Nominal.NNPDF23_as_118", "000027.Powheg.W2jets.Nominal.MSTW2008nlo68cl",
+          "000028.Powheg.W2jets.Nominal.MSTW2008nlo90cl", "000029.Powheg.W2jets.Nominal.CT10",
           "147774.Nominal_Sherpa_Bkgd_enu", "129915.Nominal_Sherpa_Sgnl_enu", "129929.Nominal_Sherpa_Bkgd_enu_MjjFilt",
           "200900.Nominal_Sherpa_NLO_Bkgd_enu"]
 
@@ -455,7 +458,7 @@ def GetListDataset(list_name):
                           "000003.Powheg.W2jets.MuFup.bornsuppfact", "000004.Powheg.W2jets.MuRdown.bornsuppfact", "000005.Powheg.W2jets.MuRup.bornsuppfact", 
                           "000006.Powheg.W2jets.MuRdownMuFdown.bornsuppfact", "000007.Powheg.W2jets.MuRupMuFup.bornsuppfact",
                           "000024.Powheg.W2jets.Nominal.bornsuppfact.Hpp", "000025.Powheg.W2jets.Nominal.CT10as", "000026.Powheg.W2jets.Nominal.NNPDF23_as_118",
-                          "000027.Powheg.W2jets.Nominal.MSTW2008nlo68cl", "000028.Powheg.W2jets.Nominal.MSTW2008nlo90cl",]
+                          "000027.Powheg.W2jets.Nominal.MSTW2008nlo68cl", "000028.Powheg.W2jets.Nominal.MSTW2008nlo90cl"]
 
     exp_hist_list = ["d01-x01-y01", "d01-x01-y02", "d02-x01-y01", "d02-x01-y02",
 		      "d03-x01-y01", "d03-x01-y02", "d04-x01-y01", "d04-x01-y02",
