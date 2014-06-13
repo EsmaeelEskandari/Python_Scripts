@@ -100,6 +100,15 @@ class AtlasStyle( ROOT.TStyle ):
 	return
 
 #--------------Create_Hists.py-----------------------------------------------
+def DivideBinWidth(h1):
+    for bin in range(h1.GetNbinsX()):
+        bin_width = h1.GetBinWidth(bin)
+        bin_cont = h1.GetBinContent(bin)/bin_width
+        bin_err = h1.GetBinError(bin)/bin_width
+        h1.SetBinContent(bin_cont)
+        h1.SetBinError(bin_err)
+    return h1
+
 def MakeLegend(h1,h2):
     leg = ROOT.TLegend(0.2,0.77,0.5,0.87)
     leg.SetFillColor(0)

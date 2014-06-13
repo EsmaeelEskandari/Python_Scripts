@@ -1,6 +1,7 @@
 #!/usr/local/bin/python
 
 import ROOT, os, sys
+import array
 from optparse import OptionParser
 
 help_text = """./HistogramRatio.py <-i|-n|-l> [root file (default=VBF_Systematics_JLC.root)]"""
@@ -11,6 +12,15 @@ parser.add_option("-r", "--rebin", type="int", dest="new_rebin", metavar="REBIN"
 parser.add_option("-l", "--lin-y", action="store_true", dest="linear", default=False, help="Sets the y-axis to linear scale (Defaults to log.).")
 (options, args) = parser.parse_args()
 ROOT.gStyle.SetOptStat(0)
+
+def DivideBinWidth(h1):
+    for bin in range(h1.GetNbinsX()+2):
+        bin_width = h1.GetBinWidth(bin)
+        bin_cont = h1.GetBinContent(bin)/bin_width
+        bin_err = h1.GetBinError(bin)/bin_width
+        h1.SetBinContent(bin,bin_cont)
+        h1.SetBinError(bin,bin_err)
+    return h1
 
 def query_yes_no(question, default="yes"):
     valid = {"yes":True,   "y":True,  "ye":True,
@@ -70,8 +80,8 @@ def PlotCurves(hist_base,NORMED_XS,NORMED_INT,fnames1,legents,histpaths):
     RX2=260.0
     RY1=0.0
     RY2=0.0
-    RATRY1=0.25
-    RATRY2=2.2
+    RATRY1=0.90
+    RATRY2=1.1
     INTEGRATE=False
     max_val = 0.0
     # Number of files to be opened
@@ -107,6 +117,12 @@ def PlotCurves(hist_base,NORMED_XS,NORMED_INT,fnames1,legents,histpaths):
         else:
             print "Define more line attributes, too many curves...check lines 63-67"
     
+    # if options.new_rebin == -1:
+    #     rebin = array.array("d",[0,100,200,300,400,500,600,700,800,900,1000,1250,1500,1750,2000,2250,2500,2750,3000,3500,5000])
+    # elif options.new_rebin is not None:
+    #     rebin = options.new_rebin
+    # else: rebin = 10
+    
     if options.new_rebin is not None:
         rebin = options.new_rebin
     else: rebin = 5
@@ -117,6 +133,11 @@ def PlotCurves(hist_base,NORMED_XS,NORMED_INT,fnames1,legents,histpaths):
             hvect1[i].Scale(1.0/hvect1[i].Integral("width"))
             hvect1[i].GetYaxis().SetTitle("Norm to One")
         num_xbins = hvect1[i].GetNbinsX()
+        # if options.new_rebin == -1:
+        #     new_hist = hvect1[i].Rebin(len(rebin)-1,"DijetMass_rebin",rebin)
+        #     hvect1[i] = DivideBinWidth(new_hist)
+        # elif (num_xbins > 52) and (num_xbins <= 102): hvect1[i].Rebin(10)
+        # elif (num_xbins > 102): hvect1[i].Rebin(rebin)
         if (num_xbins > 52) and (num_xbins <= 102): hvect1[i].Rebin(2)
         elif (num_xbins > 102): hvect1[i].Rebin(rebin)
         max_val_tmp=hvect1[i].GetMaximum()
@@ -249,7 +270,10 @@ def PlotCurves(hist_base,NORMED_XS,NORMED_INT,fnames1,legents,histpaths):
 # Histogram base name
 NORMED_XS = options.normalizeXS
 NORMED_INT = options.integrate
-histograms = ["DijetMass_2jet_1"]
+#histograms = ["FirstJetPt_nocuts","SecondJetPt_nocuts","BosonPt_nocuts","DijetMass_nocuts"]
+histograms = ["FirstJetPt_2jet_1","SecondJetPt_2jet_1","WBosonPt_1","DijetMass_2jet_1"]
+histograms = histograms[0:3]
+
 if (NORMED_XS): 
     for j,base_name in enumerate(histograms):
         histograms[j] = "Normalized_XS/"+base_name+"_norm"
@@ -267,15 +291,19 @@ else:
         print "VBF_Systematics_JLC.root does not exist!"
         print "Define a histogram root file in command line arguments. (see --help)"
     
+#legents = ["Nominal"]
 #legents = ["Nominal", "MuFdown", "MuFup", "MuRdown", "MuRup", "MuR/Fdown", "MuR/Fup"]
 #legents = ["Nominal", "CKKW(20->30)", "MPI_1", "MPI_2", "Shower_1"]
-legents = ["Sherpa", "Herwig++", "Pythia"]
+#legents = ["Sherpa", "Herwig++", "Pythia"]
+legents = ["Nominal (CT10_as_118)", "CT10_as_113", "NNPDF23_as_118", "MSTW2008nlo68cl", "MSTW2008nlo90cl"]
 
 # Be sure directory names end in /
+#histpaths = ["129930.Nominal_Sherpa_Background_MjjFilt/"]
 #histpaths = ["129930.Nominal_Sherpa_Background_MjjFilt/", "147313.MuFdown_MjjFilt/", "147315.MuFup_MjjFilt/", "147323.MuRdown_MjjFilt/", "147325.MuRup_MjjFilt/"]
 #histpaths = ["129930.Nominal_Sherpa_Background_MjjFilt/","147311.CKKW30_MjjFilt/","147317.mpi1_MjjFilt/","147319.mpi2_MjjFilt/","147321.Shower1_MjjFilt/"]
 #histpaths = ["000001.Powheg.W2jets.Nominal.bornsuppfact/","000002.Powheg.W2jets.MuFdown.bornsuppfact/","000003.Powheg.W2jets.MuFup.bornsuppfact/","000004.Powheg.W2jets.MuRdown.bornsuppfact/","000005.Powheg.W2jets.MuRup.bornsuppfact/","000006.Powheg.W2jets.MuRdownMuFdown.bornsuppfact/","000007.Powheg.W2jets.MuRupMuFup.bornsuppfact/"]
-histpaths = ["129930.Nominal_Sherpa_Background_MjjFilt/", "000024.Powheg.W2jets.Nominal.bornsuppfact.Hpp/", "000001.Powheg.W2jets.Nominal.bornsuppfact/"]
+#histpaths = ["129930.Nominal_Sherpa_Background_MjjFilt/", "000024.Powheg.W2jets.Nominal.bornsuppfact.Hpp/", "000001.Powheg.W2jets.Nominal.bornsuppfact/"]
+histpaths = ["000029.Powheg.W2jets.Nominal.CT10/", "000025.Powheg.W2jets.Nominal.CT10as/", "000026.Powheg.W2jets.Nominal.NNPDF23_as_118/", "000027.Powheg.W2jets.Nominal.MSTW2008nlo68cl/", "000028.Powheg.W2jets.Nominal.MSTW2008nlo90cl/"]
 
 for hist_base in histograms:
     PlotCurves(hist_base,NORMED_XS,NORMED_INT,fnames1,legents,histpaths)
