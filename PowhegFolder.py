@@ -33,7 +33,8 @@ folder_names = ["000001.Powheg.W2jets.Nominal.bornsuppfact", "000002.Powheg.W2je
                 "000021.Powheg.VBF.MuRupMuFup.ptj_gencut", "000022.Powheg.VBF.Nominal.ptj_gencut_7TeV",
                 "000023.Powheg.VBF.Nominal.7TeV_noshower", "000024.Powheg.W2jets.Nominal.bornsuppfact.Hpp",
                 "000025.Powheg.W2jets.Nominal.CT10as", "000026.Powheg.W2jets.Nominal.NNPDF23_as_118",
-                "000027.Powheg.W2jets.Nominal.MSTW2008nlo68cl", "000028.Powheg.W2jets.Nominal.MSTW2008nlo90cl"]
+                "000027.Powheg.W2jets.Nominal.MSTW2008nlo68cl", "000028.Powheg.W2jets.Nominal.MSTW2008nlo90cl",
+                "000032.Powheg.W2jets.Nominal.electron"]
                 
 shifts = [".Nominal.", ".MuFdown.", ".MuFup.", ".MuRdown.", ".MuRup.", ".MuRdownMuFdown.", ".MuRupMuFup."]
                 

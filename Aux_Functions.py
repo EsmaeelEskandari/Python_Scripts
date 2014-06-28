@@ -394,7 +394,7 @@ def GetListDataset(list_name):
                       (3.44834797044, 1.0), (3.44332503928, 1.0), (3.44604220929, 1.0),
                       (2.628075,1.0), (2.628075,1.0), (7191.86534513, 1.0),
                       (6648.65296181,1.0), (7296.62835667,1.0), (7410.79316717,1.0), (7407.27818743,1.0),
-                      (7191.86534513, 1.0),
+                      (7191.86534513,1.0),  (5753.24002702,1.0),
                       (11866.0,1.0), (4.2114,1.0), (11866.0,1.0), (11506.0,1.0)]
 
     dataset_names = ["129916.Nominal_Sherpa_Signal", "129930.Nominal_Sherpa_Background_MjjFilt",
@@ -423,6 +423,7 @@ def GetListDataset(list_name):
           "000022.Powheg.VBF.Nominal.ptj_gencut_7TeV", "000023.Powheg.VBF.Nominal.7TeV_noshower", "000024.Powheg.W2jets.Nominal.bornsuppfact.Hpp",
           "000025.Powheg.W2jets.Nominal.CT10as", "000026.Powheg.W2jets.Nominal.NNPDF23_as_118", "000027.Powheg.W2jets.Nominal.MSTW2008nlo68cl",
           "000028.Powheg.W2jets.Nominal.MSTW2008nlo90cl", "000029.Powheg.W2jets.Nominal.CT10",
+          "000032.Powheg.W2jets.Nominal.electron",
           "147774.Nominal_Sherpa_Bkgd_enu", "129915.Nominal_Sherpa_Sgnl_enu", "129929.Nominal_Sherpa_Bkgd_enu_MjjFilt",
           "200900.Nominal_Sherpa_NLO_Bkgd_enu"]
 
