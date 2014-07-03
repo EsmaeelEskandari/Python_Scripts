@@ -35,8 +35,9 @@ def getTheWeights(eventBlock):
 dir_names = ["MuRdownMuFdown", "MuFdown", "MuRdown", "MuFup", "MuRup", "MuRupMuFup",
              "NNPDF23_as_118", "CT10as_113", "MSTW2008nlo68cl", "MSTW2008nlo90cl",
              "CT10_117", "CT10_119"]
+dir_names = dir_names[10:]
              
-for dir_name in dir_names[10:]:
+for dir_name in dir_names:
     if not os.path.exists("./"+dir_name):
         os.mkdir("./"+dir_name)
 
