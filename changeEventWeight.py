@@ -42,6 +42,7 @@ for dir_name in dir_names:
         os.mkdir("./"+dir_name)
 
 for name_index,fname in enumerate(filenames):
+    print "Working on file: {0}. File {1} of {2}.".format(fname,name_index+1,len(filenames))
     numEvents = 0
     eventLine = 0
     with open(fname) as infile:
@@ -104,7 +105,7 @@ for name_index,fname in enumerate(filenames):
     if setXS: os.rename(fname+".1",fname)
     
     for j,folder in enumerate(dir_names):
-        print "Working on file: {0}".format(fname)
+        print "Copying to folder: {0}".format(folder)
         infile = open(fname)
         with open("./"+folder+"/"+file_root_names[name_index]+".lhe", "w") as out_file:
             numEvents = 0
