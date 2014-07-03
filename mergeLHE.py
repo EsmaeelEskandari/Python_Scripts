@@ -17,7 +17,7 @@ with open('./outfile.lhe', 'w') as outfile:
             if "<!--" in line: writeHeader = True
             if writeHeader: outfile.write(line)
             if "</init>" in line:
-                outfile.write(line)
+                #outfile.write(line)
                 break
     for fname in filenames:
         writeLine = False
