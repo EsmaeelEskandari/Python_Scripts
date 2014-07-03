@@ -12,7 +12,7 @@ xSec = '%.5E' % float(options.xSection) # Convert it to string and in scientific
 xErr = '%.5E' % float(options.xsErr)
 if float(options.xSection) != -1.00: setXS = True
 else: setXS = False
-print setXS, options.xSection
+print "Set Cross-section: {0}. Current value: {1}".format(setXS, options.xSection)
 
 #filenames = ["powheg.events"]
 filenames = glob.glob("*.lhe")
@@ -102,7 +102,8 @@ for name_index,fname in enumerate(filenames):
                     allFacFacts.append(facfact)
     if setXS: os.rename(fname+".1",fname)
     
-    for j,folder in dir_names:
+    for j,folder in enumerate(dir_names):
+        print "Working on file: {0}".format(fname)
         infile = open(fname)
         with open("./"+folder+"/"+file_root_names[name_index]+".lhe", "w") as out_file:
             numEvents = 0
