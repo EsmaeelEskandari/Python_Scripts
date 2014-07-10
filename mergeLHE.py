@@ -1,14 +1,20 @@
 import glob
+from datetime import datetime
 
 # TODO: add the capabality to choose between
 #           globbing all lhe files
 #           inputting specific files by hand
 #       add the capability to name output file
 
+parser.add_option("-s", "--save_loc", type="string", dest="save_loc", default=".", help="Rebin override: forces scirpt to rebin using given number.")
+(options, args) = parser.parse_args()
+
 #filenames = glob.glob('*.events')
 filenames = glob.glob('*.lhe')
+startTime = datetime.now()
+save_location = options.save_loc
 
-with open('./outfile.lhe', 'w') as outfile:
+with open(save_location+'/outfile.lhe', 'w') as outfile:
     numEvents = 0
     outfile.write("""<LesHouchesEvents version="1.0">\n""")
     with open(filenames[0]) as toGetHeader:
@@ -17,7 +23,6 @@ with open('./outfile.lhe', 'w') as outfile:
             if "<!--" in line: writeHeader = True
             if writeHeader: outfile.write(line)
             if "</init>" in line:
-                #outfile.write(line)
                 break
     for fname in filenames:
         writeLine = False
@@ -34,3 +39,4 @@ with open('./outfile.lhe', 'w') as outfile:
     outfile.write("</LesHouchesEvents>")
     
 print "There were {0} events processed in {1} files.".format(numEvents, len(filenames))
+print(datetime.now()-startTime)
