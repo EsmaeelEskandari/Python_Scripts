@@ -7,8 +7,9 @@ from datetime import datetime
 #           inputting specific files by hand
 #       add the capability to name output file
 
+help_text = """python mergeLHE.py -s /path/to/save/dir"""
 parser = OptionParser(usage=help_text)
-parser.add_option("-s", "--save_loc", type="string", dest="save_loc", default=".", help="Rebin override: forces scirpt to rebin using given number.")
+parser.add_option("-s", "--save_loc", type="string", dest="save_loc", default=".", help="Sets the location of the output file.")
 (options, args) = parser.parse_args()
 
 #filenames = glob.glob('*.events')
