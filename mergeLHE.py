@@ -1,4 +1,5 @@
 import glob
+from optparse import OptionParser
 from datetime import datetime
 
 # TODO: add the capabality to choose between
@@ -6,6 +7,7 @@ from datetime import datetime
 #           inputting specific files by hand
 #       add the capability to name output file
 
+parser = OptionParser(usage=help_text)
 parser.add_option("-s", "--save_loc", type="string", dest="save_loc", default=".", help="Rebin override: forces scirpt to rebin using given number.")
 (options, args) = parser.parse_args()
 
