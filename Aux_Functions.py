@@ -423,7 +423,7 @@ def GetListDataset(list_name):
           "000022.Powheg.VBF.Nominal.ptj_gencut_7TeV", "000023.Powheg.VBF.Nominal.7TeV_noshower", "000024.Powheg.W2jets.Nominal.bornsuppfact.Hpp",
           "000025.Powheg.W2jets.Nominal.CT10as", "000026.Powheg.W2jets.Nominal.NNPDF23_as_118", "000027.Powheg.W2jets.Nominal.MSTW2008nlo68cl",
           "000028.Powheg.W2jets.Nominal.MSTW2008nlo90cl", "000029.Powheg.W2jets.Nominal.CT10", "000030.Powheg.W2jets.Nominal.CT10117",
-          "000031.Powheg.W2jets.Nominal.CT10117", "000032.Powheg.W2jets.Nominal.electron",
+          "000031.Powheg.W2jets.Nominal.CT10119", "000032.Powheg.W2jets.Nominal.electron",
           "147774.Nominal_Sherpa_Bkgd_enu", "129915.Nominal_Sherpa_Sgnl_enu", "129929.Nominal_Sherpa_Bkgd_enu_MjjFilt",
           "200900.Nominal_Sherpa_NLO_Bkgd_enu"]
 
