@@ -65,7 +65,8 @@ def main(argv):
                             outFile.write("</LesHouchesEvents>")                     # End file correctly 
                             outFile.close()                                          # Close old output lhe file
                             fileNum += 1
-                            outFile = open(baseout+"_"+str(fileNum)+".lhe","w")      # Open new output lhe file with increased index. Should prob catch exceptions...
+                            fileNum_str = "%05d" % fileNum
+                            outFile = open(baseout+"_"+fileNum_str+".lhe","w")      # Open new output lhe file with increased index. Should prob catch exceptions...
                             outFile.write(commonBlock)                              # Add common block to start of each file
                             print "File #:", fileNum
                         eventNum += 1
