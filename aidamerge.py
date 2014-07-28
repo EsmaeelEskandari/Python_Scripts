@@ -25,6 +25,9 @@ parser.add_option("-o", "--outfile", dest="OUTFILE",
 parser.add_option("-s", "--sum",
                   action="store_true", dest="performSum", default=False,
                   help="sum the bin values instead of averaging")
+parser.add_option("-c", "--sum-channels",
+                  action="store_true", dest="sumChannels", default=False,
+                  help="sum the bin values instead of averaging but average the errors")
 opts, args = parser.parse_args()
 headerprefix = ""
 
@@ -73,11 +76,12 @@ for path, hs in inhistos.iteritems():
                 sum_err2 = float('inf')
             n += 1
         if (opts.performSum): outhistos[path].getBin(i).val = sum_val
+        elif(opts.sumChannels): outhistos[path].getBin(i).val = sum_val
         else:                 outhistos[path].getBin(i).val = sum_val / n
 
         try:
             if (opts.performSum): outhistos[path].getBin(i).setErr(sum_err2**0.5 )
-            #if (opts.performSum): outhistos[path].getBin(i).setErr(sum_err2**0.5 / n)
+            elif (opts.sumChannels): outhistos[path].getBin(i).setErr(sum_err2**0.5 / n)
             else:                 outhistos[path].getBin(i).setErr(sum_err2**0.5 / n)
         except OverflowError:
             # to get back to numerics, replace an eventual 'inf' 

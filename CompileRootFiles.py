@@ -96,7 +96,7 @@ _h_xsecs = ROOT.TH1F("Cross_Sections","Cross_Sections",len(dataset_names),0,len(
 _h_xsecs.GetYaxis().SetTitle("Cross Section [pb]")
 for idx,folder in enumerate(dataset_names):
 #for folder, data in zip(dataset_names, datasets):
-    if os.path.exists(folder+"/") == True:
+    if os.path.exists(folder+"/") == True and not os.listdir("./"+folder+"/"):
         th2_hist_30 = ROOT.TH2F( "hmj1j2_wvbf", "hmj1j2_wvbf", 10, -0.5, 9.5, 200, 0, 5000 )
         th2_hist_20 = ROOT.TH2F( "hmj1j2_wvbf_20", "hmj1j2_wvbf_20", 10, -0.5, 9.5, 200, 0, 5000 )
         # First get the crossSection_mean and GenFiltEff_mean for this dataset from AMI for normalizations
