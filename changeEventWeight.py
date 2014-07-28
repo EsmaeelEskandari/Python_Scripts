@@ -24,7 +24,7 @@ def getTheWeights(eventBlock,num_shifts):
     renfact = []
     facfact = []
     weight = []
-    for i in range(numParticles+4,numParticles+4+num_shifts-1):
+    for i in range(numParticles+4,numParticles+4+num_shifts):
         sci_not = '%.5E' % float(eventBlock[i][2])
         weight.append(sci_not)
         renfact.append(eventBlock[i][3])
@@ -36,6 +36,8 @@ dir_names = ["MuRdownMuFdown", "MuFdown", "MuRdown", "MuFup", "MuRup", "MuRupMuF
              "NNPDF23_as_118", "CT10as_113", "MSTW2008nlo68cl", "MSTW2008nlo90cl",
              "CT10_117", "CT10_119"]
 dir_names = dir_names[10:]
+dir_names = ["MuRdownMuFdown", "MuFdown", "MuRdown", "MuFup", "MuRup", "MuRupMuFup",
+             "MSTW2008nlo68cl", "MSTW2008nlo90cl", "CT10_117", "CT10_119"]
 num_shifts = len(dir_names)
              
 for dir_name in dir_names:
@@ -78,7 +80,7 @@ for name_index,fname in enumerate(filenames):
                     if getWeights:
                         eventBlock.append(line.split())
                     if changeWeights: 
-                        renfact, facfact, weight, currWeight = getTheWeights(eventBlock)
+                        renfact, facfact, weight, currWeight = getTheWeights(eventBlock,num_shifts)
                         allNewWeights.append(weight)
                         allCurrWeights.append(currWeight)
                         allRenFacts.append(renfact)
@@ -98,7 +100,7 @@ for name_index,fname in enumerate(filenames):
                 if getWeights:
                     eventBlock.append(line.split())
                 if changeWeights: 
-                    renfact, facfact, weight, currWeight = getTheWeights(eventBlock)
+                    renfact, facfact, weight, currWeight = getTheWeights(eventBlock,num_shifts)
                     allNewWeights.append(weight)
                     allCurrWeights.append(currWeight)
                     allRenFacts.append(renfact)
