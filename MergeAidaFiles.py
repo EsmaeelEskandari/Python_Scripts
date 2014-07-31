@@ -33,7 +33,7 @@ for folder in dataset_names:
         cmd = "cp ../{0}/merged_avg.save ./merged_avg_Wp.aida".format(source_Wp_dir)
         os.system(cmd)
         os.system("python ../aidamerge.py -c -o merged_avg.aida merged_avg_Wm.aida merged_avg_Wp.aida")
-        os.system("python ../aidamerge.py -c -o merged_add.aida merged_add_Wm.aida merged_add_Wp.aida")
+        os.system("python ../aidamerge.py -s -o merged_add.aida merged_add_Wm.aida merged_add_Wp.aida")
         # convert to root, rename root and *.aida files
     else:
         if not Aida_Files: continue
