@@ -3,7 +3,9 @@ import os
 from Aux_Functions import *
 
 dataset_names = GetListDataset('dataset_names')
+dataset_number = GetListDataset('dataset_number')
 powheg_list = ['000001','000002','000003','000004','000005','000006','000007']
+powheg_dict = dict(zip(dataset_number, dataset_names))
 
 # Make a list of Aida files available in the current directory
 for folder in dataset_names:
@@ -20,10 +22,8 @@ for folder in dataset_names:
         dest_Wpm = file_name
         source_Wm = str(int(file_name) + 185695)
         source_Wp = str(int(source_Wm) + 7)
-        source_idx = dataset_names.index(source_Wm)
-        source_Wm_dir = dataset_names[source_idx]
-        source_idx = dataset_names.index(source_Wp)
-        source_Wp_dir = dataset_names[source_idx]
+        source_Wm_dir = dataset_names[source_Wm]
+        source_Wp_dir = dataset_names[source_Wp]
         cmd = "cp ../{0}/merged_add.save ./merged_add_Wm.aida".format(source_Wm_dir)
         os.system(cmd)
         cmd = "cp ../{0}/merged_avg.save ./merged_avg_Wm.aida".format(source_Wm_dir)
