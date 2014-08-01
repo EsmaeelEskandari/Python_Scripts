@@ -9,15 +9,15 @@ powheg_dict = dict(zip(dataset_number, dataset_names))
 
 # Make a list of Aida files available in the current directory
 for folder in dataset_names:
-	current_dir = folder+"/"
-	if os.path.exists(current_dir) != True: continue
+    current_dir = folder+"/"
+    if os.path.exists(current_dir) != True: continue
     file_name = folder.split('.')[0]
     
-	os.chdir(current_dir)
-	Aida_Files = glob.glob("*.aida*")
-	i = len(Aida_Files)
-	print "There were {0} in the directory: {1}".format(i,current_dir)
-    
+    os.chdir(current_dir)
+    Aida_Files = glob.glob("*.aida*")
+    i = len(Aida_Files)
+    print "There were {0} in the directory: {1}".format(i,current_dir)
+
     if file_name in powheg_list:
         dest_Wpm = file_name
         source_Wm = str(int(file_name) + 185695)
@@ -37,28 +37,28 @@ for folder in dataset_names:
         # convert to root, rename root and *.aida files
     else:
         if not Aida_Files: continue
-    	# Run aidamerge.py over every file in the Aida_Files list.
-    	arguments = "%s" % " ".join(map(str, Aida_Files))
-    	cmd = "python ../aidamerge.py -o merged_avg.aida "+arguments
-    	os.system(cmd)
-    	cmd = "python ../aidamerge.py -s -o merged_add.aida "+arguments
-    	os.system(cmd)
+        # Run aidamerge.py over every file in the Aida_Files list.
+        arguments = "%s" % " ".join(map(str, Aida_Files))
+        cmd = "python ../aidamerge.py -o merged_avg.aida "+arguments
+        os.system(cmd)
+        cmd = "python ../aidamerge.py -s -o merged_add.aida "+arguments
+        os.system(cmd)
 		
-	# Convert merged.aida file to merged.root file and rename to dataset
-	# run number (found from the folder name).
-	os.system("aida2root merged_avg.aida")
-	os.system("aida2root merged_add.aida")
-	#if "Powheg" in file_name: file_name = folder.replace('.','_')
-	cmd = "mv merged_avg.root "+file_name+".root"
-	os.system(cmd)
-	cmd = "mv merged_add.root "+file_name+"_add.root"
-	os.system(cmd)
+    # Convert merged.aida file to merged.root file and rename to dataset
+    # run number (found from the folder name).
+    os.system("aida2root merged_avg.aida")
+    os.system("aida2root merged_add.aida")
+    #if "Powheg" in file_name: file_name = folder.replace('.','_')
+    cmd = "mv merged_avg.root "+file_name+".root"
+    os.system(cmd)
+    cmd = "mv merged_add.root "+file_name+"_add.root"
+    os.system(cmd)
 		
-	# Remove the merged.aida file in case the script fails.
-	# This keeps you from having to delete them by hand before re-running script.
-	os.system("mv merged_add.aida merged_add.save")
-	os.system("mv merged_avg.aida merged_avg.save")
+    # Remove the merged.aida file in case the script fails.
+    # This keeps you from having to delete them by hand before re-running script.
+    os.system("mv merged_add.aida merged_add.save")
+    os.system("mv merged_avg.aida merged_avg.save")
 	
-	# Prepare for next folder
-	os.chdir("..")
-	Aida_Files = []
+    # Prepare for next folder
+    os.chdir("..")
+    Aida_Files = []

@@ -5,6 +5,22 @@ from math import sqrt
 from subprocess import Popen
 import lighthisto
 
+def MergeChannels(hist_errs):     # Merge statistics when adding two channels
+    if len(hist_errs) > 2:
+        sys.stderr.write("Should not try to merge more than two channels\n")
+        sys.exit(1)
+    bin_err1 = hist_errs[0]
+    bin_err2 = hist_errs[1]
+    if bin_err1 == 0.0: weight1 = 0.0
+    else: weight1 = 1.0/(bin_err1**2)
+    if bin_err2 == 0.0: weight2 = 0.0
+    else: weight2 = 1.0/(bin_err2**2)
+    new_stat = weight1+weight2
+    if new_stat != 0.0:
+        new_bin_err = 1.0/new_stat
+    
+    return new_bin_err
+
 ## Try to load faster but non-standard cElementTree module
 try:
     import xml.etree.cElementTree as ET
@@ -66,22 +82,28 @@ for path, hs in inhistos.iteritems():
         sum_val = 0.0
         sum_err2 = 0.0
         n = 0
-        for infile, h in hs.iteritems():
-            sum_val += h.getBin(i).val
-            try:
-                sum_err2 += h.getBin(i).getErr()**2
-            except OverflowError:
-                # in case the **2 produces overflow errors
-                # set sum to 'inf'
-                sum_err2 = float('inf')
-            n += 1
-        if (opts.performSum): outhistos[path].getBin(i).val = sum_val
-        elif(opts.sumChannels): outhistos[path].getBin(i).val = sum_val
+        if opts.sumChannels:
+            hist_errs = []
+            for infile, h in hs.iteritems():
+                sum_val += h.getBin(i).val
+                hist_errs.append(h.getBin(i).getErr())
+            sum_err2 = MergeChannels(hist_errs)
+        else:
+            for infile, h in hs.iteritems():
+                sum_val += h.getBin(i).val
+                try:
+                    sum_err2 += h.getBin(i).getErr()**2
+                except OverflowError:
+                    # in case the **2 produces overflow errors
+                    # set sum to 'inf'
+                    sum_err2 = float('inf')
+                n += 1
+            
+        if (opts.performSum or opts.sumChannels): outhistos[path].getBin(i).val = sum_val
         else:                 outhistos[path].getBin(i).val = sum_val / n
 
         try:
-            if (opts.performSum): outhistos[path].getBin(i).setErr(sum_err2**0.5 )
-            elif (opts.sumChannels): outhistos[path].getBin(i).setErr(sum_err2**0.5 / n)
+            if (opts.performSum or opts.sumChannels): outhistos[path].getBin(i).setErr(sum_err2**0.5 )
             else:                 outhistos[path].getBin(i).setErr(sum_err2**0.5 / n)
         except OverflowError:
             # to get back to numerics, replace an eventual 'inf' 
