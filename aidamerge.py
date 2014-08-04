@@ -18,6 +18,7 @@ def MergeChannels(hist_errs):     # Merge statistics when adding two channels
     new_stat = weight1+weight2
     if new_stat != 0.0:
         new_bin_err = 1.0/new_stat
+    else: new_bin_err = 1.e308
     
     return new_bin_err
 
