@@ -22,8 +22,8 @@ for folder in dataset_names:
         dest_Wpm = file_name
         source_Wm = str(int(file_name) + 185695)
         source_Wp = str(int(source_Wm) + 7)
-        source_Wm_dir = dataset_names[source_Wm]
-        source_Wp_dir = dataset_names[source_Wp]
+        source_Wm_dir = powheg_dict[source_Wm]
+        source_Wp_dir = powheg_dict[source_Wp]
         cmd = "cp ../{0}/merged_add.save ./merged_add_Wm.aida".format(source_Wm_dir)
         os.system(cmd)
         cmd = "cp ../{0}/merged_avg.save ./merged_avg_Wm.aida".format(source_Wm_dir)
