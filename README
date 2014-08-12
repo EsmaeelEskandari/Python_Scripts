@@ -2,7 +2,7 @@ N.B.: For these scripts to run your environment must source ROOT and Rivet.
 
 Aux_Functions.py:
 	This module holds a lot of the clutter that would inhibit the readability
-	of the other scripts. It contains lists used for histogram titles, datset
+	of the other scripts. It contains lists used for histogram titles, dataset
 	names, etc... It also has the Atlas Style built in and a few other functions
 	referenced by the other scripts. Anytime new datasets or histograms are
 	added to the analysis they need to be added to the lists in here...
@@ -65,3 +65,49 @@ plot_all_hists.py:
 	with a series of histograms with shifted theoretical systematics. This just
 	allows you to visualize the systematic shifts so you can be sure they are 
 	reasonable. It uses the histograms normalized to their cross section. 
+
+Aux_Functions.py
+Average_AMI_txt.py
+Batch_Aida2Root.py
+ChangeWeights_and_Merge.sh
+Compare_md5.py
+CompileRootFiles.py
+CompileRootFiles_MergeStats.py
+Count_Events_LHEF.py
+Create_Hists.py
+Cut_Flow_Plots.py
+EvgentoRivet.sh
+Find_Error_Band.py
+Gen_Hists.py
+Gen_Hists_VBF_Syst.py
+HistogramsRatio.py
+MC12_PowhegVBFW_example.py
+MergeAidaFiles.py
+MergeYodaFiles.py
+Muon2Tau.py
+PowhegFolder.py
+Prepare_Syst_File.sh
+README
+Rename_Folder.py
+Rivet.sh
+SetXS_Herwigpp.py
+Style.C
+TopPlotter.py
+Utils.C
+aidamerge.py
+aidamerge_alt.py
+calc_XS.py
+changeEventWeight.py
+combineNLOtop.py
+convertToHepMC.sh
+histo_ratio.C
+mergeLHE.py
+mergePwhgWpm.sh
+plot_all_hists.py
+plots.py
+prepareEvents.sh
+removeIncEvents.py
+rootlogon.C
+scalup.py
+splitLHE.py
+top2root.py
