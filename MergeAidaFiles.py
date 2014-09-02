@@ -3,6 +3,7 @@ import os
 from optparse import OptionParser
 from Aux_Functions import *
 
+parser = OptionParser(usage="%prog <options>")
 parser.add_option("-s", "--skip-merged",
                   action="store_true", dest="skipMerged", default=False,
                   help="Skip the folders that already have merged aida files.")
