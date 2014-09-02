@@ -34,7 +34,21 @@ for folder in dataset_names:
         os.system(cmd)
         os.system("python ../aidamerge.py -c -o merged_avg.aida merged_avg_Wm.aida merged_avg_Wp.aida")
         os.system("python ../aidamerge.py -s -o merged_add.aida merged_add_Wm.aida merged_add_Wp.aida")
-        # convert to root, rename root and *.aida files
+    elif file_name == "000032":
+        source_Wm = "185836"
+        source_Wp = "185837"
+        source_Wm_dir = powheg_dict[source_Wm]
+        source_Wp_dir = powheg_dict[source_Wp]
+        cmd = "cp ../{0}/merged_add.save ./merged_add_Wm.aida".format(source_Wm_dir)
+        os.system(cmd)
+        cmd = "cp ../{0}/merged_avg.save ./merged_avg_Wm.aida".format(source_Wm_dir)
+        os.system(cmd)
+        cmd = "cp ../{0}/merged_add.save ./merged_add_Wp.aida".format(source_Wp_dir)
+        os.system(cmd)
+        cmd = "cp ../{0}/merged_avg.save ./merged_avg_Wp.aida".format(source_Wp_dir)
+        os.system(cmd)
+        os.system("python ../aidamerge.py -c -o merged_avg.aida merged_avg_Wm.aida merged_avg_Wp.aida")
+        os.system("python ../aidamerge.py -s -o merged_add.aida merged_add_Wm.aida merged_add_Wp.aida")
     else:
         if not Aida_Files: continue
         # Run aidamerge.py over every file in the Aida_Files list.
