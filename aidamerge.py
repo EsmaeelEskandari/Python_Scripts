@@ -75,7 +75,7 @@ for path, hs in inhistos.iteritems():
                 # set sum to 'inf'
                 sum_err2 = float('inf')
             n += 1
-        if (opts.performSum or sumChannels): outhistos[path].getBin(i).val = sum_val
+        if (opts.performSum or opts.sumChannels): outhistos[path].getBin(i).val = sum_val
         else:                 outhistos[path].getBin(i).val = sum_val / n
 
         try:
