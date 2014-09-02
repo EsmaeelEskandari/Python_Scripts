@@ -22,9 +22,9 @@ for folder in dataset_names:
     os.chdir(current_dir)
     if opts.skipMerged:
         file_exists = os.path.isfile(file_name+".root")
-    if file_exits:
-        os.chdir("..")
-        continue
+        if file_exists:
+            os.chdir("..")
+            continue
         
     Aida_Files = glob.glob("*.aida*")
     i = len(Aida_Files)
