@@ -1,6 +1,12 @@
 import glob
 import os
+from optparse import OptionParser
 from Aux_Functions import *
+
+parser.add_option("-s", "--skip-merged",
+                  action="store_true", dest="skipMerged", default=False,
+                  help="Skip the folders that already have merged aida files.")
+opts, args = parser.parse_args()
 
 dataset_names = GetListDataset('dataset_names')
 dataset_number = GetListDataset('dataset_number')
@@ -14,6 +20,12 @@ for folder in dataset_names:
     file_name = folder.split('.')[0]
     
     os.chdir(current_dir)
+    if opts.skipMerged:
+        file_exists = os.path.isfile(file_name+".root")
+    if file_exits:
+        os.chdir("..")
+        continue
+        
     Aida_Files = glob.glob("*.aida*")
     i = len(Aida_Files)
     print "There were {0} in the directory: {1}".format(i,current_dir)
