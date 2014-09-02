@@ -10,7 +10,6 @@ hf = ROOT.TFile("VBF_Systematics.root", "RECREATE")
 
 datasets = GetListDataset('datasets')
 dataset_names = GetListDataset('dataset_names')
-dataset_number = GetListDataset('dataset_number')
 exp_hist_list = GetListDataset('exp_hist_list')
 hist_list = GetListDataset('hist_list')
 cross_sections = GetListDataset('cross_sections')
@@ -18,9 +17,6 @@ title_list = GetListDataset('title_list')
 x_axis_list = GetListDataset('x_axis_list')
 y_axis_list = GetListDataset('y_axis_list')
 y_axis_list_norm = GetListDataset('y_axis_list_norm')
-
-merged_pwhg = ['000001','000002','000003','000004','000005','000006','000007']
-powheg_dict = dict(zip(dataset_number, dataset_names))
 
 def StyleHistogram(index, h1):
     h1.SetTitle(title_list[index])
@@ -72,35 +68,6 @@ def CompileDijetMass(ExclMjj,th2_hist):
         th2_hist.SetBinError(jet_num+1,bin,bin_err[bin])
         
     return th2_hist
-    
-def MergeChannels(hist,file_name):
-    source_Wm = str(int(file_name) + 185695)
-    source_Wp = str(int(source_Wm) + 7)
-    source_Wm_dir = powheg_dict[source_Wm]
-    source_Wp_dir = powheg_dict[source_Wp]
-    rootFile_Wp_avg = ROOT.TFile.Open("../"+source_Wp_dir+"/"+source_Wp+".root")
-    rootFile_Wm_avg = ROOT.TFile.Open("../"+source_Wm_dir+"/"+source_Wm+".root")
-    rootFile_Wp_add = ROOT.TFile.Open("../"+source_Wp_dir+"/"+source_Wp+"_add.root")
-    rootFile_Wm_add = ROOT.TFile.Open("../"+source_Wm_dir+"/"+source_Wm+"_add.root")
-    
-    histogram = rootFile_Wp_avg.Get(hist)
-    hist1 = histogram.Clone()
-    hist2 = rootFile_Wm_avg.Get(hist)
-    hist1.Add(hist2)
-    
-    histogram_add = rootFile_Wp_add.Get(hist)
-    hist3 = histogram_add.Clone()
-    hist4 = rootFile_Wm_add.Get(hist)
-    hist3.Add(hist4)
-    
-    rootFile_Wp_avg.Close()
-    rootFile_Wm_avg.Close()
-    rootFile_Wp_add.Close()
-    rootFile_Wm_add.Close()
-    
-    del histogram, histogram_add, hist2, hist4
-    # Need to check errors on new_hist (it should not be sumw2)
-    return hist1, hist3
 
 #Setup AMIClient.	
 #This works only on my laptop, otherwise you need to run 'ami auth'
@@ -129,15 +96,14 @@ _h_xsecs = ROOT.TH1F("Cross_Sections","Cross_Sections",len(dataset_names),0,len(
 _h_xsecs.GetYaxis().SetTitle("Cross Section [pb]")
 for idx,folder in enumerate(dataset_names):
 #for folder, data in zip(dataset_names, datasets):
-    if os.path.exists(folder+"/") == True:
+    if os.path.exists(folder+"/") == True: # and not os.listdir("./"+folder+"/"):
         th2_hist_30 = ROOT.TH2F( "hmj1j2_wvbf", "hmj1j2_wvbf", 10, -0.5, 9.5, 200, 0, 5000 )
+        th2_hist_20 = ROOT.TH2F( "hmj1j2_wvbf_20", "hmj1j2_wvbf_20", 10, -0.5, 9.5, 200, 0, 5000 )
         # First get the crossSection_mean and GenFiltEff_mean for this dataset from AMI for normalizations
         xsec = cross_sections[idx][0]
         #effic = cross_sections[idx][1] # Do not use efficiency for MjjFilt datasets
         _h_xsecs.Fill(idx,xsec)
-        print folder, xsec, folder.split('.')[0]
-        mergeChannels = False
-        #if folder.split('.')[0] in merged_pwhg: mergeChannels = True
+        print folder, xsec
 
         # histogram manipulation and such
         os.chdir(folder+"/")
@@ -147,17 +113,15 @@ for idx,folder in enumerate(dataset_names):
         file_name = folder.split('.')
         file_name = file_name[0]
         _h_xsecs.GetXaxis().SetBinLabel(idx+1,file_name)
-        if not mergeChannels:
-            root_file = ROOT.TFile.Open(file_name+".root")
-            root_file_add = ROOT.TFile.Open(file_name+"_add.root")
+        root_file = ROOT.TFile.Open(file_name+".root")
+        root_file_add = ROOT.TFile.Open(file_name+"_add.root")
         for index, hist in enumerate(hist_list):
             if index > len(title_list)-1: index = index-len(title_list)
             # No normalization
-            if mergeChannels:
-                histogram,histogram_add = MergeChannels(hist,file_name)
-            else:
-                histogram = root_file.Get(hist)
-                histogram_add = root_file_add.Get(hist)
+            histogram = root_file.Get(hist)
+            #if "_MjjFilt" in folder:            # Remove these two lines when the new data (without
+            #    histogram.Scale(1.0/effic)      # genfilteffic) have been acquired.
+            histogram_add = root_file_add.Get(hist)
             hf.cd(folder)
             StyleHistogram(index, histogram)
             if "CutFlow" in hist:
@@ -174,11 +138,15 @@ for idx,folder in enumerate(dataset_names):
             ROOT.gDirectory.cd()
             if "Mjj_" in hist and "Jet_1" in hist:
                 th2_hist_30 = CompileDijetMass(histogram_norm,th2_hist_30)
+            if "Mjj_" in hist and "Jet_2" in hist:
+                th2_hist_20 = CompileDijetMass(histogram_norm,th2_hist_20)
             del histogram_norm
         hf.cd(folder)
         StyleTH2(th2_hist_30)
+        StyleTH2(th2_hist_20)
         th2_hist_30.Write()
-        del th2_hist_30
+        th2_hist_20.Write()
+        del th2_hist_30, th2_hist_20
         root_file.Close()
         hf.cd()
         os.chdir("..")
