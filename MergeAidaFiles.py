@@ -11,7 +11,8 @@ opts, args = parser.parse_args()
 
 dataset_names = GetListDataset('dataset_names')
 dataset_number = GetListDataset('dataset_number')
-powheg_list = ['000001','000002','000003','000004','000005','000006','000007']
+powheg_w2jet_list = ['000001','000002','000003','000004','000005','000006','000007']
+powheg_vbfw_list  = ['000015','000016','000017','000018','000019','000020','000021']
 powheg_dict = dict(zip(dataset_number, dataset_names))
 
 # Make a list of Aida files available in the current directory
@@ -31,7 +32,7 @@ for folder in dataset_names:
     i = len(Aida_Files)
     print "There were {0} in the directory: {1}".format(i,current_dir)
 
-    if file_name in powheg_list:
+    if file_name in powheg_w2jet_list:
         dest_Wpm = file_name
         source_Wm = str(int(file_name) + 185695)
         source_Wp = str(int(source_Wm) + 7)
@@ -47,7 +48,38 @@ for folder in dataset_names:
         os.system(cmd)
         os.system("python ../aidamerge.py -c -o merged_avg.aida merged_avg_Wm.aida merged_avg_Wp.aida")
         os.system("python ../aidamerge.py -s -o merged_add.aida merged_add_Wm.aida merged_add_Wp.aida")
+    elif file_name in powheg_w2jet_list:
+        dest_Wpm = file_name
+        source_Wm = str(int(file_name) + 185848)
+        source_Wp = str(int(source_Wm) + 7)
+        source_Wm_dir = powheg_dict[source_Wm]
+        source_Wp_dir = powheg_dict[source_Wp]
+        cmd = "cp ../{0}/merged_add.save ./merged_add_Wm.aida".format(source_Wm_dir)
+        os.system(cmd)
+        cmd = "cp ../{0}/merged_avg.save ./merged_avg_Wm.aida".format(source_Wm_dir)
+        os.system(cmd)
+        cmd = "cp ../{0}/merged_add.save ./merged_add_Wp.aida".format(source_Wp_dir)
+        os.system(cmd)
+        cmd = "cp ../{0}/merged_avg.save ./merged_avg_Wp.aida".format(source_Wp_dir)
+        os.system(cmd)
+        os.system("python ../aidamerge.py -c -o merged_avg.aida merged_avg_Wm.aida merged_avg_Wp.aida")
+        os.system("python ../aidamerge.py -s -o merged_add.aida merged_add_Wm.aida merged_add_Wp.aida")
     elif file_name == "000032":
+        source_Wm = "185836"
+        source_Wp = "185837"
+        source_Wm_dir = powheg_dict[source_Wm]
+        source_Wp_dir = powheg_dict[source_Wp]
+        cmd = "cp ../{0}/merged_add.save ./merged_add_Wm.aida".format(source_Wm_dir)
+        os.system(cmd)
+        cmd = "cp ../{0}/merged_avg.save ./merged_avg_Wm.aida".format(source_Wm_dir)
+        os.system(cmd)
+        cmd = "cp ../{0}/merged_add.save ./merged_add_Wp.aida".format(source_Wp_dir)
+        os.system(cmd)
+        cmd = "cp ../{0}/merged_avg.save ./merged_avg_Wp.aida".format(source_Wp_dir)
+        os.system(cmd)
+        os.system("python ../aidamerge.py -c -o merged_avg.aida merged_avg_Wm.aida merged_avg_Wp.aida")
+        os.system("python ../aidamerge.py -s -o merged_add.aida merged_add_Wm.aida merged_add_Wp.aida")
+    elif file_name == "000033":
         source_Wm = "185836"
         source_Wp = "185837"
         source_Wm_dir = powheg_dict[source_Wm]

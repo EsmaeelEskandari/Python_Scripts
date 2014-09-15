@@ -398,7 +398,7 @@ def GetListDataset(list_name):
               '000008','000009','000010','000011','000012','000013','000014',
               '000015','000016','000017','000018','000019','000020','000021',
               '000022','000023','000024','000025','000026','000027','000028',
-              '000029','000030','000031','000032']
+              '000029','000030','000031','000032','000033']
     
     # List of Cross-sections and Generator Filter Efficiencies (xsec,effic)          
     cross_sections = [(4.2128, 1.0), (11866.0, 0.41371), (4.0071, 1.0), (4.0065, 0.54318), 
@@ -426,7 +426,8 @@ def GetListDataset(list_name):
                       (3.44834797044, 1.0), (3.44332503928, 1.0), (3.44604220929, 1.0),
                       (2.628075,1.0), (2.628075,1.0), (7191.86534513, 1.0),
                       (6648.65296181,1.0), (7296.62835667,1.0), (7410.79316717,1.0), (7407.27818743,1.0),
-                      (7191.86534513,1.0), (7095.81150725,1.0), (7285.89654071,1.0), (2440.0+2899.8,1.0)]
+                      (7191.86534513,1.0), (7095.81150725,1.0), (7285.89654071,1.0), (2440.0+2899.8,1.0),
+                      (3.44758708752, 1.0)]
 
     dataset_names = ["129916.Nominal_Sherpa_Signal", "129930.Nominal_Sherpa_Background_MjjFilt",
               "147294.min_n_tchannels_CKKW30", "147295.min_n_tchannels_CKKW30_MjjFilt",
@@ -468,7 +469,7 @@ def GetListDataset(list_name):
           "000022.Powheg.VBF.Nominal.ptj_gencut_7TeV", "000023.Powheg.VBF.Nominal.7TeV_noshower", "000024.Powheg.W2jets.Nominal.bornsuppfact.Hpp",
           "000025.Powheg.W2jets.Nominal.CT10as", "000026.Powheg.W2jets.Nominal.NNPDF23_as_118", "000027.Powheg.W2jets.Nominal.MSTW2008nlo68cl",
           "000028.Powheg.W2jets.Nominal.MSTW2008nlo90cl", "000029.Powheg.W2jets.Nominal.CT10", "000030.Powheg.W2jets.Nominal.CT10117",
-          "000031.Powheg.W2jets.Nominal.CT10119", "000032.Powheg.W2jets.Nominal.electron"]
+          "000031.Powheg.W2jets.Nominal.CT10119", "000032.Powheg.W2jets.Nominal.electron", "000033.Powheg.VBF.Nominal.Hpp"]
 
     dataset_names_1 = ["147294.min_n_tchannels_CKKW30", "147295.min_n_tchannels_CKKW30_MjjFilt",
 			"147296.min_n_tchannels_MuFdown", "147297.min_n_tchannels_MuFdown_MjjFilt",
