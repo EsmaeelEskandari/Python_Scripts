@@ -79,9 +79,9 @@ for folder in dataset_names:
         os.system(cmd)
         os.system("python ../aidamerge.py -c -o merged_avg.aida merged_avg_Wm.aida merged_avg_Wp.aida")
         os.system("python ../aidamerge.py -s -o merged_add.aida merged_add_Wm.aida merged_add_Wp.aida")
-    elif file_name == "000033":
-        source_Wm = "185836"
-        source_Wp = "185837"
+    elif file_name == "000034":
+        source_Wm = "185847"
+        source_Wp = "185848"
         source_Wm_dir = powheg_dict[source_Wm]
         source_Wp_dir = powheg_dict[source_Wp]
         cmd = "cp ../{0}/merged_add.save ./merged_add_Wm.aida".format(source_Wm_dir)
