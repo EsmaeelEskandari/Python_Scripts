@@ -50,7 +50,7 @@ for folder in dataset_names:
         os.system("python ../aidamerge.py -s -o merged_add.aida merged_add_Wm.aida merged_add_Wp.aida")
     elif file_name in powheg_vbfw_list:
         dest_Wpm = file_name
-        source_Wm = str(int(file_name) + 185848)
+        source_Wm = str(int(file_name) + 185834)
         source_Wp = str(int(source_Wm) + 7)
         source_Wm_dir = powheg_dict[source_Wm]
         source_Wp_dir = powheg_dict[source_Wp]
