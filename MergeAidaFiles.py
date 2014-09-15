@@ -48,7 +48,7 @@ for folder in dataset_names:
         os.system(cmd)
         os.system("python ../aidamerge.py -c -o merged_avg.aida merged_avg_Wm.aida merged_avg_Wp.aida")
         os.system("python ../aidamerge.py -s -o merged_add.aida merged_add_Wm.aida merged_add_Wp.aida")
-    elif file_name in powheg_w2jet_list:
+    elif file_name in powheg_vbfw_list:
         dest_Wpm = file_name
         source_Wm = str(int(file_name) + 185848)
         source_Wp = str(int(source_Wm) + 7)
