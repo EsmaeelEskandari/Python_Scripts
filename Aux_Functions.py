@@ -344,6 +344,38 @@ def GetListDataset(list_name):
 	  'mc12_8TeV.147324.Sherpa_CT10_Wmunu_MuRup.evgen.EVNT.e2355/',
 	  'mc12_8TeV.147325.Sherpa_CT10_Wmunu_MuRup_MjjFilt.evgen.EVNT.e2355/',
 	  'mc12_8TeV.147775.Sherpa_CT10_Wmunu.evgen.EVNT.e1434/',
+      'mc12_7TeV.185930.PowhegPythia8_AU2_CT10_W2Jets_Wm_el_Nominal.evgen.EVNT.e3254/',
+      'mc12_7TeV.185931.PowhegPythia8_AU2_CT10_W2Jets_Wp_el_Nominal.evgen.EVNT.e3254/',
+      'mc12_7TeV.185932.PowhegPythia8_AU2_CT10_W2Jets_Wm_mu_Nominal.evgen.EVNT.e3254/',
+      'mc12_7TeV.185933.PowhegPythia8_AU2_CT10_W2Jets_Wm_mu_MuFdown.evgen.EVNT.e3254/',
+      'mc12_7TeV.185934.PowhegPythia8_AU2_CT10_W2Jets_Wm_mu_MuFup.evgen.EVNT.e3254/',
+      'mc12_7TeV.185935.PowhegPythia8_AU2_CT10_W2Jets_Wm_mu_MuRdown.evgen.EVNT.e3254/',
+      'mc12_7TeV.185936.PowhegPythia8_AU2_CT10_W2Jets_Wm_mu_MuRup.evgen.EVNT.e3254/',
+      'mc12_7TeV.185937.PowhegPythia8_AU2_CT10_W2Jets_Wm_mu_MuRFdown.evgen.EVNT.e3254/',
+      'mc12_7TeV.185938.PowhegPythia8_AU2_CT10_W2Jets_Wm_mu_MuRFup.evgen.EVNT.e3254/',
+      'mc12_7TeV.185939.PowhegPythia8_AU2_CT10_W2Jets_Wp_mu_Nominal.evgen.EVNT.e3254/',
+      'mc12_7TeV.185940.PowhegPythia8_AU2_CT10_W2Jets_Wp_mu_MuFdown.evgen.EVNT.e3254/',
+      'mc12_7TeV.185941.PowhegPythia8_AU2_CT10_W2Jets_Wp_mu_MuFup.evgen.EVNT.e3254/',
+      'mc12_7TeV.185942.PowhegPythia8_AU2_CT10_W2Jets_Wp_mu_MuRdown.evgen.EVNT.e3254/',
+      'mc12_7TeV.185943.PowhegPythia8_AU2_CT10_W2Jets_Wp_mu_MuRup.evgen.EVNT.e3254/',
+      'mc12_7TeV.185944.PowhegPythia8_AU2_CT10_W2Jets_Wp_mu_MuRFdown.evgen.EVNT.e3254/',
+      'mc12_7TeV.185945.PowhegPythia8_AU2_CT10_W2Jets_Wp_mu_MuRFup.evgen.EVNT.e3254/',
+      'mc12_7TeV.185946.PowhegPythia8_AU2_CT10_VBF_Wm_el_Nominal.evgen.EVNT.e3254/',
+      'mc12_7TeV.185947.PowhegPythia8_AU2_CT10_VBF_Wp_el_Nominal.evgen.EVNT.e3254/',
+      'mc12_7TeV.185948.PowhegPythia8_AU2_CT10_VBF_Wm_mu_Nominal.evgen.EVNT.e3254/',
+      'mc12_7TeV.185949.PowhegPythia8_AU2_CT10_VBF_Wm_mu_MuFdown.evgen.EVNT.e3254/',
+      'mc12_7TeV.185950.PowhegPythia8_AU2_CT10_VBF_Wm_mu_MuFup.evgen.EVNT.e3254/',
+      'mc12_7TeV.185951.PowhegPythia8_AU2_CT10_VBF_Wm_mu_MuRdown.evgen.EVNT.e3254/',
+      'mc12_7TeV.185952.PowhegPythia8_AU2_CT10_VBF_Wm_mu_MuRup.evgen.EVNT.e3254/',
+      'mc12_7TeV.185953.PowhegPythia8_AU2_CT10_VBF_Wm_mu_MuRFdown.evgen.EVNT.e3254/',
+      'mc12_7TeV.185954.PowhegPythia8_AU2_CT10_VBF_Wm_mu_MuRFup.evgen.EVNT.e3254/',
+      'mc12_7TeV.185955.PowhegPythia8_AU2_CT10_VBF_Wp_mu_Nominal.evgen.EVNT.e3254/',
+      'mc12_7TeV.185956.PowhegPythia8_AU2_CT10_VBF_Wp_mu_MuFdown.evgen.EVNT.e3254/',
+      'mc12_7TeV.185957.PowhegPythia8_AU2_CT10_VBF_Wp_mu_MuFup.evgen.EVNT.e3254/',
+      'mc12_7TeV.185958.PowhegPythia8_AU2_CT10_VBF_Wp_mu_MuRdown.evgen.EVNT.e3254/',
+      'mc12_7TeV.185959.PowhegPythia8_AU2_CT10_VBF_Wp_mu_MuRup.evgen.EVNT.e3254/',
+      'mc12_7TeV.185960.PowhegPythia8_AU2_CT10_VBF_Wp_mu_MuRFdown.evgen.EVNT.e3254/',
+      'mc12_7TeV.185961.PowhegPythia8_AU2_CT10_VBF_Wp_mu_MuRFup.evgen.EVNT.e3254/',
       'mc12_8TeV.185696.PowhegPythia8_AU2_CT10_W2Jets_Wm_Nominal.evgen.EVNT.e2965/',
       'mc12_8TeV.185697.PowhegPythia8_AU2_CT10_W2Jets_Wm_MuFdown.evgen.EVNT.e2965/',
       'mc12_8TeV.185698.PowhegPythia8_AU2_CT10_W2Jets_Wm_MuFup.evgen.EVNT.e2965/',
@@ -388,6 +420,11 @@ def GetListDataset(list_name):
               '147309','147310','147311','147312','147313','147314',
               '147315','147316','147317','147318','147319','147320',
               '147321','147322','147323','147324','147325','147775',
+              '185930','185931','185932','185933','185934','185935','185936',
+              '185937','185938','185939','185940','185941','185942','185943',
+              '185944','185945','185946','185947','185948','185949','185950',
+              '185951','185952','185953','185954','185955','185956','185957',
+              '185958','185959','185960','185961'
               '185696','185697','185698','185699','185700','185701','185702',
               '185703','185704','185705','185706','185707','185708','185709',
               '185836','185837','185847','185848','185849','185850','185851',
@@ -398,7 +435,7 @@ def GetListDataset(list_name):
               '000008','000009','000010','000011','000012','000013','000014',
               '000015','000016','000017','000018','000019','000020','000021',
               '000022','000023','000024','000025','000026','000027','000028',
-              '000029','000030','000031','000032','000033','000034']
+              '000029','000030','000031','000032']
     
     # List of Cross-sections and Generator Filter Efficiencies (xsec,effic)          
     cross_sections = [(4.2128, 1.0), (11866.0, 0.41371), (4.0071, 1.0), (4.0065, 0.54318), 
@@ -410,6 +447,16 @@ def GetListDataset(list_name):
                       (11864.0, 1.0), (11866.0, 0.4209), (11871.0, 1.0), (11864.0, 0.43504),
                       (11865.0, 1.0), (11865.0, 0.43722), (12985.0, 1.0), (12977.0, 0.41737),
                       (11971.0, 1.0), (11964.0, 0.42458), (11867.0, 1.0),
+                      
+                      (2019.1, 1.0), (2630.5, 1.0), (1479.5, 1.0), (1391.1, 1.0),
+                      (1501.0, 1.0), (1704.4, 1.0), (1512.7, 1.0), (1167.6, 1.0),
+                      (1576.9, 1.0), (3136.7, 1.0), (3107.3, 1.0), (3688.3, 1.0),
+                      (3456.8, 1.0), (2929.0, 1.0), (3672.5, 1.0), (3075.8, 1.0),
+                      (1.0440, 1.0), (1.6810, 1.0), (1.0440, 1.0), (1.0474, 1.0),
+                      (1.0466, 1.0), (1.0446, 1.0), (1.0433, 1.0), (1.0437, 1.0),
+                      (1.0420, 1.0), (1.6810, 1.0), (1.6870, 1.0), (1.6839, 1.0),
+                      (1.6800, 1.0), (1.6809, 1.0), (1.6784, 1.0), (1.6774, 1.0),
+                      
                       (2612.8, 1.0), (2463.5, 1.0), (2633.8, 1.0), (2708.8, 1.0),
                       (2233.6, 1.0), (2652.3, 1.0), (2391.0, 1.0),
                       (2895.8, 1.0), (2909.5, 1.0), (2932.0, 1.0), (3024.7, 1.0),
@@ -419,15 +466,27 @@ def GetListDataset(list_name):
                       (1.3418, 1.0), (1.3381, 1.0), (1.3372, 1.0), (1.3369, 1.0),
                       (1.3369, 1.0), (2.1100, 1.0), (2.1166, 1.0), (2.1154, 1.0),
                       (2.1089, 1.0), (2.1110, 1.0), (2.1069, 1.0), (2.1087, 1.0),
+                      
                       (11.641, 0.51349), (11866.0,1.0), (4.2114,1.0), (11866.0,1.0), (11506.0,1.0), 
+                      
                       (2612.8+2895.8, 1.0), (2463.5+2909.5, 1.0), (2633.8+2932.0, 1.0), (2708.8+3024.7, 1.0),
                       (2233.6+2708.5, 1.0), (2652.3+3004.3, 1.0), (2391.0+2703.5, 1.0),
+                      
+                      (1479.5+3136.7, 1.0), (1391.1+3107.3, 1.0), (1501.0+3688.3, 1.0), (1704.4+3456.8, 1.0)
+                      (1512.7+2929.0, 1.0), (1167.6+3672.5, 1.0), (1576.9+3075.8, 1.0),
+                      
                       (1.3378+2.1100, 1.0), (1.3411+2.1166, 1.0), (1.3418+2.1154, 1.0), (1.3381+2.1089, 1.0),
-                      (1.3372+2.1110, 1.0), (1.3369+2.1069, 1.0), (1.3369+2.1087, 1.0),
-                      (2.628075, 1.0), (2.628075, 1.0), (7191.86534513, 1.0),
-                      (6648.65296181, 1.0), (7296.62835667, 1.0), (7410.79316717, 1.0), (7407.27818743, 1.0),
-                      (7191.86534513, 1.0), (7095.81150725, 1.0), (7285.89654071, 1.0), (2440.0+2899.8, 1.0),
-                      (3.44758708752, 1.0), (1.3378+2.1100, 1.0)]
+                      (1.3372+2.1110, 1.0), (1.3369+2.1069, 1.0), (1.3369+2.1087, 1.0)
+                  
+                      (1.0440+1.6810, 1.0), (1.0474+1.6870, 1.0), (1.0466+1.6839, 1.0), (1.0446+1.6800, 1.0)
+                      (1.0433+1.6809, 1.0), (1.0437+1.6784, 1.0), (1.0420+1.6774, 1.0),
+                  
+                      (2440.0+2899.8, 1.0), (1.3378+2.1100, 1.0), (2019.1+2630.5, 1.0), (1.0440+1.6810, 1.0)]
+                      
+                      # (2.628075, 1.0), (2.628075, 1.0), (7191.86534513, 1.0),
+                      # (6648.65296181, 1.0), (7296.62835667, 1.0), (7410.79316717, 1.0), (7407.27818743, 1.0),
+                      # (7191.86534513, 1.0), (7095.81150725, 1.0), (7285.89654071, 1.0), (2440.0+2899.8, 1.0),
+                      # (3.44758708752, 1.0), (1.3378+2.1100, 1.0)
 
     dataset_names = ["129916.Nominal_Sherpa_Signal", "129930.Nominal_Sherpa_Background_MjjFilt",
               "147294.min_n_tchannels_CKKW30", "147295.min_n_tchannels_CKKW30_MjjFilt",
@@ -443,6 +502,24 @@ def GetListDataset(list_name):
 	      "147318.mpi2", "147319.mpi2_MjjFilt", "147320.Shower1", "147321.Shower1_MjjFilt",
 	      "147322.MuRdown", "147323.MuRdown_MjjFilt", "147324.MuRup", "147325.MuRup_MjjFilt", 
           "147775.Nominal_Sherpa_Background",
+          
+          "185930.PowhegPythia8_W2Jets_Wm_el_Nominal.7TeV", "185931.PowhegPythia8_W2Jets_Wp_el_Nominal.7TeV",
+          "185932.PowhegPythia8_W2Jets_Wm_mu_Nominal.7TeV", "185933.PowhegPythia8_W2Jets_Wm_mu_MuFdown.7TeV",
+          "185934.PowhegPythia8_W2Jets_Wm_mu_MuFup.7TeV", "185935.PowhegPythia8_W2Jets_Wm_mu_MuRdown.7TeV",
+          "185936.PowhegPythia8_W2Jets_Wm_mu_MuRup.7TeV", "185937.PowhegPythia8_W2Jets_Wm_mu_MuRFdown.7TeV",
+          "185938.PowhegPythia8_W2Jets_Wm_mu_MuRFup.7TeV", "185939.PowhegPythia8_W2Jets_Wp_mu_Nominal.7TeV",
+          "185940.PowhegPythia8_W2Jets_Wp_mu_MuFdown.7TeV", "185941.PowhegPythia8_W2Jets_Wp_mu_MuFup.7TeV",
+          "185942.PowhegPythia8_W2Jets_Wp_mu_MuRdown.7TeV", "185943.PowhegPythia8_W2Jets_Wp_mu_MuRup.7TeV",
+          "185944.PowhegPythia8_W2Jets_Wp_mu_MuRFdown.7TeV", "185945.PowhegPythia8_W2Jets_Wp_mu_MuRFup.7TeV",
+          "185946.PowhegPythia8_VBF_Wm_el_Nominal.7TeV", "185947.PowhegPythia8_VBF_Wp_el_Nominal.7TeV",
+          "185948.PowhegPythia8_VBF_Wm_mu_Nominal.7TeV", "185949.PowhegPythia8_VBF_Wm_mu_MuFdown.7TeV",
+          "185950.PowhegPythia8_VBF_Wm_mu_MuFup.7TeV", "185951.PowhegPythia8_VBF_Wm_mu_MuRdown.7TeV",
+          "185952.PowhegPythia8_VBF_Wm_mu_MuRup.7TeV", "185953.PowhegPythia8_VBF_Wm_mu_MuRFdown.7TeV",
+          "185954.PowhegPythia8_VBF_Wm_mu_MuRFup.7TeV", "185955.PowhegPythia8_VBF_Wp_mu_Nominal.7TeV",
+          "185956.PowhegPythia8_VBF_Wp_mu_MuFdown.7TeV", "185957.PowhegPythia8_VBF_Wp_mu_MuFup.7TeV",
+          "185958.PowhegPythia8_VBF_Wp_mu_MuRdown.7TeV", "185959.PowhegPythia8_VBF_Wp_mu_MuRup.7TeV",
+          "185960.PowhegPythia8_VBF_Wp_mu_MuRFdown.7TeV", "185961.PowhegPythia8_VBF_Wp_mu_MuRFup.7TeV",
+          
           "185696.PowhegPythia8_Wm_Nominal", "185697.PowhegPythia8_Wm_MuFdown", "185698.PowhegPythia8_Wm_MuFup",
           "185699.PowhegPythia8_Wm_MuRdown", "185700.PowhegPythia8_Wm_MuRup", "185701.PowhegPythia8_Wm_MuRFdown",
           "185702.PowhegPythia8_Wm_MuRFup", "185703.PowhegPythia8_Wp_Nominal", "185704.PowhegPythia8_Wp_MuFdown",
@@ -457,20 +534,38 @@ def GetListDataset(list_name):
           "185857.PowhegPythia8.VBF_Wp_MuFdown", "185858.PowhegPythia8.VBF_Wp_MuFup",
           "185859.PowhegPythia8.VBF_Wp_MuRdown", "185860.PowhegPythia8.VBF_Wp_MuRup",
           "185861.PowhegPythia8.VBF_Wp_MuRdownMuFdown", "185862.PowhegPythia8.VBF_Wp_MuRupMuFup",
+          
           "147550.Wenu2JetsEW1JetQCD15GeV_filt", "147774.Nominal_Sherpa_Bkgd_enu", "129915.Nominal_Sherpa_Sgnl_enu",
           "129929.Nominal_Sherpa_Bkgd_enu_MjjFilt", "200900.Nominal_Sherpa_NLO_Bkgd_enu",
+          
           "000001.Powheg.W2jets.Nominal.bornsuppfact", "000002.Powheg.W2jets.MuFdown.bornsuppfact", 
           "000003.Powheg.W2jets.MuFup.bornsuppfact", "000004.Powheg.W2jets.MuRdown.bornsuppfact", 
           "000005.Powheg.W2jets.MuRup.bornsuppfact", "000006.Powheg.W2jets.MuRdownMuFdown.bornsuppfact", 
           "000007.Powheg.W2jets.MuRupMuFup.bornsuppfact",
-          "000015.Powheg.VBF.Nominal.ptj_gencut", "000016.Powheg.VBF.MuFdown.ptj_gencut", 
-          "000017.Powheg.VBF.MuFup.ptj_gencut", "000018.Powheg.VBF.MuRdown.ptj_gencut", "000019.Powheg.VBF.MuRup.ptj_gencut",
-          "000020.Powheg.VBF.MuRdownMuFdown.ptj_gencut", "000021.Powheg.VBF.MuRupMuFup.ptj_gencut",
-          "000022.Powheg.VBF.Nominal.ptj_gencut_7TeV", "000023.Powheg.VBF.Nominal.7TeV_noshower", "000024.Powheg.W2jets.Nominal.bornsuppfact.Hpp",
-          "000025.Powheg.W2jets.Nominal.CT10as", "000026.Powheg.W2jets.Nominal.NNPDF23_as_118", "000027.Powheg.W2jets.Nominal.MSTW2008nlo68cl",
-          "000028.Powheg.W2jets.Nominal.MSTW2008nlo90cl", "000029.Powheg.W2jets.Nominal.CT10", "000030.Powheg.W2jets.Nominal.CT10117",
-          "000031.Powheg.W2jets.Nominal.CT10119", "000032.Powheg.W2jets.Nominal.electron", "000033.Powheg.VBF.Nominal.Hpp",
-          "000034.Powheg.VBFW.electron"]
+          
+          "000008.Powheg.W2jets.Nominal.7TeV", "000009.Powheg.W2jets.MuFdown.7TeV",
+          "000010.Powheg.W2jets.MuFup.7TeV", "000011.Powheg.W2jets.MuRdown.7TeV",
+          "000012.Powheg.W2jets.MuRup.7TeV", "000013.Powheg.W2jets.MuRdownMuFdown.7TeV",
+          "000014.Powheg.W2jets.MuRupMuFup.7TeV",
+          
+          "000015.Powheg.VBF.Nominal.ptj_gencut", "000016.Powheg.VBF.MuFdown.ptj_gencut",
+          "000017.Powheg.VBF.MuFup.ptj_gencut", "000018.Powheg.VBF.MuRdown.ptj_gencut",
+          "000019.Powheg.VBF.MuRup.ptj_gencut", "000020.Powheg.VBF.MuRdownMuFdown.ptj_gencut",
+          "000021.Powheg.VBF.MuRupMuFup.ptj_gencut"
+      
+          "000022.Powheg.VBF.Nominal.7TeV", "000023.Powheg.VBF.MuFdown.7TeV",
+          "000024.Powheg.VBF.MuFup.7TeV", "000025.Powheg.VBF.MuRdown.7TeV",
+          "000026.Powheg.VBF.MuRup.7TeV", "000027.Powheg.VBF.MuRdownMuFdown.7TeV",
+          "000028.Powheg.VBF.MuRupMuFup.7TeV",
+      
+          "000029.Powheg.W2jets.Nominal.electron", "000030.Powheg.VBFW.electron",
+          "000031.Powheg.W2jets.Nominal.electron.7TeV", "000032.Powheg.VBFW.electron.7TeV"]
+          
+          # "000022.Powheg.VBF.Nominal.ptj_gencut_7TeV", "000023.Powheg.VBF.Nominal.7TeV_noshower", "000024.Powheg.W2jets.Nominal.bornsuppfact.Hpp",
+          # "000025.Powheg.W2jets.Nominal.CT10as", "000026.Powheg.W2jets.Nominal.NNPDF23_as_118", "000027.Powheg.W2jets.Nominal.MSTW2008nlo68cl",
+          # "000028.Powheg.W2jets.Nominal.MSTW2008nlo90cl", "000029.Powheg.W2jets.Nominal.CT10", "000030.Powheg.W2jets.Nominal.CT10117",
+          # "000031.Powheg.W2jets.Nominal.CT10119", "000032.Powheg.W2jets.Nominal.electron", "000033.Powheg.VBF.Nominal.Hpp",
+          # "000034.Powheg.VBFW.electron"
 
     dataset_names_1 = ["147294.min_n_tchannels_CKKW30", "147295.min_n_tchannels_CKKW30_MjjFilt",
 			"147296.min_n_tchannels_MuFdown", "147297.min_n_tchannels_MuFdown_MjjFilt",
