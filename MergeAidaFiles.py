@@ -16,7 +16,6 @@ powheg_w2jet_list_7TeV = ['000008','000009','000010','000011','000012','000013',
 powheg_vbfw_list  = ['000015','000016','000017','000018','000019','000020','000021']
 powheg_vbfw_list_7TeV  = ['000022','000023','000024','000025','000026','000027','000028']
 powheg_dict = dict(zip(dataset_number, dataset_names))
-print powheg_dict
 
 # Make a list of Aida files available in the current directory
 for folder in dataset_names:
