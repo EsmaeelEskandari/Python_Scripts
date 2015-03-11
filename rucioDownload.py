@@ -39,8 +39,8 @@ for DID in DIDs_to_download:
     if len(splitDID) == 1: formatedDID = splitDID[0]
     else: formatedDID = splitDID[1]
     
-    outputDir = options.outDir+"/"+formatedDID+"/"
+    outputDir = "--dir="+options.outDir+"/"
     ensure_dir(outputDir)
-    cmd = "rucio download --dir={0} {1}:{2}".format(outputDir,options.scopeName,formatedDID)
+    cmd = "rucio download {0} {1}:{2}".format(outputDir,options.scopeName,formatedDID)
     os.system(cmd)
     
