@@ -33,10 +33,14 @@ for folder in dataset_names:
     YodaFiles = glob.glob("*.yoda*")
     Yoda_Files = []
     # yodamerge does not like file names ending with .yoda.#
+    proc = subprocess.Popen(["pwd"], stdout=subprocess.PIPE, shell=True)
+    (pwd,err) = proc.communicate()
+    print pwd.strip()
     for file in YodaFiles:
-        splitFile = file.split(".")
-        if splitFile[-1] not "yoda":
-            Yoda_Files.append(".".join(splitFile))
+        fileName, fileExt = os.path.splitext(pwd.strip()+'/'+file)
+        if fileExt != ".yoda":
+            os.rename(file,fileName)
+            Yoda_Files.append(fileName)
         else: Yoda_Files.append(file)
     del YodaFiles
     i = len(Yoda_Files)
