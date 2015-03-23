@@ -11,17 +11,19 @@ hf = ROOT.TFile("VBF_Systematics.root", "RECREATE")
 datasets = GetListDataset('datasets')
 dataset_names = GetListDataset('dataset_names')
 exp_hist_list = GetListDataset('exp_hist_list')
-hist_list = GetListDataset('hist_list')
+# hist_list = GetListDataset('hist_list')
 cross_sections = GetListDataset('cross_sections')
-title_list = GetListDataset('title_list')
-x_axis_list = GetListDataset('x_axis_list')
-y_axis_list = GetListDataset('y_axis_list')
-y_axis_list_norm = GetListDataset('y_axis_list_norm')
+# title_list = GetListDataset('title_list')
+# x_axis_list = GetListDataset('x_axis_list')
+# y_axis_list = GetListDataset('y_axis_list')
+# y_axis_list_norm = GetListDataset('y_axis_list_norm')
+histDict = GetListDataset('dictList')
+analysis = 'WJETS_SYST_NEWANALYSIS'
 
-def StyleHistogram(index, h1):
-    h1.SetTitle(title_list[index])
-    h1.GetXaxis().SetTitle(x_axis_list[index])
-    h1.GetYaxis().SetTitle(y_axis_list[index])
+def StyleHistogram(h1,titles):
+    h1.SetTitle(titles[0])
+    h1.GetXaxis().SetTitle(titles[1])
+    h1.GetYaxis().SetTitle(titles[2])
     h1.SetOption("HIST E")
     
 def StyleCutFlow(h1):
@@ -42,13 +44,6 @@ def StyleTH2(th2):
     th2.GetYaxis().SetTitle("Dijet Mass [GeV]")
     th2.GetZaxis().SetTitle("(1/#sigma) d#sigma/d#m_{jj}dN_{jets}")
     th2.SetOption("LEGO2 0")
-	
-def StyleData(index, h1):
-	h1.SetTitle(title_list[index])
-	h1.GetXaxis().SetTitle(x_axis_list[index])
-	h1.GetYaxis().SetTitle(y_axis_list[index])
-	h1.SetMarkerStyle(20)
-	h1.SetMarkerSize(0.9)
     
 def CompileDijetMass(ExclMjj,th2_hist):
     # x-axis is the number of jets in event
@@ -68,26 +63,6 @@ def CompileDijetMass(ExclMjj,th2_hist):
         th2_hist.SetBinError(jet_num+1,bin,bin_err[bin])
         
     return th2_hist
-
-#Setup AMIClient.	
-#This works only on my laptop, otherwise you need to run 'ami auth'
-# client = AMIClient()
-# if not os.path.exists(AMI_CONFIG):
-#     create_auth_config()
-# client.read_config(AMI_CONFIG)
-
-if os.path.exists("Exp_Data_arXiv12011276.root") == True:
-	hf.mkdir("Exp_Data_2012")
-	hf.cd("Exp_Data_2012")
-	exp_data = ROOT.TFile.Open("Exp_Data_arXiv12011276.root")
-	for index, hist in enumerate(exp_hist_list):
-		histogram = exp_data.Get(hist)
-		hf.cd("Exp_Data_2012")
-		StyleData(index, histogram)
-		histogram.Write()
-		del histogram
-	exp_data.Close()
-	hf.cd()
 
 # Folder names must be the same as in the dataset_names list in Aux_Functions.py
 # I could try to get the script to just to check for run number in folder name (do this later)
@@ -113,16 +88,16 @@ for idx,folder in enumerate(dataset_names):
         file_name = file_name[0]
         _h_xsecs.GetXaxis().SetBinLabel(idx+1,file_name)
         root_file = ROOT.TFile.Open(file_name+".root")
-        for index, hist in enumerate(hist_list):
-            if index > len(title_list)-1: index = index-len(title_list)
+        for hist in histDict:
             # No normalization
-            histogram = root_file.Get(hist)
+            histo = root_file.Get(analysis+'/'+hist)
+            histogram = histo.Clone(hist)
             hf.cd(folder)
-            StyleHistogram(index, histogram)
+            StyleHistogram(histogram,histDict[hist])
             histogram.Write()
             # Clone root histograms, normalize to XS, and move to Normalized_XS directory
             histogram_norm = histogram.Clone(hist+"_norm")
-            histogram_norm.GetYaxis().SetTitle("(1/#sigma) "+y_axis_list_norm[index])
+            histogram_norm.GetYaxis().SetTitle("(1/#sigma) "+histDict[hist][3])
             histogram_norm.Scale(1.0/xsec)
             ROOT.gDirectory.cd("Normalized_XS")
             histogram_norm.Write()
