@@ -70,13 +70,13 @@ def CompileDijetMass(ExclMjj,th2_hist):
 _h_xsecs = ROOT.TH1F("Cross_Sections","Cross_Sections",len(dataset_names),0,len(dataset_names))
 _h_xsecs.GetYaxis().SetTitle("Cross Section [pb]")
 idx = 0
-for folder, xsec_pair in dataset_names.iteritems():
+for folder in sorted(dataset_names):
     idx += 1
     if os.path.exists(folder+"/") == True: # and not os.listdir("./"+folder+"/"):
         th2_hist_30 = ROOT.TH2F( "hmj1j2_wvbf", "hmj1j2_wvbf", 10, -0.5, 9.5, 200, 0, 5000 )
         # First get the crossSection_mean and GenFiltEff_mean for this dataset from AMI for normalizations
-        xsec = xsec_pair[0]
-        #effic = xsec_pair[1] # Do not use efficiency for MjjFilt datasets
+        xsec = dataset_names[folder][0]
+        #effic = dataset_names[folder][1] # Do not use efficiency for MjjFilt datasets
         print folder, xsec
 
         # histogram manipulation and such
