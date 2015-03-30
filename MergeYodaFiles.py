@@ -134,7 +134,7 @@ for folder in dataset_names:
         if not Yoda_Files: continue
         # Run yodamerge.py over every file in the Yoda_Files list.
         arguments = "%s" % " ".join(map(str, Yoda_Files))
-        cmd = "yodamerge -o merged.yoda "+arguments
+        cmd = "yodamerge --assume-normalized -o merged.yoda "+arguments
         os.system(cmd)
 		
     # Convert merged.yoda file to merged.root file and rename to dataset
