@@ -69,14 +69,14 @@ def CompileDijetMass(ExclMjj,th2_hist):
 # Root file needs to be named after the dataset run number
 _h_xsecs = ROOT.TH1F("Cross_Sections","Cross_Sections",len(dataset_names),0,len(dataset_names))
 _h_xsecs.GetYaxis().SetTitle("Cross Section [pb]")
-for idx,folder in enumerate(dataset_names):
-#for folder, data in zip(dataset_names, datasets):
+idx = 0
+for folder, xsec_pair in dataset_names.iteritems():
+    idx += 1
     if os.path.exists(folder+"/") == True: # and not os.listdir("./"+folder+"/"):
         th2_hist_30 = ROOT.TH2F( "hmj1j2_wvbf", "hmj1j2_wvbf", 10, -0.5, 9.5, 200, 0, 5000 )
         # First get the crossSection_mean and GenFiltEff_mean for this dataset from AMI for normalizations
-        xsec = cross_sections[idx][0]
-        #effic = cross_sections[idx][1] # Do not use efficiency for MjjFilt datasets
-        _h_xsecs.Fill(idx,xsec)
+        xsec = xsec_pair[0]
+        #effic = xsec_pair[1] # Do not use efficiency for MjjFilt datasets
         print folder, xsec
 
         # histogram manipulation and such
@@ -86,7 +86,8 @@ for idx,folder in enumerate(dataset_names):
         ROOT.gDirectory.mkdir("Normalized_XS")
         file_name = folder.split('.')
         file_name = file_name[0]
-        _h_xsecs.GetXaxis().SetBinLabel(idx+1,file_name)
+        _h_xsecs.GetXaxis().SetBinLabel(idx,file_name)
+        _h_xsecs.Fill(idx,xsec)
         root_file = ROOT.TFile.Open(file_name+".root")
         for hist in histDict:
             # No normalization
