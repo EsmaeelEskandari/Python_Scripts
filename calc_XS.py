@@ -16,6 +16,7 @@ def getTheWeights(eventBlock,num_shifts):
 	
 shifts = ["Nominal", "MuRFdown", "MuFdown", "MuRdown", "MuFup", "MuRup", "MuRFup",
           "NNPDF23_as_118", "CT10as", "MSTW2008nlo68cl", "MSTW2008nlo90cl", "CT10_117", "CT10_119"]
+shifts = ["Nominal"]
 num_shifts = len(shifts)
 
 numEvents = 0

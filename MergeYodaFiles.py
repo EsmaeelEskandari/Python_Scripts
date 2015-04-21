@@ -15,27 +15,31 @@ powheg_w2jet_list = ['000001','000002','000003','000004','000005','000006','0000
 powheg_w2jet_list_7TeV = ['000008','000009','000010','000011','000012','000013','000014']
 powheg_vbfw_list  = ['000015','000016','000017','000018','000019','000020','000021']
 powheg_vbfw_list_7TeV  = ['000022','000023','000024','000025','000026','000027','000028']
-powheg_dict = dict(zip(dataset_number, dataset_names))
+powheg_dict = {}
+
+keys = dataset_names.keys()
+keys.sort(reverse=True)
+for key in keys:
+    powheg_dict[key.split('.')[0]] = key
 
 # Make a list of yoda files available in the current directory
-for folder in dataset_names:
+for folder in keys:
     current_dir = folder+"/"
     if os.path.exists(current_dir) != True: continue
     file_name = folder.split('.')[0]
-    
+
     os.chdir(current_dir)
     if opts.skipMerged:
         file_exists = os.path.isfile(file_name+".root")
         if file_exists:
             os.chdir("..")
             continue
-        
+
     YodaFiles = glob.glob("*.yoda*")
     Yoda_Files = []
     # yodamerge does not like file names ending with .yoda.#
     proc = subprocess.Popen(["pwd"], stdout=subprocess.PIPE, shell=True)
     (pwd,err) = proc.communicate()
-    print pwd.strip()
     for file in YodaFiles:
         fileName, fileExt = os.path.splitext(pwd.strip()+'/'+file)
         if fileExt != ".yoda":
@@ -136,7 +140,7 @@ for folder in dataset_names:
         arguments = "%s" % " ".join(map(str, Yoda_Files))
         cmd = "yodamerge --assume-normalized -o merged.yoda "+arguments
         os.system(cmd)
-		
+
     # Convert merged.yoda file to merged.root file and rename to dataset
     # run number (found from the folder name).
     y2r_cmd = ["yoda2root","merged.yoda"]
@@ -150,10 +154,10 @@ for folder in dataset_names:
         else:
             print """Command '{0}' not found!!!""".format(y2r_cmd[0])
             raise
-		
+
     # Remove the merged.yoda file in case the script fails.
     # This keeps you from having to delete them by hand before re-running script.
     os.system("mv merged.yoda merged.save")
-	
+
     # Prepare for next folder
     os.chdir("..")
