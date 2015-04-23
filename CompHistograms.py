@@ -211,7 +211,7 @@ def PlotCurves(histograms,NORMED_XS,NORMED_INT,file_name,axisLabels=None,legents
 
     # margins :
     lx1,lx2=0.60,0.90 
-    ly1,ly2=0.9-0.05*REPNFIL,0.89
+    ly1,ly2=0.5-0.05*REPNFIL,0.49
     ptitx1,ptitx2=0.01,lx1+0.1
     ptity1,ptity2=0.91,0.996
 
@@ -221,7 +221,7 @@ def PlotCurves(histograms,NORMED_XS,NORMED_INT,file_name,axisLabels=None,legents
     leg.SetFillColor(0)
     leg.SetShadowColor(0)
     leg.SetBorderSize(0)
-    if legents==None: legents = histograms
+    if legents==None: legents = histograms.split("/")[1]
     for i in range(REPNFIL):
         leg.AddEntry(hvect1[i],legents[i],"pl")
     leg.Draw()
@@ -378,6 +378,9 @@ print """Or type "all" to plot all histograms in root file separately."""
 histString = raw_input("Histograms: ")
 histString = histString.replace(" ","")
 histKeys = histString.split(",")
+legendInput = raw_input("Lengend Entries: ")
+legendInput = legendInput.replace(" ","")
+legents = legendInput.split(",")
 
 if histString == "all":
     for histo in possibles:
@@ -389,6 +392,6 @@ elif sorted(histKeys) == sorted(list(set(histKeys) & set(presets.keys()))):
         PlotCurves(histograms,NORMED_XS,NORMED_INT,file_name,axisLabels=labels)
 else:
     histograms = histString.split(",")
-    PlotCurves(histograms,NORMED_XS,NORMED_INT,file_name)
+    PlotCurves(histograms,NORMED_XS,NORMED_INT,file_name,legents=legents)
 
 ROOT.gROOT.ProcessLine(".q")

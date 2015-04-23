@@ -271,8 +271,9 @@ def PlotCurves(hist_base,NORMED_XS,NORMED_INT,fnames1,legents,histpaths):
 NORMED_XS = options.normalizeXS
 NORMED_INT = options.integrate
 #histograms = ["FirstJetPt_nocuts","SecondJetPt_nocuts","BosonPt_nocuts","DijetMass_nocuts"]
-histograms = ["FirstJetPt_2jet_1","SecondJetPt_2jet_1","WBosonPt_1","DijetMass_2jet_1"]
-histograms = histograms[0:3]
+#histograms = ["FirstJetPt_2jet_1","SecondJetPt_2jet_1","WBosonPt_1","DijetMass_2jet_1"]
+histograms = ["WBosonEta_SR_1","WBosonEta_antiCJV_1","WBosonEta_antiOLV_1"]
+#histograms = histograms[0:3]
 
 if (NORMED_XS): 
     for j,base_name in enumerate(histograms):
@@ -295,7 +296,8 @@ else:
 #legents = ["Nominal", "MuFdown", "MuFup", "MuRdown", "MuRup", "MuR/Fdown", "MuR/Fup"]
 #legents = ["Nominal", "CKKW(20->30)", "MPI_1", "MPI_2", "Shower_1"]
 #legents = ["Sherpa", "Herwig++", "Pythia"]
-legents = ["Nominal (CT10_as_118)", "CT10_as_113", "NNPDF23_as_118", "MSTW2008nlo68cl", "MSTW2008nlo90cl"]
+#legents = ["Nominal (CT10_as_118)", "CT10_as_113", "NNPDF23_as_118", "MSTW2008nlo68cl", "MSTW2008nlo90cl"]
+legents = ["SR", "!JC", "!LC"]
 
 # Be sure directory names end in /
 #histpaths = ["129930.Nominal_Sherpa_Background_MjjFilt/"]
@@ -303,7 +305,8 @@ legents = ["Nominal (CT10_as_118)", "CT10_as_113", "NNPDF23_as_118", "MSTW2008nl
 #histpaths = ["129930.Nominal_Sherpa_Background_MjjFilt/","147311.CKKW30_MjjFilt/","147317.mpi1_MjjFilt/","147319.mpi2_MjjFilt/","147321.Shower1_MjjFilt/"]
 #histpaths = ["000001.Powheg.W2jets.Nominal.bornsuppfact/","000002.Powheg.W2jets.MuFdown.bornsuppfact/","000003.Powheg.W2jets.MuFup.bornsuppfact/","000004.Powheg.W2jets.MuRdown.bornsuppfact/","000005.Powheg.W2jets.MuRup.bornsuppfact/","000006.Powheg.W2jets.MuRdownMuFdown.bornsuppfact/","000007.Powheg.W2jets.MuRupMuFup.bornsuppfact/"]
 #histpaths = ["129930.Nominal_Sherpa_Background_MjjFilt/", "000024.Powheg.W2jets.Nominal.bornsuppfact.Hpp/", "000001.Powheg.W2jets.Nominal.bornsuppfact/"]
-histpaths = ["000029.Powheg.W2jets.Nominal.CT10/", "000025.Powheg.W2jets.Nominal.CT10as/", "000026.Powheg.W2jets.Nominal.NNPDF23_as_118/", "000027.Powheg.W2jets.Nominal.MSTW2008nlo68cl/", "000028.Powheg.W2jets.Nominal.MSTW2008nlo90cl/"]
+#histpaths = ["000029.Powheg.W2jets.Nominal.CT10/", "000025.Powheg.W2jets.Nominal.CT10as/", "000026.Powheg.W2jets.Nominal.NNPDF23_as_118/", "000027.Powheg.W2jets.Nominal.MSTW2008nlo68cl/", "000028.Powheg.W2jets.Nominal.MSTW2008nlo90cl/"]
+histpaths = ["000001.Powheg.W2jets.Nominal.bornsuppfact/","000015.Powheg.VBF.Nominal.ptj_gencut/"]
 
 for hist_base in histograms:
     PlotCurves(hist_base,NORMED_XS,NORMED_INT,fnames1,legents,histpaths)
