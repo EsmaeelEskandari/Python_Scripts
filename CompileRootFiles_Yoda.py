@@ -12,7 +12,7 @@ datasets = GetListDataset('datasets')
 dataset_names = GetListDataset('dataset_names')
 exp_hist_list = GetListDataset('exp_hist_list')
 # hist_list = GetListDataset('hist_list')
-cross_sections = GetListDataset('cross_sections')
+# cross_sections = GetListDataset('cross_sections')
 # title_list = GetListDataset('title_list')
 # x_axis_list = GetListDataset('x_axis_list')
 # y_axis_list = GetListDataset('y_axis_list')
@@ -32,8 +32,9 @@ def StyleCutFlow(h1):
     h1.GetXaxis().SetBinLabel(4, "p_{T,1} > 80GeV")
     h1.GetXaxis().SetBinLabel(5, "p_{T,2} > 60GeV")
     h1.GetXaxis().SetBinLabel(6, "M_{jj} > 500GeV")
-    h1.GetXaxis().SetBinLabel(7, "CJV")
-    h1.GetXaxis().SetBinLabel(8, "OLV")
+    h1.GetXaxis().SetBinLabel(7, "#Delta #eta > 2")
+    h1.GetXaxis().SetBinLabel(8, "CJV")
+    h1.GetXaxis().SetBinLabel(9, "OLV")
     #h1.GetXaxis().SetBinLabel(9, "")
     #h1.GetXaxis().SetBinLabel(10, "")
     #h1.GetXaxis().SetBinLabel(11, "")
@@ -92,6 +93,9 @@ for folder in sorted(dataset_names):
         for hist in histDict:
             # No normalization
             histo = root_file.Get(analysis+'/'+hist)
+            if not histo:
+                print "No histogram for {0} found.".format(hist)
+                continue
             histogram = histo.Clone(hist)
             hf.cd(folder)
             StyleHistogram(histogram,histDict[hist])
