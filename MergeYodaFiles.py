@@ -60,7 +60,12 @@ for folder in keys:
         os.system(cmd)
         cmd = "cp ../{0}/merged.save ./merged_Wp.yoda".format(source_Wp_dir)
         os.system(cmd)
+        cmd = "cp ../{0}/merged_add.save ./merged_add_Wm.yoda".format(source_Wm_dir)
+        os.system(cmd)
+        cmd = "cp ../{0}/merged_add.save ./merged_add_Wp.yoda".format(source_Wp_dir)
+        os.system(cmd)
         os.system("yodamerge -o merged.yoda merged_Wm.yoda merged_Wp.yoda")
+        os.system("yodamerge -o merged_add.yoda merged_add_Wm.yoda merged_add_Wp.yoda")
     elif file_name in powheg_vbfw_list:
         dest_Wpm = file_name
         source_Wm = str(int(file_name) + 185834)
@@ -71,7 +76,12 @@ for folder in keys:
         os.system(cmd)
         cmd = "cp ../{0}/merged.save ./merged_Wp.yoda".format(source_Wp_dir)
         os.system(cmd)
+        cmd = "cp ../{0}/merged_add.save ./merged_add_Wm.yoda".format(source_Wm_dir)
+        os.system(cmd)
+        cmd = "cp ../{0}/merged_add.save ./merged_add_Wp.yoda".format(source_Wp_dir)
+        os.system(cmd)
         os.system("yodamerge -o merged.yoda merged_Wm.yoda merged_Wp.yoda")
+        os.system("yodamerge -o merged_add.yoda merged_add_Wm.yoda merged_add_Wp.yoda")
     elif file_name in powheg_w2jet_list_7TeV:
         dest_Wpm = file_name
         source_Wm = str(int(file_name) + 185924)
@@ -82,7 +92,12 @@ for folder in keys:
         os.system(cmd)
         cmd = "cp ../{0}/merged.save ./merged_Wp.yoda".format(source_Wp_dir)
         os.system(cmd)
+        cmd = "cp ../{0}/merged_add.save ./merged_add_Wm.yoda".format(source_Wm_dir)
+        os.system(cmd)
+        cmd = "cp ../{0}/merged_add.save ./merged_add_Wp.yoda".format(source_Wp_dir)
+        os.system(cmd)
         os.system("yodamerge -o merged.yoda merged_Wm.yoda merged_Wp.yoda")
+        os.system("yodamerge -o merged_add.yoda merged_add_Wm.yoda merged_add_Wp.yoda")
     elif file_name in powheg_vbfw_list_7TeV:
         dest_Wpm = file_name
         source_Wm = str(int(file_name) + 185926)
@@ -93,7 +108,12 @@ for folder in keys:
         os.system(cmd)
         cmd = "cp ../{0}/merged.save ./merged_Wp.yoda".format(source_Wp_dir)
         os.system(cmd)
+        cmd = "cp ../{0}/merged_add.save ./merged_add_Wm.yoda".format(source_Wm_dir)
+        os.system(cmd)
+        cmd = "cp ../{0}/merged_add.save ./merged_add_Wp.yoda".format(source_Wp_dir)
+        os.system(cmd)
         os.system("yodamerge -o merged.yoda merged_Wm.yoda merged_Wp.yoda")
+        os.system("yodamerge -o merged_add.yoda merged_add_Wm.yoda merged_add_Wp.yoda")
     elif file_name == "000029":
         source_Wm = "185836"
         source_Wp = "185837"
@@ -103,7 +123,12 @@ for folder in keys:
         os.system(cmd)
         cmd = "cp ../{0}/merged.save ./merged_Wp.yoda".format(source_Wp_dir)
         os.system(cmd)
+        cmd = "cp ../{0}/merged_add.save ./merged_add_Wm.yoda".format(source_Wm_dir)
+        os.system(cmd)
+        cmd = "cp ../{0}/merged_add.save ./merged_add_Wp.yoda".format(source_Wp_dir)
+        os.system(cmd)
         os.system("yodamerge -o merged.yoda merged_Wm.yoda merged_Wp.yoda")
+        os.system("yodamerge -o merged_add.yoda merged_add_Wm.yoda merged_add_Wp.yoda")
     elif file_name == "000030":
         source_Wm = "185847"
         source_Wp = "185848"
@@ -113,7 +138,12 @@ for folder in keys:
         os.system(cmd)
         cmd = "cp ../{0}/merged.save ./merged_Wp.yoda".format(source_Wp_dir)
         os.system(cmd)
+        cmd = "cp ../{0}/merged_add.save ./merged_add_Wm.yoda".format(source_Wm_dir)
+        os.system(cmd)
+        cmd = "cp ../{0}/merged_add.save ./merged_add_Wp.yoda".format(source_Wp_dir)
+        os.system(cmd)
         os.system("yodamerge -o merged.yoda merged_Wm.yoda merged_Wp.yoda")
+        os.system("yodamerge -o merged_add.yoda merged_add_Wm.yoda merged_add_Wp.yoda")
     elif file_name == "000031":
         source_Wm = "185930"
         source_Wp = "185931"
@@ -123,7 +153,12 @@ for folder in keys:
         os.system(cmd)
         cmd = "cp ../{0}/merged.save ./merged_Wp.yoda".format(source_Wp_dir)
         os.system(cmd)
+        cmd = "cp ../{0}/merged_add.save ./merged_add_Wm.yoda".format(source_Wm_dir)
+        os.system(cmd)
+        cmd = "cp ../{0}/merged_add.save ./merged_add_Wp.yoda".format(source_Wp_dir)
+        os.system(cmd)
         os.system("yodamerge -o merged.yoda merged_Wm.yoda merged_Wp.yoda")
+        os.system("yodamerge -o merged_add.yoda merged_add_Wm.yoda merged_add_Wp.yoda")
     elif file_name == "000032":
         source_Wm = "185946"
         source_Wp = "185947"
@@ -133,20 +168,44 @@ for folder in keys:
         os.system(cmd)
         cmd = "cp ../{0}/merged.save ./merged_Wp.yoda".format(source_Wp_dir)
         os.system(cmd)
+        cmd = "cp ../{0}/merged_add.save ./merged_add_Wm.yoda".format(source_Wm_dir)
+        os.system(cmd)
+        cmd = "cp ../{0}/merged_add.save ./merged_add_Wp.yoda".format(source_Wp_dir)
+        os.system(cmd)
         os.system("yodamerge -o merged.yoda merged_Wm.yoda merged_Wp.yoda")
+        os.system("yodamerge -o merged_add.yoda merged_add_Wm.yoda merged_add_Wp.yoda")
+    elif file_name == "000033":
+        os.system("yodamerge -o merged.yoda merged_Wm.yoda merged_Wp.yoda")
+        os.system("yodamerge -o merged_add.yoda merged_add_Wm.yoda merged_add_Wp.yoda")
+    elif file_name == "000034":
+        os.system("yodamerge -o merged.yoda merged_Wm.yoda merged_Wp.yoda")
+        os.system("yodamerge -o merged_add.yoda merged_add_Wm.yoda merged_add_Wp.yoda")
     else:
         if not Yoda_Files: continue
         # Run yodamerge.py over every file in the Yoda_Files list.
         arguments = "%s" % " ".join(map(str, Yoda_Files))
         cmd = "yodamerge --assume-normalized -o merged.yoda "+arguments
         os.system(cmd)
+        cmd = "yodamerge -o merged_add.yoda "+arguments
+        os.system(cmd)
 
     # Convert merged.yoda file to merged.root file and rename to dataset
     # run number (found from the folder name).
     y2r_cmd = ["yoda2root","merged.yoda"]
     try:
-        subprocess.call(["yoda2root","merged.yoda"])
+        subprocess.call(y2r_cmd)
         cmd = "mv merged.root "+file_name+".root"
+        os.system(cmd)
+    except OSError as e:
+        if e.errno == os.errno.ENOENT:
+            print "File {0} in {1} doesn't exist!".format(y2r_cmd,folder)
+        else:
+            print """Command '{0}' not found!!!""".format(y2r_cmd[0])
+            raise
+    y2r_cmd = ["yoda2root","merged_add.yoda"]
+    try:
+        subprocess.call(y2r_cmd)
+        cmd = "mv merged_add.root "+file_name+"_add.root"
         os.system(cmd)
     except OSError as e:
         if e.errno == os.errno.ENOENT:
@@ -158,6 +217,7 @@ for folder in keys:
     # Remove the merged.yoda file in case the script fails.
     # This keeps you from having to delete them by hand before re-running script.
     os.system("mv merged.yoda merged.save")
+    os.system("mv merged_add.yoda merged_add.save")
 
     # Prepare for next folder
     os.chdir("..")

@@ -116,7 +116,8 @@ def PlotCurves(histograms,NORMED_XS,NORMED_INT,file_name,axisLabels=None,legents
             print "Define more line attributes, too many curves...check lines 63-67"
     
     if options.new_rebin == -1:
-        rebin = array.array("d",[0,100,200,300,400,500,600,700,800,900,1000,1250,1500,1750,2000,2250,2500,2750,3000,3500,5000])
+        #rebin = array.array("d",[0,100,200,300,400,500,545,615,695,785,880,985,1100,1200,1350,1500,1750,2000,2300,2700,3200,4000,5000])
+        rebin = array.array("d",[0,100,200,300,400,500,550,625,700,775,875,975,1100,1200,1350,1500,1750,2000,2300,2700,3200,4000,5000])
     elif options.new_rebin is not None:
         rebin = options.new_rebin
     else: rebin = 1

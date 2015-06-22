@@ -44,4 +44,4 @@ for input_file in input_list:
                 del histogram
                 fillHist = False
             
-    root_file.Write()
+    root_file.Close()

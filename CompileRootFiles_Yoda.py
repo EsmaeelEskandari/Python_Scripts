@@ -33,8 +33,8 @@ def StyleCutFlow(h1):
     h1.GetXaxis().SetBinLabel(5, "p_{T,2} > 60GeV")
     h1.GetXaxis().SetBinLabel(6, "M_{jj} > 500GeV")
     h1.GetXaxis().SetBinLabel(7, "#Delta #eta > 2")
-    h1.GetXaxis().SetBinLabel(8, "CJV")
-    h1.GetXaxis().SetBinLabel(9, "OLV")
+    h1.GetXaxis().SetBinLabel(8, "OLV")
+    h1.GetXaxis().SetBinLabel(9, "CJV")
     #h1.GetXaxis().SetBinLabel(9, "")
     #h1.GetXaxis().SetBinLabel(10, "")
     #h1.GetXaxis().SetBinLabel(11, "")
@@ -90,15 +90,20 @@ for folder in sorted(dataset_names):
         _h_xsecs.GetXaxis().SetBinLabel(idx,file_name)
         _h_xsecs.Fill(idx,xsec)
         root_file = ROOT.TFile.Open(file_name+".root")
+        root_file_add = ROOT.TFile.Open(file_name+"_add.root")
         for hist in histDict:
             # No normalization
-            histo = root_file.Get(analysis+'/'+hist)
+            if "CutFlow" in hist:
+                histo = root_file_add.Get(analysis+'/'+hist)
+            else:
+                histo = root_file.Get(analysis+'/'+hist)
             if not histo:
                 print "No histogram for {0} found.".format(hist)
                 continue
             histogram = histo.Clone(hist)
             hf.cd(folder)
             StyleHistogram(histogram,histDict[hist])
+            if "CutFlow" in hist: StyleCutFlow(histogram)
             histogram.Write()
             # Clone root histograms, normalize to XS, and move to Normalized_XS directory
             histogram_norm = histogram.Clone(hist+"_norm")
