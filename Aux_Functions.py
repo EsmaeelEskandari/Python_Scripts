@@ -1239,7 +1239,7 @@ def GetListDataset(list_name):
      'dy12_1D_antiLCantiJC': ('#Delta y (j1,j2) in !LC!JC Region',
                            '#Delta y (j1,j2)',
                            'd#sigma/d#Delta y (j1,j2) [pb]'
-                           'd#sigma/d#Delta y (j1,j2) [events]')
+                           'd#sigma/d#Delta y (j1,j2) [events]'),
      'dy12_1D_highmass15': ('#Delta y (j1,j2) in M_{jj}>1.5TeV Region',
                            '#Delta y (j1,j2)',
                            'd#sigma/d#Delta y (j1,j2) [pb]'
