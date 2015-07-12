@@ -1135,7 +1135,7 @@ def GetListDataset(list_name):
      'DijetMass_CR_SR_DEta2less_1': ('M_{jj} with #Delta#eta < 2 - SR',
                            'M_{jj} [GeV]',
                            'd#sigma/dM_{jj} [pb]',
-                           'd#sigma/dM_{jj} [events]') 
+                           'd#sigma/dM_{jj} [events]'),
      'RegionPopWeight_1': ('Weighted Region Population',
                            'Regions',
                            'Event Weight [pb]'
