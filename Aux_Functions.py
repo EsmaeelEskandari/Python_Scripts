@@ -1138,163 +1138,163 @@ def GetListDataset(list_name):
                            'd#sigma/dM_{jj} [events]'),
      'RegionPopWeight_1': ('Weighted Region Population',
                            'Regions',
-                           'Event Weight [pb]'
+                           'Event Weight [pb]',
                            'Event Weight [events]'),
      'RegionPop_1': ('Region Population',
                            'Regions',
-                           'Events [events]'
+                           'Events [events]',
                            'Events [events]'),
      'dijetmass_1D_antiJC': ('Dijet Mass in !JC Region',
                            'M_{jj} [GeV]',
-                           'd#sigma/dM_{jj} [pb]'
+                           'd#sigma/dM_{jj} [pb]',
                            'd#sigma/dM_{jj} [events]'),
      'dijetmass_1D_antiLC': ('Dijet Mass in !LC Region',
                            'M_{jj} [GeV]',
-                           'd#sigma/dM_{jj} [pb]'
+                           'd#sigma/dM_{jj} [pb]',
                            'd#sigma/dM_{jj} [events]'),
      'dijetmass_1D_antiLCantiJC': ('Dijet Mass in !LC!JC Region',
                            'M_{jj} [GeV]',
-                           'd#sigma/dM_{jj} [pb]'
+                           'd#sigma/dM_{jj} [pb]',
                            'd#sigma/dM_{jj} [events]'),
      'dijetmass_1D_highmass15': ('Dijet Mass in M_{jj}>1.5TeV Region',
                            'M_{jj} [GeV]',
-                           'd#sigma/dM_{jj} [pb]'
+                           'd#sigma/dM_{jj} [pb]',
                            'd#sigma/dM_{jj} [events]'),
      'dijetmass_1D_highmass20': ('Dijet Mass in M_{jj}>2.0TeV Region',
                            'M_{jj} [GeV]',
-                           'd#sigma/dM_{jj} [pb]'
+                           'd#sigma/dM_{jj} [pb]',
                            'd#sigma/dM_{jj} [events]'),
      'dijetmass_1D_inclusive': ('Dijet Mass in Inclusive Region',
                            'M_{jj} [GeV]',
-                           'd#sigma/dM_{jj} [pb]'
+                           'd#sigma/dM_{jj} [pb]',
                            'd#sigma/dM_{jj} [events]'),
      'dijetmass_1D_signal': ('Dijet Mass in Signal Region',
                            'M_{jj} [GeV]',
-                           'd#sigma/dM_{jj} [pb]'
+                           'd#sigma/dM_{jj} [pb]',
                            'd#sigma/dM_{jj} [events]'),
      'dijetpt_1D_antiJC': ('Dijet P_{T} in !JC Region',
                            'P_{T} [GeV]',
-                           'd#sigma/dP_{T} [pb]'
+                           'd#sigma/dP_{T} [pb]',
                            'd#sigma/dP_{T} [events]'),
      'dijetpt_1D_antiLC': ('Dijet P_{T} in !LC Region',
                            'P_{T} [GeV]',
-                           'd#sigma/dP_{T} [pb]'
+                           'd#sigma/dP_{T} [pb]',
                            'd#sigma/dP_{T} [events]'),
      'dijetpt_1D_antiLCantiJC': ('Dijet P_{T} in !LC!JC Region',
                            'P_{T} [GeV]',
-                           'd#sigma/dP_{T} [pb]'
+                           'd#sigma/dP_{T} [pb]',
                            'd#sigma/dP_{T} [events]'),
      'dijetpt_1D_highmass15': ('Dijet P_{T} in M_{jj}>1.5TeV Region',
                            'P_{T} [GeV]',
-                           'd#sigma/dP_{T} [pb]'
+                           'd#sigma/dP_{T} [pb]',
                            'd#sigma/dP_{T} [events]'),
      'dijetpt_1D_highmass20': ('Dijet P_{T} in M_{jj}>2.0TeV Region',
                            'P_{T} [GeV]',
-                           'd#sigma/dP_{T} [pb]'
+                           'd#sigma/dP_{T} [pb]',
                            'd#sigma/dP_{T} [events]'),
      'dijetpt_1D_inclusive': ('Dijet P_{T} in Inclusive Region',
                            'P_{T} [GeV]',
-                           'd#sigma/dP_{T} [pb]'
+                           'd#sigma/dP_{T} [pb]',
                            'd#sigma/dP_{T} [events]'),
      'dijetpt_1D_signal': ('Dijet P_{T} in Signal Region',
                            'P_{T} [GeV]',
-                           'd#sigma/dP_{T} [pb]'
+                           'd#sigma/dP_{T} [pb]',
                            'd#sigma/dP_{T} [events]'),
      'dphi12_1D_antiJC': ('#Delta #phi (j1,j2) in !JC Region',
                            '#Delta #phi (j1,j2)',
-                           'd#sigma/d#Delta #phi (j1,j2) [pb]'
+                           'd#sigma/d#Delta #phi (j1,j2) [pb]',
                            'd#sigma/d#Delta #phi (j1,j2) [events]'),
      'dphi12_1D_antiLC': ('#Delta #phi (j1,j2) in !LC Region',
                            '#Delta #phi (j1,j2)',
-                           'd#sigma/d#Delta #phi (j1,j2) [pb]'
+                           'd#sigma/d#Delta #phi (j1,j2) [pb]',
                            'd#sigma/d#Delta #phi (j1,j2) [events]'),
      'dphi12_1D_antiLCantiJC': ('#Delta #phi (j1,j2) in !LC!JC Region',
                            '#Delta #phi (j1,j2)',
-                           'd#sigma/d#Delta #phi (j1,j2) [pb]'
+                           'd#sigma/d#Delta #phi (j1,j2) [pb]',
                            'd#sigma/d#Delta #phi (j1,j2) [events]'),
      'dphi12_1D_highmass15': ('#Delta #phi (j1,j2) in M_{jj}>1.5TeV Region',
                            '#Delta #phi (j1,j2)',
-                           'd#sigma/d#Delta #phi (j1,j2) [pb]'
+                           'd#sigma/d#Delta #phi (j1,j2) [pb]',
                            'd#sigma/d#Delta #phi (j1,j2) [events]'),
      'dphi12_1D_highmass20': ('#Delta #phi (j1,j2) in M_{jj}>2.0TeV Region',
                            '#Delta #phi (j1,j2)',
-                           'd#sigma/d#Delta #phi (j1,j2) [pb]'
+                           'd#sigma/d#Delta #phi (j1,j2) [pb]',
                            'd#sigma/d#Delta #phi (j1,j2) [events]'),
      'dphi12_1D_inclusive': ('#Delta #phi (j1,j2) in Inclusive Region',
                            '#Delta #phi (j1,j2)',
-                           'd#sigma/d#Delta #phi (j1,j2) [pb]'
+                           'd#sigma/d#Delta #phi (j1,j2) [pb]',
                            'd#sigma/d#Delta #phi (j1,j2) [events]'),
      'dphi12_1D_signal': ('#Delta #phi (j1,j2) in Signal Region',
                            '#Delta #phi (j1,j2)',
-                           'd#sigma/d#Delta #phi (j1,j2) [pb]'
+                           'd#sigma/d#Delta #phi (j1,j2) [pb]',
                            'd#sigma/d#Delta #phi (j1,j2) [events]'),
      'dy12_1D_antiJC': ('#Delta y (j1,j2) in !JC Region',
                            '#Delta y (j1,j2)',
-                           'd#sigma/d#Delta y (j1,j2) [pb]'
+                           'd#sigma/d#Delta y (j1,j2) [pb]',
                            'd#sigma/d#Delta y (j1,j2) [events]'),
      'dy12_1D_antiLC': ('#Delta y (j1,j2) in !LC Region',
                            '#Delta y (j1,j2)',
-                           'd#sigma/d#Delta y (j1,j2) [pb]'
+                           'd#sigma/d#Delta y (j1,j2) [pb]',
                            'd#sigma/d#Delta y (j1,j2) [events]'),
      'dy12_1D_antiLCantiJC': ('#Delta y (j1,j2) in !LC!JC Region',
                            '#Delta y (j1,j2)',
-                           'd#sigma/d#Delta y (j1,j2) [pb]'
+                           'd#sigma/d#Delta y (j1,j2) [pb]',
                            'd#sigma/d#Delta y (j1,j2) [events]'),
      'dy12_1D_highmass15': ('#Delta y (j1,j2) in M_{jj}>1.5TeV Region',
                            '#Delta y (j1,j2)',
-                           'd#sigma/d#Delta y (j1,j2) [pb]'
+                           'd#sigma/d#Delta y (j1,j2) [pb]',
                            'd#sigma/d#Delta y (j1,j2) [events]'),
      'dy12_1D_highmass20': ('#Delta y (j1,j2) in M_{jj}>2.0TeV Region',
                            '#Delta y (j1,j2)',
-                           'd#sigma/d#Delta y (j1,j2) [pb]'
+                           'd#sigma/d#Delta y (j1,j2) [pb]',
                            'd#sigma/d#Delta y (j1,j2) [events]'),
      'dy12_1D_inclusive': ('#Delta y (j1,j2) in Inclusive Region',
                            '#Delta y (j1,j2)',
-                           'd#sigma/d#Delta y (j1,j2) [pb]'
+                           'd#sigma/d#Delta y (j1,j2) [pb]',
                            'd#sigma/d#Delta y (j1,j2) [events]'),
      'dy12_1D_signal': ('#Delta y (j1,j2) in Signal Region',
                            '#Delta y (j1,j2)',
-                           'd#sigma/d#Delta y (j1,j2) [pb]'
+                           'd#sigma/d#Delta y (j1,j2) [pb]',
                            'd#sigma/d#Delta y (j1,j2) [events]'),
      'j1pt_1D_antiJC': ('Leading Jet P_{T} in !JC Region',
                            'P_{T} [GeV]',
-                           'd#sigma/dP_{T} [pb]'
+                           'd#sigma/dP_{T} [pb]',
                            'd#sigma/dP_{T} [events]'),
      'j1pt_1D_antiLC': ('Leading Jet P_{T} in !LC Region',
                            'P_{T} [GeV]',
-                           'd#sigma/dP_{T} [pb]'
+                           'd#sigma/dP_{T} [pb]',
                            'd#sigma/dP_{T} [events]'),
      'j1pt_1D_antiLCantiJC': ('Leading Jet P_{T} in !LC!JC Region',
                            'P_{T} [GeV]',
-                           'd#sigma/dP_{T} [pb]'
+                           'd#sigma/dP_{T} [pb]',
                            'd#sigma/dP_{T} [events]'),
      'j1pt_1D_highmass15': ('Leading Jet P_{T} in M_{jj}>1.5TeV Region',
                            'P_{T} [GeV]',
-                           'd#sigma/dP_{T} [pb]'
+                           'd#sigma/dP_{T} [pb]',
                            'd#sigma/dP_{T} [events]'),
      'j1pt_1D_highmass20': ('Leading Jet P_{T} in M_{jj}>2.0TeV Region',
                            'P_{T} [GeV]',
-                           'd#sigma/dP_{T} [pb]'
+                           'd#sigma/dP_{T} [pb]',
                            'd#sigma/dP_{T} [events]'),
      'j1pt_1D_inclusive': ('Leading Jet P_{T} in Inclusive Region',
                            'P_{T} [GeV]',
-                           'd#sigma/dP_{T} [pb]'
+                           'd#sigma/dP_{T} [pb]',
                            'd#sigma/dP_{T} [events]'),
      'j1pt_1D_signal': ('Leading Jet P_{T} in Inclusive Region',
                            'P_{T} [GeV]',
-                           'd#sigma/dP_{T} [pb]'
+                           'd#sigma/dP_{T} [pb]',
                            'd#sigma/dP_{T} [events]'),
      'ngapjets_1D_highmass15': ('Number of Jets in Gap in M_{jj}>1.5TeV Region',
                            'N_{jets}^{gap}',
-                           'd#sigma/dN_{jets}^{gap} [pb]'
+                           'd#sigma/dN_{jets}^{gap} [pb]',
                            'd#sigma/dN_{jets}^{gap} [events]'),
      'ngapjets_1D_highmass20': ('Number of Jets in Gap in M_{jj}>2.0TeV Region',
                            'N_{jets}^{gap}',
-                           'd#sigma/dN_{jets}^{gap} [pb]'
+                           'd#sigma/dN_{jets}^{gap} [pb]',
                            'd#sigma/dN_{jets}^{gap} [events]'),
      'ngapjets_1D_inclusive': ('Number of Jets in Gap in Inclusive Region',
                            'N_{jets}^{gap}',
-                           'd#sigma/dN_{jets}^{gap} [pb]'
+                           'd#sigma/dN_{jets}^{gap} [pb]',
                            'd#sigma/dN_{jets}^{gap} [events]') }
 
     list_of_lists = ['datasets', 'dataset_names', 'dataset_names_1', 'dataset_names_2', 'datasets_sig','datasets_sig_MjjFilt',
