@@ -25,17 +25,25 @@ def StyleHistogram(index, h1):
     h1.SetOption("HIST E")
     
 def StyleCutFlow(h1):
-    h1.GetXaxis().SetBinLabel(2,"No Cuts")
-    h1.GetXaxis().SetBinLabel(3, "WFinder and #geq 2jets") # WFinder include MET cut
-    h1.GetXaxis().SetBinLabel(4, "p_{T,1} > 80GeV")
-    h1.GetXaxis().SetBinLabel(5, "p_{T,2} > 60GeV")
-    h1.GetXaxis().SetBinLabel(6, "M_{jj} > 500GeV")
-    h1.GetXaxis().SetBinLabel(7, "#Delta #eta > 2")
-    h1.GetXaxis().SetBinLabel(8, "CJV")
-    h1.GetXaxis().SetBinLabel(9, "OLV")
-    #h1.GetXaxis().SetBinLabel(9, "")
-    #h1.GetXaxis().SetBinLabel(10, "")
-    #h1.GetXaxis().SetBinLabel(11, "")
+    h1.GetXaxis().SetBinLabel(1, "No Cuts")
+    h1.GetXaxis().SetBinLabel(2, "One W Boson")
+    h1.GetXaxis().SetBinLabel(3, "N_{jets} >= 2")
+    h1.GetXaxis().SetBinLabel(4, "MET > 25 GeV")
+    h1.GetXaxis().SetBinLabel(5, "p_{T,1} > 80GeV")
+    h1.GetXaxis().SetBinLabel(6, "p_{T,2} > 60GeV")
+    h1.GetXaxis().SetBinLabel(7, "M_{jj} > 500GeV")
+    h1.GetXaxis().SetBinLabel(8, "#Delta #eta > 2")
+    h1.GetXaxis().SetBinLabel(9, "M_{T}(W) > 40GeV")
+    h1.GetXaxis().SetBinLabel(10, "CJV")
+    h1.GetXaxis().SetBinLabel(11, "OLV")
+    h1.GetXaxis().SetBinLabel(12, "Signal Region")
+    
+def StyleRegPop(h1):
+    binNames = { 1: 'AllEvents', 2: 'Inclusive', 3: 'HighMass15', 4: 'HighMass20', 5: '!LC',
+                 6: '!JC', 7: '!LC!JC', 8: 'Signal', 9: 'aTGC_WpT500', 10: 'aTGC_WpT600',
+                 11: 'aTGC_WpT700', 12: 'aTGC_MT10', 13: 'aTGC_MT20', 14: 'aTGC_Mjj1000' }
+    for bin in binNames:
+        h1.GetXaxis().SetBinLabel(bin, binNames[bin])
     
 def StyleTH2(th2):
     th2.SetTitle("Differential Dijet Mass and N_{jets} Distribution")
@@ -119,14 +127,16 @@ for idx,folder in enumerate(dataset_names):
         for index, hist in enumerate(hist_list):
             if index > len(title_list)-1: index = index-len(title_list)
             # No normalization
+            if not root_file.GetListOfKeys().Contains(hist): continue
             histogram = root_file.Get(hist)
-            #if "_MjjFilt" in folder:            # Remove these two lines when the new data (without
-            #    histogram.Scale(1.0/effic)      # genfilteffic) have been acquired.
             histogram_add = root_file_add.Get(hist)
             hf.cd(folder)
             StyleHistogram(index, histogram)
             if "CutFlow" in hist:
                 StyleCutFlow(histogram_add) # Labels the Cut Flow histograms
+                histogram_add.Write()
+            elif "RegionPop" in hist:
+                StyleRegPop(histogram_add)
                 histogram_add.Write()
             else:
                 histogram.Write()

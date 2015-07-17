@@ -27,17 +27,25 @@ def StyleHistogram(h1,titles):
     h1.SetOption("HIST E")
     
 def StyleCutFlow(h1):
-    h1.GetXaxis().SetBinLabel(2,"No Cuts")
-    h1.GetXaxis().SetBinLabel(3, "WFinder and #geq 2jets") # WFinder include MET cut
-    h1.GetXaxis().SetBinLabel(4, "p_{T,1} > 80GeV")
-    h1.GetXaxis().SetBinLabel(5, "p_{T,2} > 60GeV")
-    h1.GetXaxis().SetBinLabel(6, "M_{jj} > 500GeV")
-    h1.GetXaxis().SetBinLabel(7, "#Delta #eta > 2")
-    h1.GetXaxis().SetBinLabel(8, "OLV")
-    h1.GetXaxis().SetBinLabel(9, "CJV")
-    #h1.GetXaxis().SetBinLabel(9, "")
-    #h1.GetXaxis().SetBinLabel(10, "")
-    #h1.GetXaxis().SetBinLabel(11, "")
+    h1.GetXaxis().SetBinLabel(1, "No Cuts")
+    h1.GetXaxis().SetBinLabel(2, "One W Boson")
+    h1.GetXaxis().SetBinLabel(3, "N_{jets} >= 2")
+    h1.GetXaxis().SetBinLabel(4, "MET > 25 GeV")
+    h1.GetXaxis().SetBinLabel(5, "p_{T,1} > 80GeV")
+    h1.GetXaxis().SetBinLabel(6, "p_{T,2} > 60GeV")
+    h1.GetXaxis().SetBinLabel(7, "M_{jj} > 500GeV")
+    h1.GetXaxis().SetBinLabel(8, "#Delta #eta > 2")
+    h1.GetXaxis().SetBinLabel(9, "M_{T}(W) > 40GeV")
+    h1.GetXaxis().SetBinLabel(10, "CJV")
+    h1.GetXaxis().SetBinLabel(11, "OLV")
+    h1.GetXaxis().SetBinLabel(12, "Signal Region")
+    
+def StyleRegPop(h1):
+    binNames = { 1: 'AllEvents', 2: 'Inclusive', 3: 'HighMass15', 4: 'HighMass20', 5: '!LC',
+                 6: '!JC', 7: '!LC!JC', 8: 'Signal', 9: 'aTGC_WpT500', 10: 'aTGC_WpT600',
+                 11: 'aTGC_WpT700', 12: 'aTGC_MT10', 13: 'aTGC_MT20', 14: 'aTGC_Mjj1000' }
+    for bin in binNames:
+        h1.GetXaxis().SetBinLabel(bin, binNames[bin])
     
 def StyleTH2(th2):
     th2.SetTitle("Differential Dijet Mass and N_{jets} Distribution")
@@ -93,17 +101,18 @@ for folder in sorted(dataset_names):
         root_file_add = ROOT.TFile.Open(file_name+"_add.root")
         for hist in histDict:
             # No normalization
-            if "CutFlow" in hist:
+            if not root_file.GetListOfKeys().Contains(analysis+'/'+hist):
+                print "No histogram for {0} found.".format(hist)
+                continue
+            if ("CutFlow" in hist) or ("RegionPop" in hist):
                 histo = root_file_add.Get(analysis+'/'+hist)
             else:
                 histo = root_file.Get(analysis+'/'+hist)
-            if not histo:
-                print "No histogram for {0} found.".format(hist)
-                continue
             histogram = histo.Clone(hist)
             hf.cd(folder)
             StyleHistogram(histogram,histDict[hist])
             if "CutFlow" in hist: StyleCutFlow(histogram)
+            if "RegionPop" in hist: StyleRegPop(histogram)
             histogram.Write()
             # Clone root histograms, normalize to XS, and move to Normalized_XS directory
             histogram_norm = histogram.Clone(hist+"_norm")
