@@ -507,7 +507,7 @@ def GetListDataset(list_name):
            '147323.MuRdown_MjjFilt': (12977.0, 0.41737),
            '147324.MuRup': (11971.0, 1.0),
            '147325.MuRup_MjjFilt': (11964.0, 0.42458),
-           '147550.Wenu2JetsEW1JetQCD15GeV_filt': (11641.0, 0.51349),
+           '147550.Wenu2JetsEW1JetQCD15GeV_filt': (11.641, 0.51349),
            '147774.Nominal_Sherpa_Bkgd_enu': (11866.0, 1.0),
            '147775.Nominal_Sherpa_Background': (11867.0, 1.0),
            '185696.PowhegPythia8_Wm_Nominal': (2612.8, 1.0),
