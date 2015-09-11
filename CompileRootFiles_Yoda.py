@@ -18,7 +18,7 @@ exp_hist_list = GetListDataset('exp_hist_list')
 # y_axis_list = GetListDataset('y_axis_list')
 # y_axis_list_norm = GetListDataset('y_axis_list_norm')
 histDict = GetListDataset('dictList')
-analysis = 'WJETS_SYST_NEWANALYSIS'
+analysis = 'VBF_W_NLO'
 
 def StyleHistogram(h1,titles):
     h1.SetTitle(titles[0])
@@ -101,27 +101,31 @@ for folder in sorted(dataset_names):
         root_file_add = ROOT.TFile.Open(file_name+"_add.root")
         for hist in histDict:
             # No normalization
-            if not root_file.GetListOfKeys().Contains(analysis+'/'+hist):
-                print "No histogram for {0} found.".format(hist)
-                continue
-            if ("CutFlow" in hist) or ("RegionPop" in hist):
+            keyName = hist
+            if hist[-2:] == "_1": hist = hist[:-2]
+            if "CutFlow" in hist:
+                histo = root_file_add.Get(analysis+'/'+hist)
+            elif "RegionPop" in hist:
                 histo = root_file_add.Get(analysis+'/'+hist)
             else:
                 histo = root_file.Get(analysis+'/'+hist)
+            if not histo:
+                print "No histogram for {0} found.".format(hist)
+                continue
             histogram = histo.Clone(hist)
             hf.cd(folder)
-            StyleHistogram(histogram,histDict[hist])
+            StyleHistogram(histogram,histDict[keyName])
             if "CutFlow" in hist: StyleCutFlow(histogram)
             if "RegionPop" in hist: StyleRegPop(histogram)
             histogram.Write()
             # Clone root histograms, normalize to XS, and move to Normalized_XS directory
             histogram_norm = histogram.Clone(hist+"_norm")
-            histogram_norm.GetYaxis().SetTitle("(1/#sigma) "+histDict[hist][3])
+            histogram_norm.GetYaxis().SetTitle("(1/#sigma) "+histDict[keyName][3])
             histogram_norm.Scale(1.0/xsec)
             ROOT.gDirectory.cd("Normalized_XS")
             histogram_norm.Write()
             ROOT.gDirectory.cd()
-            if "Mjj_" in hist and "Jet_1" in hist:
+            if "Mjj_Excl" in hist:
                 th2_hist_30 = CompileDijetMass(histogram_norm,th2_hist_30)
             del histogram_norm
         hf.cd(folder)
