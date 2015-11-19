@@ -43,7 +43,8 @@ def StyleCutFlow(h1):
 def StyleRegPop(h1):
     binNames = { 1: 'AllEvents', 2: 'Inclusive', 3: 'HighMass15', 4: 'HighMass20', 5: '!LC',
                  6: '!JC', 7: '!LC!JC', 8: 'Signal', 9: 'aTGC_WpT500', 10: 'aTGC_WpT600',
-                 11: 'aTGC_WpT700', 12: 'aTGC_MT10', 13: 'aTGC_MT20', 14: 'aTGC_Mjj1000' }
+                 11: 'aTGC_WpT700', 12: 'aTGC_MT10', 13: 'aTGC_MT20', 14: 'aTGC_Mjj1000',
+                 15: 'HighMass10', 16: 'Signal10' }
     for bin in binNames:
         h1.GetXaxis().SetBinLabel(bin, binNames[bin])
     
@@ -98,28 +99,35 @@ for folder in sorted(dataset_names):
         _h_xsecs.GetXaxis().SetBinLabel(idx,file_name)
         _h_xsecs.Fill(idx,xsec)
         root_file = ROOT.TFile.Open(file_name+".root")
-        root_file_add = ROOT.TFile.Open(file_name+"_add.root")
+        #root_file_add = ROOT.TFile.Open(file_name+"_add.root")
+        #if not(root_file) or not(root_file_add):
+        if not(root_file):
+          os.chdir("..")
+          continue
         for hist in histDict:
+          for ext in [ "", "_ewkonly" ]:
             # No normalization
             keyName = hist
             if hist[-2:] == "_1": hist = hist[:-2]
-            if "CutFlow" in hist:
-                histo = root_file_add.Get(analysis+'/'+hist)
-            elif "RegionPop" in hist:
-                histo = root_file_add.Get(analysis+'/'+hist)
-            else:
-                histo = root_file.Get(analysis+'/'+hist)
+            # if "CutFlow" in hist:
+            #     histo = root_file_add.Get(analysis+'/'+hist+ext)
+            # elif "RegionPop" in hist:
+            #     histo = root_file_add.Get(analysis+'/'+hist+ext)
+            # else:
+            #     histo = root_file.Get(analysis+'/'+hist+ext)
+            histo = root_file.Get(analysis+'/'+hist+ext)
+            root_file.Get(analysis+'/'+hist+ext)
             if not histo:
-                print "No histogram for {0} found.".format(hist)
+                print "No histogram for {0} found.".format(hist+ext)
                 continue
-            histogram = histo.Clone(hist)
+            histogram = histo.Clone(hist+ext)
             hf.cd(folder)
             StyleHistogram(histogram,histDict[keyName])
             if "CutFlow" in hist: StyleCutFlow(histogram)
             if "RegionPop" in hist: StyleRegPop(histogram)
             histogram.Write()
             # Clone root histograms, normalize to XS, and move to Normalized_XS directory
-            histogram_norm = histogram.Clone(hist+"_norm")
+            histogram_norm = histogram.Clone(hist+ext+"_norm")
             histogram_norm.GetYaxis().SetTitle("(1/#sigma) "+histDict[keyName][3])
             histogram_norm.Scale(1.0/xsec)
             ROOT.gDirectory.cd("Normalized_XS")

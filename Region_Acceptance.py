@@ -26,6 +26,12 @@ Pwhg_QCD_WpmJJ_mu_7TeV = [ '000008.Powheg.W2jets.Nominal.7TeV','000009.Powheg.W2
 Pwhg_EWK_WmJJ_mu_7TeV  = [ '185948.PowhegPythia8_VBF_Wm_mu_Nominal.7TeV','185949.PowhegPythia8_VBF_Wm_mu_MuFdown.7TeV','185950.PowhegPythia8_VBF_Wm_mu_MuFup.7TeV','185951.PowhegPythia8_VBF_Wm_mu_MuRdown.7TeV','185952.PowhegPythia8_VBF_Wm_mu_MuRup.7TeV','185953.PowhegPythia8_VBF_Wm_mu_MuRFdown.7TeV','185954.PowhegPythia8_VBF_Wm_mu_MuRFup.7TeV' ]
 Pwhg_EWK_WpJJ_mu_7TeV  = [ '185955.PowhegPythia8_VBF_Wp_mu_Nominal.7TeV','185956.PowhegPythia8_VBF_Wp_mu_MuFdown.7TeV','185957.PowhegPythia8_VBF_Wp_mu_MuFup.7TeV','185958.PowhegPythia8_VBF_Wp_mu_MuRdown.7TeV','185959.PowhegPythia8_VBF_Wp_mu_MuRup.7TeV','185960.PowhegPythia8_VBF_Wp_mu_MuRFdown.7TeV','185961.PowhegPythia8_VBF_Wp_mu_MuRFup.7TeV' ]
 Pwhg_EWK_WpmJJ_mu_7TeV = [ '000022.Powheg.VBF.Nominal.7TeV','000023.Powheg.VBF.MuFdown.7TeV','000024.Powheg.VBF.MuFup.7TeV','000025.Powheg.VBF.MuRdown.7TeV','000026.Powheg.VBF.MuRup.7TeV','000027.Powheg.VBF.MuRdownMuFdown.7TeV','000028.Powheg.VBF.MuRupMuFup.7TeV' ]
+Pwhg_EWK_WmJJ_mu_Hpp_7TeV = [ '999990.PowhegHerwigpp.VBF_Wm.7TeV' ]
+Pwhg_EWK_WpJJ_mu_Hpp_7TeV = [ '999991.PowhegHerwigpp.VBF_Wp.7TeV' ]
+Pwhg_EWK_WpmJJ_mu_Hpp_7TeV = [ '000036.Powheg.VBF.Hpp.7TeV' ]
+Pwhg_QCD_WmJJ_mu_Hpp_7TeV = [ '999992.PowhegHerwigpp.W2jets_Wm.7TeV' ]
+Pwhg_QCD_WpJJ_mu_Hpp_7TeV = [ '999993.PowhegHerwigpp.W2jets_Wp.7TeV' ]
+Pwhg_QCD_WpmJJ_mu_Hpp_7TeV = [ '000035.Powheg.W2jets.Hpp.7TeV' ]
 # --------------- 8 TeV ---------------
 Pwhg_QCD_WmJJ_mu_8TeV  = [ '185696.PowhegPythia8_Wm_Nominal','185697.PowhegPythia8_Wm_MuFdown','185698.PowhegPythia8_Wm_MuFup','185699.PowhegPythia8_Wm_MuRdown','185700.PowhegPythia8_Wm_MuRup','185701.PowhegPythia8_Wm_MuRFdown','185702.PowhegPythia8_Wm_MuRFup' ]
 Pwhg_QCD_WpJJ_mu_8TeV  = [ '185703.PowhegPythia8_Wp_Nominal','185704.PowhegPythia8_Wp_MuFdown','185705.PowhegPythia8_Wp_MuFup','185706.PowhegPythia8_Wp_MuRdown','185707.PowhegPythia8_Wp_MuRup','185708.PowhegPythia8_Wp_MuRFdown','185709.PowhegPythia8_Wp_MuRFup' ]
@@ -33,20 +39,27 @@ Pwhg_QCD_WpmJJ_mu_8TeV = [ '000001.Powheg.W2jets.Nominal.bornsuppfact','000002.P
 Pwhg_EWK_WmJJ_mu_8TeV  = [ '185849.PowhegPythia8.VBF_Wm_Nominal','185850.PowhegPythia8.VBF_Wm_MuFdown','185851.PowhegPythia8.VBF_Wm_MuFup','185852.PowhegPythia8.VBF_Wm_MuRdown','185853.PowhegPythia8.VBF_Wm_MuRup','185854.PowhegPythia8.VBF_Wm_MuRdownMuFdown','185855.PowhegPythia8.VBF_Wm_MuRupMuFup' ]
 Pwhg_EWK_WpJJ_mu_8TeV  = [ '185856.PowhegPythia8.VBF_Wp_Nominal','185857.PowhegPythia8.VBF_Wp_MuFdown','185858.PowhegPythia8.VBF_Wp_MuFup','185859.PowhegPythia8.VBF_Wp_MuRdown','185860.PowhegPythia8.VBF_Wp_MuRup','185861.PowhegPythia8.VBF_Wp_MuRdownMuFdown','185862.PowhegPythia8.VBF_Wp_MuRupMuFup' ]
 Pwhg_EWK_WpmJJ_mu_8TeV = [ '000015.Powheg.VBF.Nominal.ptj_gencut','000016.Powheg.VBF.MuFdown.ptj_gencut','000017.Powheg.VBF.MuFup.ptj_gencut','000018.Powheg.VBF.MuRdown.ptj_gencut','000019.Powheg.VBF.MuRup.ptj_gencut','000020.Powheg.VBF.MuRdownMuFdown.ptj_gencut','000021.Powheg.VBF.MuRupMuFup.ptj_gencut' ]
-
+Pwhg_EWK_WmJJ_mu_Hpp_8TeV = [ '999994.PowhegHerwigpp.VBF_Wm' ]
+Pwhg_EWK_WpJJ_mu_Hpp_8TeV = [ '999995.PowhegHerwigpp.VBF_Wp' ]
+Pwhg_EWK_WpmJJ_mu_Hpp_8TeV = [ '000034.Powheg.VBF.Hpp' ]
+Pwhg_QCD_WmJJ_mu_Hpp_8TeV = [ '999996.PowhegHerwigpp.W2jets_Wm' ]
+Pwhg_QCD_WpJJ_mu_Hpp_8TeV = [ '999997.PowhegHerwigpp.W2jets_Wp' ]
+Pwhg_QCD_WpmJJ_mu_Hpp_8TeV = [ '000033.Powheg.W2jets.Hpp' ]
 
 All_DS_el_7TeV = Pwhg_QCD_WmJJ_el_7TeV+Pwhg_QCD_WpJJ_el_7TeV+Pwhg_QCD_WpmJJ_el_7TeV+Pwhg_EWK_WmJJ_el_7TeV+Pwhg_EWK_WpJJ_el_7TeV+Pwhg_EWK_WpmJJ_el_7TeV
 All_DS_el_8TeV = Pwhg_QCD_WmJJ_el_8TeV+Pwhg_QCD_WpJJ_el_8TeV+Pwhg_QCD_WpmJJ_el_8TeV+Pwhg_EWK_WmJJ_el_8TeV+Pwhg_EWK_WpJJ_el_8TeV+Pwhg_EWK_WpmJJ_el_8TeV
 All_DS_mu_7TeV = Pwhg_QCD_WmJJ_mu_7TeV+Pwhg_QCD_WpJJ_mu_7TeV+Pwhg_QCD_WpmJJ_mu_7TeV+Pwhg_EWK_WmJJ_mu_7TeV+Pwhg_EWK_WpJJ_mu_7TeV+Pwhg_EWK_WpmJJ_mu_7TeV
 All_DS_mu_8TeV = Pwhg_QCD_WmJJ_mu_8TeV+Pwhg_QCD_WpJJ_mu_8TeV+Pwhg_QCD_WpmJJ_mu_8TeV+Pwhg_EWK_WmJJ_mu_8TeV+Pwhg_EWK_WpJJ_mu_8TeV+Pwhg_EWK_WpmJJ_mu_8TeV
-All_DS = All_DS_el_7TeV+All_DS_el_8TeV+All_DS_mu_7TeV+All_DS_mu_8TeV
+All_DS_Hpp_7TeV= Pwhg_EWK_WmJJ_mu_Hpp_7TeV+Pwhg_EWK_WpJJ_mu_Hpp_7TeV+Pwhg_EWK_WpmJJ_mu_Hpp_7TeV+Pwhg_QCD_WmJJ_mu_Hpp_7TeV+Pwhg_QCD_WpJJ_mu_Hpp_7TeV+Pwhg_QCD_WpmJJ_mu_Hpp_7TeV
+All_DS_Hpp_8TeV= Pwhg_EWK_WmJJ_mu_Hpp_8TeV+Pwhg_EWK_WpJJ_mu_Hpp_8TeV+Pwhg_EWK_WpmJJ_mu_Hpp_8TeV+Pwhg_QCD_WmJJ_mu_Hpp_8TeV+Pwhg_QCD_WpJJ_mu_Hpp_8TeV+Pwhg_QCD_WpmJJ_mu_Hpp_8TeV
+All_DS = All_DS_el_7TeV+All_DS_el_8TeV+All_DS_mu_7TeV+All_DS_mu_8TeV+All_DS_Hpp_7TeV+All_DS_Hpp_8TeV
 
 ListOfDSLists = [ Pwhg_QCD_WmJJ_el_7TeV, Pwhg_QCD_WpJJ_el_7TeV, Pwhg_EWK_WmJJ_el_7TeV, Pwhg_EWK_WpJJ_el_7TeV,
                   Pwhg_QCD_WmJJ_mu_7TeV, Pwhg_QCD_WpJJ_mu_7TeV, Pwhg_EWK_WmJJ_mu_7TeV, Pwhg_EWK_WpJJ_mu_7TeV,
                   Pwhg_QCD_WmJJ_el_8TeV, Pwhg_QCD_WpJJ_el_8TeV, Pwhg_EWK_WmJJ_el_8TeV, Pwhg_EWK_WpJJ_el_8TeV,
                   Pwhg_QCD_WmJJ_mu_8TeV, Pwhg_QCD_WpJJ_mu_8TeV, Pwhg_EWK_WmJJ_mu_8TeV, Pwhg_EWK_WpJJ_mu_8TeV ]
 
-f = ROOT.TFile("VBF_Systematics.root")
+f = ROOT.TFile("VBF_Systematics_yoda152.root")
 
 # def GetError(Wplus, Wminus, typeName='abs'):
 #     listName = [ sum(x) for x in zip(Wplus,Wminus) ]
@@ -105,7 +118,7 @@ def PrintInfo(ListOfDSLists, Title, binNames):
             f_out.write("  Region {0}:\n".format(region))
             f_out.write("\tNumber of events: {0}\n".format(NumEvnts[region][0]))
             f_out.write("\tNominal Acceptance: {0}\n".format(NumEvnts[region][0]/NumEvnts['AllEvents'][0]))
-            f_out.write("\tCross Section:\t{0} +- {1} {2}\n".format(error[0], error[1], error[2]))
+            f_out.write("\tCross Section:\t{0} +- {1} {2} (scales)\n".format(error[0], error[1], error[2]))
             for i in range(len(List)):
                 DS_Name = List[i]
                 #f_out.write("""\t'True' Cross Section : {0} pb\n""".format( dataset_names[DS_Name][0] ))
@@ -142,6 +155,7 @@ for ds in All_DS:
     EventsInRegions = {}
     Weights = f.Get(ds+"/RegionPopWeight")
     WeightInRegions = {}
+    if not(Events) or not(Weights): continue
     for regionBin in binNames:
         Events_binContent = Events.GetBinContent(regionBin)
         EventsInRegions[binNames[regionBin]] = Events_binContent
@@ -150,6 +164,7 @@ for ds in All_DS:
     EventsPerDS[ds] = EventsInRegions
     WeightPerDS[ds] = WeightInRegions
 #pprint.pprint(EventsPerDS)
+pprint.pprint(WeightPerDS)
 
 QCD_Elec_7TeV = [ Pwhg_QCD_WmJJ_el_7TeV, Pwhg_QCD_WpJJ_el_7TeV ]
 PrintInfo(QCD_Elec_7TeV, "QCD_Elec_7TeV", binNames)
@@ -159,6 +174,11 @@ QCD_Muon_7TeV = [ Pwhg_QCD_WmJJ_mu_7TeV, Pwhg_QCD_WpJJ_mu_7TeV ]
 PrintInfo(QCD_Muon_7TeV, "QCD_Muon_7TeV", binNames)
 EWK_Muon_7TeV = [ Pwhg_EWK_WmJJ_mu_7TeV, Pwhg_EWK_WpJJ_mu_7TeV ]
 PrintInfo(EWK_Muon_7TeV, "EWK_Muon_7TeV", binNames)
+# QCD_Muon_7TeV_Hpp = [ Pwhg_QCD_WmJJ_mu_Hpp_7TeV, Pwhg_QCD_WpJJ_mu_Hpp_7TeV ]
+# PrintInfo(QCD_Muon_7TeV_Hpp, "QCD_Muon_7TeV_Hpp", binNames)
+# EWK_Muon_7TeV_Hpp = [ Pwhg_EWK_WmJJ_mu_Hpp_7TeV, Pwhg_EWK_WpJJ_mu_Hpp_7TeV ]
+# PrintInfo(EWK_Muon_7TeV_Hpp, "EWK_Muon_7TeV_Hpp", binNames)
+
 QCD_Elec_8TeV = [ Pwhg_QCD_WmJJ_el_8TeV, Pwhg_QCD_WpJJ_el_8TeV ]
 PrintInfo(QCD_Elec_8TeV, "QCD_Elec_8TeV", binNames)
 EWK_Elec_8TeV = [ Pwhg_EWK_WmJJ_el_8TeV, Pwhg_EWK_WpJJ_el_8TeV ]
@@ -167,6 +187,10 @@ QCD_Muon_8TeV = [ Pwhg_QCD_WmJJ_mu_8TeV, Pwhg_QCD_WpJJ_mu_8TeV ]
 PrintInfo(QCD_Muon_8TeV, "QCD_Muon_8TeV", binNames)
 EWK_Muon_8TeV = [ Pwhg_EWK_WmJJ_mu_8TeV, Pwhg_EWK_WpJJ_mu_8TeV ]
 PrintInfo(EWK_Muon_8TeV, "EWK_Muon_8TeV", binNames)
+QCD_Muon_8TeV_Hpp = [ Pwhg_QCD_WmJJ_mu_Hpp_8TeV, Pwhg_QCD_WpJJ_mu_Hpp_8TeV ]
+PrintInfo(QCD_Muon_8TeV_Hpp, "QCD_Muon_8TeV_Hpp", binNames)
+EWK_Muon_8TeV_Hpp = [ Pwhg_EWK_WmJJ_mu_Hpp_8TeV, Pwhg_EWK_WpJJ_mu_Hpp_8TeV ]
+PrintInfo(EWK_Muon_8TeV_Hpp, "EWK_Muon_8TeV_Hpp", binNames)
 
 #-----------------------------------------------------------------------------------------------------
 # for List in ListOfDSLists:

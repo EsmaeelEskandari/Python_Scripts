@@ -17,6 +17,17 @@ powheg_vbfw_list  = ['000015','000016','000017','000018','000019','000020','0000
 powheg_vbfw_list_7TeV  = ['000022','000023','000024','000025','000026','000027','000028']
 powheg_dict = {}
 
+def combineChannels(source_Wm_dir, source_Wp_dir, file_name):
+  print "\tCopying channels to merged directory."
+  os.system("cp ../{0}/merged.save ./merged_Wm.yoda".format(source_Wm_dir))
+  os.system("cp ../{0}/merged.save ./merged_Wp.yoda".format(source_Wp_dir))
+  os.system("yoda2root merged_Wm.yoda")
+  os.system("yoda2root merged_Wp.yoda")
+  os.system("hadd -f {0}.root merged_Wm.root merged_Wp.root".format(file_name))
+  return 0
+
+# Have to be sorted in reverse so that the 0000* directories
+# are accessed last. The rely on other directories to be done.
 keys = dataset_names.keys()
 keys.sort(reverse=True)
 for key in keys:
@@ -56,168 +67,104 @@ for folder in keys:
         source_Wp = str(int(source_Wm) + 7)
         source_Wm_dir = powheg_dict[source_Wm]
         source_Wp_dir = powheg_dict[source_Wp]
-        cmd = "cp ../{0}/merged.save ./merged_Wm.yoda".format(source_Wm_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged.save ./merged_Wp.yoda".format(source_Wp_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged_add.save ./merged_add_Wm.yoda".format(source_Wm_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged_add.save ./merged_add_Wp.yoda".format(source_Wp_dir)
-        os.system(cmd)
-        os.system("yodamerge -o merged.yoda merged_Wm.yoda merged_Wp.yoda")
-        os.system("yodamerge -o merged_add.yoda merged_add_Wm.yoda merged_add_Wp.yoda")
+        combineChannels(source_Wm_dir, source_Wp_dir, file_name)
     elif file_name in powheg_vbfw_list:
         dest_Wpm = file_name
         source_Wm = str(int(file_name) + 185834)
         source_Wp = str(int(source_Wm) + 7)
         source_Wm_dir = powheg_dict[source_Wm]
         source_Wp_dir = powheg_dict[source_Wp]
-        cmd = "cp ../{0}/merged.save ./merged_Wm.yoda".format(source_Wm_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged.save ./merged_Wp.yoda".format(source_Wp_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged_add.save ./merged_add_Wm.yoda".format(source_Wm_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged_add.save ./merged_add_Wp.yoda".format(source_Wp_dir)
-        os.system(cmd)
-        os.system("yodamerge -o merged.yoda merged_Wm.yoda merged_Wp.yoda")
-        os.system("yodamerge -o merged_add.yoda merged_add_Wm.yoda merged_add_Wp.yoda")
+        combineChannels(source_Wm_dir, source_Wp_dir, file_name)
     elif file_name in powheg_w2jet_list_7TeV:
         dest_Wpm = file_name
         source_Wm = str(int(file_name) + 185924)
         source_Wp = str(int(source_Wm) + 7)
         source_Wm_dir = powheg_dict[source_Wm]
         source_Wp_dir = powheg_dict[source_Wp]
-        cmd = "cp ../{0}/merged.save ./merged_Wm.yoda".format(source_Wm_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged.save ./merged_Wp.yoda".format(source_Wp_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged_add.save ./merged_add_Wm.yoda".format(source_Wm_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged_add.save ./merged_add_Wp.yoda".format(source_Wp_dir)
-        os.system(cmd)
-        os.system("yodamerge -o merged.yoda merged_Wm.yoda merged_Wp.yoda")
-        os.system("yodamerge -o merged_add.yoda merged_add_Wm.yoda merged_add_Wp.yoda")
+        combineChannels(source_Wm_dir, source_Wp_dir, file_name)
     elif file_name in powheg_vbfw_list_7TeV:
         dest_Wpm = file_name
         source_Wm = str(int(file_name) + 185926)
         source_Wp = str(int(source_Wm) + 7)
         source_Wm_dir = powheg_dict[source_Wm]
         source_Wp_dir = powheg_dict[source_Wp]
-        cmd = "cp ../{0}/merged.save ./merged_Wm.yoda".format(source_Wm_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged.save ./merged_Wp.yoda".format(source_Wp_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged_add.save ./merged_add_Wm.yoda".format(source_Wm_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged_add.save ./merged_add_Wp.yoda".format(source_Wp_dir)
-        os.system(cmd)
-        os.system("yodamerge -o merged.yoda merged_Wm.yoda merged_Wp.yoda")
-        os.system("yodamerge -o merged_add.yoda merged_add_Wm.yoda merged_add_Wp.yoda")
+        combineChannels(source_Wm_dir, source_Wp_dir, file_name)
     elif file_name == "000029":
         source_Wm = "185836"
         source_Wp = "185837"
         source_Wm_dir = powheg_dict[source_Wm]
         source_Wp_dir = powheg_dict[source_Wp]
-        cmd = "cp ../{0}/merged.save ./merged_Wm.yoda".format(source_Wm_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged.save ./merged_Wp.yoda".format(source_Wp_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged_add.save ./merged_add_Wm.yoda".format(source_Wm_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged_add.save ./merged_add_Wp.yoda".format(source_Wp_dir)
-        os.system(cmd)
-        os.system("yodamerge -o merged.yoda merged_Wm.yoda merged_Wp.yoda")
-        os.system("yodamerge -o merged_add.yoda merged_add_Wm.yoda merged_add_Wp.yoda")
+        combineChannels(source_Wm_dir, source_Wp_dir, file_name)
     elif file_name == "000030":
         source_Wm = "185847"
         source_Wp = "185848"
         source_Wm_dir = powheg_dict[source_Wm]
         source_Wp_dir = powheg_dict[source_Wp]
-        cmd = "cp ../{0}/merged.save ./merged_Wm.yoda".format(source_Wm_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged.save ./merged_Wp.yoda".format(source_Wp_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged_add.save ./merged_add_Wm.yoda".format(source_Wm_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged_add.save ./merged_add_Wp.yoda".format(source_Wp_dir)
-        os.system(cmd)
-        os.system("yodamerge -o merged.yoda merged_Wm.yoda merged_Wp.yoda")
-        os.system("yodamerge -o merged_add.yoda merged_add_Wm.yoda merged_add_Wp.yoda")
+        combineChannels(source_Wm_dir, source_Wp_dir, file_name)
     elif file_name == "000031":
         source_Wm = "185930"
         source_Wp = "185931"
         source_Wm_dir = powheg_dict[source_Wm]
         source_Wp_dir = powheg_dict[source_Wp]
-        cmd = "cp ../{0}/merged.save ./merged_Wm.yoda".format(source_Wm_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged.save ./merged_Wp.yoda".format(source_Wp_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged_add.save ./merged_add_Wm.yoda".format(source_Wm_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged_add.save ./merged_add_Wp.yoda".format(source_Wp_dir)
-        os.system(cmd)
-        os.system("yodamerge -o merged.yoda merged_Wm.yoda merged_Wp.yoda")
-        os.system("yodamerge -o merged_add.yoda merged_add_Wm.yoda merged_add_Wp.yoda")
+        combineChannels(source_Wm_dir, source_Wp_dir, file_name)
     elif file_name == "000032":
         source_Wm = "185946"
         source_Wp = "185947"
         source_Wm_dir = powheg_dict[source_Wm]
         source_Wp_dir = powheg_dict[source_Wp]
-        cmd = "cp ../{0}/merged.save ./merged_Wm.yoda".format(source_Wm_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged.save ./merged_Wp.yoda".format(source_Wp_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged_add.save ./merged_add_Wm.yoda".format(source_Wm_dir)
-        os.system(cmd)
-        cmd = "cp ../{0}/merged_add.save ./merged_add_Wp.yoda".format(source_Wp_dir)
-        os.system(cmd)
-        os.system("yodamerge -o merged.yoda merged_Wm.yoda merged_Wp.yoda")
-        os.system("yodamerge -o merged_add.yoda merged_add_Wm.yoda merged_add_Wp.yoda")
+        combineChannels(source_Wm_dir, source_Wp_dir, file_name)
     elif file_name == "000033":
-        os.system("yodamerge -o merged.yoda merged_Wm.yoda merged_Wp.yoda")
-        os.system("yodamerge -o merged_add.yoda merged_add_Wm.yoda merged_add_Wp.yoda")
+        source_Wm = "999996"
+        source_Wp = "999997"
+        source_Wm_dir = powheg_dict[source_Wm]
+        source_Wp_dir = powheg_dict[source_Wp]
+        combineChannels(source_Wm_dir, source_Wp_dir, file_name)
     elif file_name == "000034":
-        os.system("yodamerge -o merged.yoda merged_Wm.yoda merged_Wp.yoda")
-        os.system("yodamerge -o merged_add.yoda merged_add_Wm.yoda merged_add_Wp.yoda")
+        source_Wm = "999994"
+        source_Wp = "999995"
+        source_Wm_dir = powheg_dict[source_Wm]
+        source_Wp_dir = powheg_dict[source_Wp]
+        combineChannels(source_Wm_dir, source_Wp_dir, file_name)
+    elif file_name == "000035":
+        # source_Wm = "999992"
+        # source_Wp = "999993"
+        # source_Wm_dir = powheg_dict[source_Wm]
+        # source_Wp_dir = powheg_dict[source_Wp]
+        # combineChannels(source_Wm_dir, source_Wp_dir, file_name)
+        os.chdir("..")
+        continue
+    elif file_name == "000036":
+        # source_Wm = "999990"
+        # source_Wp = "999991"
+        # source_Wm_dir = powheg_dict[source_Wm]
+        # source_Wp_dir = powheg_dict[source_Wp]
+        # combineChannels(source_Wm_dir, source_Wp_dir, file_name)
+        os.chdir("..")
+        continue
     else:
-        if not Yoda_Files: continue
+        if len(Yoda_Files) == 0:
+          os.chdir("..")
+          continue
         # Run yodamerge.py over every file in the Yoda_Files list.
         arguments = "%s" % " ".join(map(str, Yoda_Files))
-        cmd = "yodamerge --assume-normalized -o merged.yoda "+arguments
+        cmd = "yodamerge -o merged.yoda "+arguments
         os.system(cmd)
-        cmd = "yodamerge -o merged_add.yoda "+arguments
-        os.system(cmd)
-
-    # Convert merged.yoda file to merged.root file and rename to dataset
-    # run number (found from the folder name).
-    y2r_cmd = ["yoda2root","merged.yoda"]
-    try:
-        subprocess.call(y2r_cmd)
-        cmd = "mv merged.root "+file_name+".root"
-        os.system(cmd)
-    except OSError as e:
-        if e.errno == os.errno.ENOENT:
-            print "File {0} in {1} doesn't exist!".format(y2r_cmd,folder)
-        else:
-            print """Command '{0}' not found!!!""".format(y2r_cmd[0])
-            raise
-    y2r_cmd = ["yoda2root","merged_add.yoda"]
-    try:
-        subprocess.call(y2r_cmd)
-        cmd = "mv merged_add.root "+file_name+"_add.root"
-        os.system(cmd)
-    except OSError as e:
-        if e.errno == os.errno.ENOENT:
-            print "File {0} in {1} doesn't exist!".format(y2r_cmd,folder)
-        else:
-            print """Command '{0}' not found!!!""".format(y2r_cmd[0])
-            raise
-
-    # Remove the merged.yoda file in case the script fails.
-    # This keeps you from having to delete them by hand before re-running script.
-    os.system("mv merged.yoda merged.save")
-    os.system("mv merged_add.yoda merged_add.save")
+        # Convert merged.yoda file to merged.root file and rename to dataset
+        # run number (found from the folder name).
+        y2r_cmd = ["yoda2root","merged.yoda"]    
+        try:
+            subprocess.call(y2r_cmd)
+            cmd = "mv merged.root "+file_name+".root"
+            os.system(cmd)
+        except OSError as e:
+            if e.errno == os.errno.ENOENT:
+                print "File {0} in {1} doesn't exist!".format(y2r_cmd,folder)
+            else:
+                print """Command '{0}' not found!!!""".format(y2r_cmd[0])
+                raise
+        # Remove the merged.yoda file in case the script fails.
+        # This keeps you from having to delete them by hand before re-running script.
+        os.system("mv merged.yoda merged.save")
 
     # Prepare for next folder
     os.chdir("..")

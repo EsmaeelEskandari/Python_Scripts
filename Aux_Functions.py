@@ -412,7 +412,16 @@ def GetListDataset(list_name):
       'mc12_8TeV.147774.Sherpa_CT10_Wenu.evgen.EVNT.e1434/',
       'mc12_8TeV.129915.Sherpa_CT10_Wenu2JetsEW1JetQCD15GeV_min_n_tchannels.evgen.EVNT.e1557/',
       'mc12_8TeV.129929.Sherpa_CT10_Wenu_MjjFiltered.evgen.EVNT.e1538/',
-      'mc12_valid.200900.Sherpa_CT10_Wenu.evgen.EVNT.e2505/']
+      'mc12_valid.200900.Sherpa_CT10_Wenu.evgen.EVNT.e2505/',
+      'user.cjohnson.7TeV.PowhegHerwigpp.CTEQ6L1_CT10ME.VBF_Wmunu.Wminus.Nominal.EVNT.v1_EXT0/',
+      'user.cjohnson.7TeV.PowhegHerwigpp.CTEQ6L1_CT10ME.VBF_Wmunu.Wplus.Nominal.EVNT.v1_EXT0/',
+      'user.cjohnson.7TeV.PowhegHerwigpp.CTEQ6L1_CT10ME.W2Jets_Wmunu.Wplus.Nominal.EVNT.v1_EXT0/',	# Wminus
+      'user.cjohnson.7TeV.PowhegHerwigpp.CTEQ6L1_CT10ME.W2Jets_Wmunu.Wplus.Nominal.EVNT.v2_EXT0/',
+      'user.cjohnson.8TeV.PowhegHpp.UEEE3CT10.VBF_Wmunu.Wminus.Nominal.EVNT.v9_EXT0/',
+      'user.cjohnson.8TeV.PowhegHpp.UEEE3CT10.VBF_Wmunu.Wplus.Nominal.EVNT.v9_EXT0/',
+      'user.cjohnson.8TeV.PowhegHerwigpp.CTEQ6L1_CT10ME.W2jet.Wminus.Nominal.EVNT.v5/',
+      'user.cjohnson.8TeV.PowhegHerwigpp.CTEQ6L1_CT10ME.W2jet.Wplus.Nominal.EVNT.v5/'
+    ]
 	      
     dataset_number = ['129916','129930','147294','147295','147296',
               '147297','147298','147299','147300','147301','147302',
@@ -471,6 +480,11 @@ def GetListDataset(list_name):
            '000032.Powheg.VBFW.electron.7TeV': (2.725, 1.0),
            '000033.Powheg.W2jets.Hpp': (7191.87, 1.0),
            '000034.Powheg.VBF.Hpp': (3.44758, 1.0),
+           '000035.Powheg.W2jets.Hpp.7TeV': (9457.69, 1.0),
+           '000036.Powheg.VBF.Hpp.7TeV': (1.63017+0.997905, 1.0),
+           '000037.HEJ.Central': ( 1.0, 1.0 ),
+           '000038.HEJ.ScaleDown': ( 1.0, 1.0 ),
+           '000039.HEJ.ScaleUp': ( 1.0, 1.0 ),
            '129915.Nominal_Sherpa_Sgnl_enu': (4.2114, 1.0),
            '129916.Nominal_Sherpa_Signal': (4.2128, 1.0),
            '129929.Nominal_Sherpa_Bkgd_enu_MjjFilt': (11866.0, 1.0),
@@ -574,7 +588,15 @@ def GetListDataset(list_name):
            '185959.PowhegPythia8_VBF_Wp_mu_MuRup.7TeV': (1.6809, 1.0),
            '185960.PowhegPythia8_VBF_Wp_mu_MuRFdown.7TeV': (1.6784, 1.0),
            '185961.PowhegPythia8_VBF_Wp_mu_MuRFup.7TeV': (1.6774, 1.0),
-           '200900.Nominal_Sherpa_NLO_Bkgd_enu': (11506.0, 1.0)
+           '200900.Nominal_Sherpa_NLO_Bkgd_enu': (11506.0, 1.0),
+           '999990.PowhegHerwigpp.VBF_Wm.7TeV': (0.997905, 1.0),
+           '999991.PowhegHerwigpp.VBF_Wp.7TeV': (1.63017, 1.0),
+           '999992.PowhegHerwigpp.W2jets_Wm.7TeV': (3402.02, 1.0),
+           '999993.PowhegHerwigpp.W2jets_Wp.7TeV': (6055.67, 1.0),
+           '999994.PowhegHerwigpp.VBF_Wm': (1.33757, 1.0),
+           '999995.PowhegHerwigpp.VBF_Wp': (2.11001, 1.0),
+           '999996.PowhegHerwigpp.W2jets_Wm': (3652.67, 1.0),
+           '999997.PowhegHerwigpp.W2jets_Wp': (3539.20, 1.0)
        }
 
     dataset_names_1 = ["147294.min_n_tchannels_CKKW30", "147295.min_n_tchannels_CKKW30_MjjFilt",
